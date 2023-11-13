@@ -1,0 +1,78 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="LayoutleftOffcanvas" aria-labelledby="LayoutleftOffcanvas">
+  <div class="offcanvas-header">
+      <img id="LayoutImageLogoMenu" width="330" alt="Logo">
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      <ul class="list-unstyled ps-0">
+          <li class="mb-1">
+              <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed href-Navigation" routerLink="CMS/Dashboard"  aria-expanded="false">
+                  Dashboard
+              </button>
+
+          </li>
+
+              <li class="mb-1">
+                  <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Management-collapse" aria-expanded="false">
+                      Management
+                  </button>
+                  <div class="collapse" id="Management-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                          <li class="dropdown-header">General Information </li>
+                          <li><a tabindex="0" routerLink="CMS/Institution"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">General Information</a></li>
+                          <li><a  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Department</a></li>
+                          <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Course</a></li>
+                          <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Section</a></li>
+                          <li class="dropdown-header">Batch</li>
+                          <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Batch</a></li>
+                          <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Update Semester</a></li>
+                          <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Batch Completion</a></li>
+                          <li class="dropdown-divider"></li>
+                          <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Holiday-Workingday</a></li>
+                      </ul>
+                  </div>
+              </li>
+                  <li class="mb-1">
+                      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Staff-collapse" aria-expanded="false">
+                          Staff
+                      </button>
+                      <div class="collapse" id="Staff-collapse">
+                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                              <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Add Staff</a></li>
+                              <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">View Staff</a></li>
+                          </ul>
+                      </div>
+                  </li>
+
+                  <li class="mb-1">
+                      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#Student-collapse" aria-expanded="false">
+                          Student
+                      </button>
+                      <div class="collapse" id="Student-collapse">
+                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                              <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer"> Application Form</a></li>
+                              <li class="dropdown-header">Student</li>
+                              <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer"> Add Student</a></li>
+                              <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer"> View Student List</a></li>
+                          </ul>
+                      </div>
+                  </li>
+
+              <li class="border-top my-3"></li>
+
+                  <li class="mb-1">
+                      <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#ApplicationSettings-collapse" aria-expanded="false">
+                          Application Settings
+                      </button>
+                      <div class="collapse" id="ApplicationSettings-collapse">
+                          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                              <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Add Admin Users</a></li>
+                              <li><a tabindex="0" class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Fees Settings</a></li>
+                              <li><a tabindex="0"  class="link-dark-Custom d-inline-flex text-decoration-none rounded href-Navigation cursor-pointer">Staff Attendance Settings</a></li>
+                          </ul>
+                      </div>
+                  </li>
+          </ul>
+  </div>
+</div>

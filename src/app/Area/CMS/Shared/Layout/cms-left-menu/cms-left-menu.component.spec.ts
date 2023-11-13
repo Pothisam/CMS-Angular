@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CMSLoginComponent } from './cmslogin.component';
+import { CmsLeftMenuComponent } from './cms-left-menu.component';
 
-describe('CMSLoginComponent', () => {
-  let component: CMSLoginComponent;
-  let fixture: ComponentFixture<CMSLoginComponent>;
+describe('CmsLeftMenuComponent', () => {
+  let component: CmsLeftMenuComponent;
+  let fixture: ComponentFixture<CmsLeftMenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CMSLoginComponent ]
+      declarations: [ CmsLeftMenuComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CMSLoginComponent);
+    fixture = TestBed.createComponent(CmsLeftMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

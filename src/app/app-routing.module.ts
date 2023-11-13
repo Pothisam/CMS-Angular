@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CMSLoginComponent } from './Area/CMS/Login/cmslogin/cmslogin.component';
-import { CmsdashboardComponent } from './Area/CMS/Dashboard/cmsdashboard/cmsdashboard.component';
 
 const routes: Routes = [
   {
-    path:"CMS/Login",
-    component:CMSLoginComponent
+    path:"CMS",
+    loadChildren:()=> import('./Area/CMS/Shared/Layout/CMS.module').then(x => x.CMSModule)
   },
   {
-    path:"CMS/Dashboard",
-    component:CmsdashboardComponent
+    path:"Staff",
+    loadChildren:()=> import('./Area/Staff/Shared/Staff.module').then(x => x.StaffModule)
+  },
+  {
+    path: '',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 
