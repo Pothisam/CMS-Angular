@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TextbComponent } from './Global/Input/textb/textb.component';
+import { CmsdashboardComponent } from './Area/CMS/Dashboard/cmsdashboard/cmsdashboard.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TextbComponent } from './Global/Input/textb/textb.component';
     CmsNavComponent,
     StaffNavComponent,
     CmsLeftMenuComponent,
-    TextbComponent
+    TextbComponent,
+    CmsdashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { TextbComponent } from './Global/Input/textb/textb.component';
     MatSnackBarModule,
     MatDialogModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
