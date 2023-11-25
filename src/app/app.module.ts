@@ -29,11 +29,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TextbComponent } from './Global/Input/textb/textb.component';
 import { CmsdashboardComponent } from './Area/CMS/Dashboard/cmsdashboard/cmsdashboard.component';
+import { TextBoxModule } from './Global/Input/textbox/textbox.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TextboxComponent,
     CmsNavComponent,
     StaffNavComponent,
     CmsLeftMenuComponent,
@@ -61,7 +61,8 @@ import { CmsdashboardComponent } from './Area/CMS/Dashboard/cmsdashboard/cmsdash
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    TextBoxModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
