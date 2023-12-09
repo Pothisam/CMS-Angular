@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { InstitutionComponent } from '../../Management/Institution/Institution.component';
 import { CMSRoutingModule } from './CMS-routing.module';
 import { LoginComponent } from '../../User/Login/Login.component';
-import { TextBoxModule } from 'src/app/Global/Input/textbox/textbox.module';
+import { HtmlHelperModule } from 'src/app/Shared/Helper/htmlhelper.module';
+import { CmsdashboardComponent } from '../../Dashboard/cmsdashboard/cmsdashboard.component';
 
 @NgModule({
   imports: [
-    CommonModule,CMSRoutingModule, TextBoxModule
+    CommonModule,CMSRoutingModule,HtmlHelperModule
   ],
-  declarations: [InstitutionComponent,LoginComponent]
+  declarations: [InstitutionComponent,LoginComponent,CmsdashboardComponent]
 })
 export class CMSModule { }

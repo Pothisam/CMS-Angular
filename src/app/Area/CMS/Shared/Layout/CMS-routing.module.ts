@@ -4,7 +4,6 @@ import { CmsdashboardComponent } from '../../Dashboard/cmsdashboard/cmsdashboard
 import { LoginComponent } from '../../User/Login/Login.component';
 import { InstitutionComponent } from '../../Management/Institution/Institution.component';
 import { CMSIsLogin } from '../../User/Login/gaurds';
-import { TextbComponent } from 'src/app/Global/Input/textb/textb.component';
 
 
 
@@ -13,6 +12,12 @@ const CMSroutes: Routes = [
   {
     path:"Login",
     component:LoginComponent
+  }
+  ,
+  {
+    path:"Dashboard",
+    component:CmsdashboardComponent,
+    canActivate:[CMSIsLogin]
   },
   {
     path:"Institution",

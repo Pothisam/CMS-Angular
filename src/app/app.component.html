@@ -1,18 +1,6 @@
 <app-cms-nav *ngIf="IsCMSNavVisible()"></app-cms-nav>
 <app-cms-left-menu></app-cms-left-menu>
 <app-staff-nav *ngIf="IsStaffNavVisible()"></app-staff-nav>
-<div class="card ">
-  <div class="card-header bg-primary text-bg-primary">
-    Quote
-  </div>
-  <div class="card-body">
-  <div class="container-fluid ps-0 pe-0 overflow-hidden">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+<router-outlet></router-outlet>
+
 

@@ -3,9 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/Global/Service/layout.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+
 @Component({
   selector: 'app-Login',
   templateUrl: './Login.component.html',

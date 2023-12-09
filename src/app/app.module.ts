@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TextboxComponent } from './Global/Input/textbox/textbox.component';
 import { StaffNavComponent } from './Area/Staff/Shared/Layout/staff-nav/staff-nav.component';
 import { CmsNavComponent } from './Area/CMS/Shared/Layout/cms-nav/cms-nav.component';
 import { CmsLeftMenuComponent } from './Area/CMS/Shared/Layout/cms-left-menu/cms-left-menu.component';
@@ -27,18 +26,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TextbComponent } from './Global/Input/textb/textb.component';
 import { CmsdashboardComponent } from './Area/CMS/Dashboard/cmsdashboard/cmsdashboard.component';
-import { TextBoxModule } from './Global/Input/textbox/textbox.module';
+import { HtmlHelperModule } from './Shared/Helper/htmlhelper.module';
+import { HelperService } from './Shared/Helper/helper-service.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     CmsNavComponent,
     StaffNavComponent,
-    CmsLeftMenuComponent,
-    TextbComponent,
-    CmsdashboardComponent
+    CmsLeftMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -62,10 +59,14 @@ import { TextBoxModule } from './Global/Input/textbox/textbox.module';
     MatSortModule,
     MatSnackBarModule,
     MatDialogModule,
-    TextBoxModule
+    HtmlHelperModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [HelperService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private eventHandlerService: HelperService) {
+    this.eventHandlerService.initializeEventHandling();
+  }
+ }

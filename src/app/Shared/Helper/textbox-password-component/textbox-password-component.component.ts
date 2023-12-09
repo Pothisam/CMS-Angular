@@ -1,12 +1,12 @@
-import { Component,Input  } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-textbox',
-  templateUrl: './textbox.component.html',
-  styleUrls: ['./textbox.component.scss']
+  selector: 'helper-textbox-password',
+  templateUrl: './textbox-password-component.component.html',
+  styleUrls: ['./textbox-password-component.component.css']
 })
+export class TextboxPasswordComponent implements OnInit {
 
-export class TextboxComponent {
   @Input() entity: string = '';
   @Input() label: string = '';
   @Input() required: boolean| string = true;
@@ -16,10 +16,8 @@ export class TextboxComponent {
   id: string | undefined;
   message: string | undefined;
   spanClass!: string;
+  constructor() { }
 
-  constructor() {
-
-  }
   ngOnInit() {
     this.id = 'Txt' + this.entity;
     this.message = 'Please Enter ' + this.label;
@@ -28,11 +26,5 @@ export class TextboxComponent {
       this.spanClass += ' d-none';
     }
   }
-  onKeyPress(event: any) {
-    // Add your keypress validation logic here
-    const key = event.key;
-    if (!/[a-z\s]/i.test(key)) {
-      event.preventDefault();
-    }
-  }
+
 }

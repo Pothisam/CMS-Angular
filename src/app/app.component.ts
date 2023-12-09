@@ -4,7 +4,6 @@ import { LayoutService } from './Global/Service/layout.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { GlobalService } from './Global/Service/global.service';
 import { routeAnimations } from './Global/Service/route-animations.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
