@@ -26,4 +26,27 @@ export class GlobalService {
       this.layout.IsStaffNavVisible = true;
     }
   }
+  disableButton(id: string): void {
+    const element = document.querySelector('#'+id) as HTMLElement | null;
+    if (!element) return;
+
+    element.setAttribute('disabled', 'true');
+
+    const children = Array.from(element.children);
+    if (children.length >= 2 && children[0] instanceof HTMLElement && children[1] instanceof HTMLElement) {
+        const firstSpan = children[0] as HTMLElement;
+        firstSpan.classList.remove('visually-hidden');
+
+        const secondSpan = children[1] as HTMLElement;
+        secondSpan.innerHTML = ' Please wait...';
+    }
+  }
+  ValidateForm(inputProperties:any): void{
+    for (const property of inputProperties) {
+      if (property.startsWith('entity')) {
+        // Do something with each input property
+        console.log(`${property}`);
+      }
+    }
+  }
 }

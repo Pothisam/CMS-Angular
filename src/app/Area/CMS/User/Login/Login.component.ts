@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   islo:string | null | undefined;
   constructor(private Location:Location,private router: Router,private layout:LayoutService,private globalService:GlobalService) {
-
+    username:String;
 
   }
 
@@ -27,9 +27,25 @@ export class LoginComponent implements OnInit {
      }
     }
   }
-  public onClick(){
-    this.layout.IsCMSNavVisible = true;
-    this.globalService.GLSS("Login","true")
-    this.router.navigate(['CMS/Dashboard']);
+  public onClick(event: MouseEvent){
+    //this.layout.IsCMSNavVisible = true;
+    //this.globalService.GLSS("Login","true")
+    //this.router.navigate(['CMS/Dashboard']);
+    const clickedElement = event.currentTarget as HTMLElement;
+    if (clickedElement.children[0].id) {
+      const buttonId = clickedElement.children[0].id;
+      this.globalService.disableButton(buttonId);
+      this.ValidateForm(Object.keys(this));
     }
+    }
+    ValidateForm(inputProperties:any): void{
+      for (const property of inputProperties) {
+        if (property.startsWith('entity')) {
+          // Do something with each input property
+          console.log(`${property}`);
+        }
+      }
+    }
+
+
 }

@@ -10,6 +10,7 @@
     [attr.ErrorMessage]="message"
     [attr.required]="required.toString().toLowerCase()"
     [attr.label]="label"
+    (ngModel)="entityValue"
   />
   <span class="highlight"></span>
   <span class="bar"></span>

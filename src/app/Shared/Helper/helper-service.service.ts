@@ -43,9 +43,7 @@ export class HelperService {
         }
       }
     }
-    if (event.type === 'keydown' && event.key !== 13) {
-      return;
-    }
+
     if (target.classList.contains('pure-material-textbox-password-icon')) {
       if (target.classList.contains('fa-eye')) {
         this.renderer.removeClass(target, 'fa-eye');

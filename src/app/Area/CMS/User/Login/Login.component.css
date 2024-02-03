@@ -1,0 +1,81 @@
+body {
+  overflow-x: hidden;
+  overflow-y:hidden;
+}
+.body {
+  overflow-x: hidden;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  background: #ecf0f3;
+  background-image: url('../../../../../assets/Images/pexels-veeterzy-303383.jpg');
+}
+
+.login-div {
+  width: 400px;
+  height: 650px;
+  padding: 60px 35px 35px 35px;
+  border-radius: 40px;
+  background: #ecf0f3;
+  box-shadow: 0 0 3px 3px #dddddd, 6px 6px 8px 4px rgba(136,136,136,0.7), -6px -6px 8px 4px rgba(244,244,244,0.7);
+  justify-content: center;
+}
+
+.logo {
+  background: url("../../../../../assets/Images/Logo New.png");
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow:
+  /* logo shadow */
+  0px 0px 2px #5f5f5f,
+  /* offset */
+  0px 0px 0px 5px #ecf0f3,
+  /*bottom right */
+  8px 8px 15px #a7aaaf,
+  /* top left */
+  -8px -8px 15px #ffffff;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  padding-top: 24px;
+  letter-spacing: 0.5px;
+}
+
+.sub-title {
+  text-align: center;
+  font-size: 15px;
+  padding-top: 7px;
+  letter-spacing: 3px;
+}
+
+.TextBox {
+  margin-bottom: 20px;
+}
+
+.fullscreen_bg {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: repeat;
+  justify-content: center;
+   background-image: url('../../../../../assets/Images/pexels-veeterzy-303383.jpg');
+}
+
+.Check {
+  color: yellow;
+}

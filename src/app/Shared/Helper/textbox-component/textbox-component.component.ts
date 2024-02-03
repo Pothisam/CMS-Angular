@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'helper-textbox',
@@ -12,11 +12,18 @@ export class TextboxComponent implements OnInit {
   @Input() required: boolean| string = true;
   @Input() min: number| string = 3;
   @Input() maxlength: number| string = 50;
-
+  @Output() entityValueChange: EventEmitter<any> = new EventEmitter<any>();
   id: string | undefined;
   message: string | undefined;
   spanClass!: string;
 
+  get entityValue(): any {
+    return this.entityValue;
+  }
+
+  set entityValue(value: any) {
+    this.entityValueChange.emit(value);
+  }
   constructor() {
 
   }
