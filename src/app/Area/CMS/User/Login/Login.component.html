@@ -4,17 +4,19 @@
 <div class="title"><h2>CMS Admin</h2></div>
 <div class="sub-title">V 3.0</div>
 <div class="m-auto">
-  <div class="row">
-   <div class="col-12">
-    <helper-textbox entity="username" maxlength="25" label="User name"></helper-textbox>
-   </div>
-   <div class="col-12">
-    <helper-textbox-password entity="Password" label="Password"></helper-textbox-password>
-   </div>
-   <div class="col-12">
-    <helper-button entity="Login1" label="Login" Type="P" (click)="onClick($event)"></helper-button>
-   </div>
-  </div>
+  <form id="login-form">
+    <div class="row">
+      <div class="col-12">
+       <helper-textbox entity="username" maxlength="25" label="User name"></helper-textbox>
+      </div>
+      <div class="col-12">
+       <helper-textbox-password entity="Password" label="Password"></helper-textbox-password>
+      </div>
+      <div class="col-12">
+       <helper-button entity="Login1" label="Login" Type="P" (click)="onClick($event)" id="login-btn"></helper-button>
+      </div>
+     </div>
+  </form>
 </div>
 </div>
 </div>

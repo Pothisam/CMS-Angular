@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/Global/Service/layout.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
+import { FormValidationService } from 'src/app/Shared/formValidation.service';
 
 @Component({
   selector: 'app-Login',
@@ -12,7 +13,13 @@ import { GlobalService } from 'src/app/Global/Service/global.service';
 export class LoginComponent implements OnInit {
 
   islo:string | null | undefined;
-  constructor(private Location:Location,private router: Router,private layout:LayoutService,private globalService:GlobalService) {
+  constructor(
+      private Location:Location,
+      private router: Router,
+      private layout:LayoutService,
+      private globalService:GlobalService,
+      private FormValidationService: FormValidationService
+    ) {
     username:String;
 
   }
@@ -28,6 +35,9 @@ export class LoginComponent implements OnInit {
     }
   }
   public onClick(event: MouseEvent){
+    const {response, errors} = this.FormValidationService.validateForm("login-btn");
+    console.log("This is response", response);
+    console.log("This is errors", errors);
     //this.layout.IsCMSNavVisible = true;
     //this.globalService.GLSS("Login","true")
     //this.router.navigate(['CMS/Dashboard']);
