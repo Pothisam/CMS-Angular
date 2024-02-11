@@ -49,4 +49,21 @@ export class GlobalService {
       }
     }
   }
+ findParentByClassName(target: Element | null, className: string): Element | null {
+    // Ensure target and className are provided
+    if (!target || !className) return null;
+
+    // Traverse up the DOM tree to find the parent with the specified class name
+    let parent: Element | null = target.parentElement;
+    while (parent) {
+        if (parent.classList && parent.classList.contains(className)) {
+            return parent;
+        }
+        parent = parent.parentNode instanceof Element ? parent.parentNode : null;
+    }
+
+    // If no parent with the specified class name is found, return null
+    return null;
+}
+
 }

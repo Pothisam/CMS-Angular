@@ -1,5 +1,4 @@
 import { Injectable, ViewChild } from '@angular/core';
-import {ErrorTagComponent} from './Helper/Error-Tag/Error-Tag.component';
 import { BadgeService } from './Helper/Error-Tag/BadgeService.service';
 @Injectable({
   providedIn: 'root',
@@ -31,6 +30,7 @@ export class FormValidationService {
   }
 
   validateForm(id: string): any {
+    this.badgeService.errorIconShowHide(false);
     this.disableButton(id);
     let response: any = {};
     let errors: any = [];
@@ -118,14 +118,15 @@ export class FormValidationService {
           }
         }
       }
-      errors = errors.concat(errormessage);
     });
+    errors = errors.concat(errormessage);
     setTimeout(() => {
       this.enableButton(id);
   }, 25);
   if(i != 0){
     this.badgeService.updateBadgeValue(i);
-    this.RenderErrorMsg(errormessage)
+    this.badgeService.updateErrorMsg(errors);
+    this.badgeService.errorIconShowHide(true);
    }
    return { response, errors };
 
@@ -135,14 +136,5 @@ export class FormValidationService {
     const regex =
       /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
-  }
-  RenderErrorMsg(error:{ id: string, msg: string }[]){
-    let listitem='';
-    for (let i = 0; i < error.length; i++) {
-      let errorMessage = error[i];
-      listitem +="<li><a tabindex='0' class='Errorlist cursor-pointer' data-focus='" +errorMessage.id + "'>" + errorMessage.msg + "</a></li>"
-
-    }
-    console.log(listitem);
   }
 }
