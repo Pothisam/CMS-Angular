@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { BadgeService } from './BadgeService.service';
 
 @Component({
   selector: 'helper-Error-Tag',
   templateUrl: './Error-Tag.component.html',
   styleUrls: ['./Error-Tag.component.css']
 })
-export class ErrorTagComponent  {
+export class ErrorTagComponent implements OnInit {
   iconButtonBadgeValue: number = 0;
-  constructor() { }
+
+  constructor(private badgeService: BadgeService) { }
 
   ngOnInit() {
-  }
-  updateBatch(errorcount:number){
-    this.iconButtonBadgeValue =errorcount;
+    this.badgeService.badgeValue$.subscribe(value => {
+      this.iconButtonBadgeValue = value;
+    });
   }
 }

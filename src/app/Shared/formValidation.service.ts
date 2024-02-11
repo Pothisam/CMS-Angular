@@ -1,10 +1,11 @@
 import { Injectable, ViewChild } from '@angular/core';
 import {ErrorTagComponent} from './Helper/Error-Tag/Error-Tag.component';
+import { BadgeService } from './Helper/Error-Tag/BadgeService.service';
 @Injectable({
   providedIn: 'root',
 })
 export class FormValidationService {
-  @ViewChild(ErrorTagComponent) ErrorTagComponent!: ErrorTagComponent;
+  constructor(private badgeService: BadgeService) {}
   disableButton(id: string): void {
     const buttonElement = document.getElementById(id) as HTMLButtonElement;
     if (buttonElement) {
@@ -123,7 +124,7 @@ export class FormValidationService {
       this.enableButton(id);
   }, 25);
   if(i != 0){
-    this.ErrorTagComponent.updateBatch(i);
+    this.badgeService.updateBadgeValue(i);
     this.RenderErrorMsg(errormessage)
    }
    return { response, errors };
