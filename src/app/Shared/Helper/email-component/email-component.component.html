@@ -1,0 +1,17 @@
+<div class="pure-material-textbox">
+  <input
+    type="email"
+    class="pure-material-textbox-input"
+    [attr.id]="id"
+    [attr.name]="entity"
+    [attr.min]="min"
+    [attr.maxLength]="maxlength"
+    [attr.ErrorMessage]="message"
+    [attr.required]="required.toString().toLowerCase()"
+    [attr.label]="label"
+    (ngModel)="entityValue"
+  />
+  <span class="highlight"></span>
+  <span class="bar"></span>
+  <label>{{ label }} <span [class]="spanClass">*</span></label>
+</div>

@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-
+import { Injectable, ViewChild } from '@angular/core';
+import {ErrorTagComponent} from './Helper/Error-Tag/Error-Tag.component';
 @Injectable({
   providedIn: 'root',
 })
 export class FormValidationService {
+  @ViewChild(ErrorTagComponent) ErrorTagComponent!: ErrorTagComponent;
   disableButton(id: string): void {
     const buttonElement = document.getElementById(id) as HTMLButtonElement;
     if (buttonElement) {
@@ -11,26 +12,25 @@ export class FormValidationService {
       const spans = buttonElement.querySelectorAll('span');
       if (spans.length >= 2) {
         spans[0].classList.remove('visually-hidden');
-        spans[1].innerHTML = 'Please wait...';
+        spans[1].innerHTML = ' Please wait...';
       }
     }
   }
 
-  enableButton(id: string, isError: boolean, dataText: string): void {
+  enableButton(id: string): void {
     const buttonElement = document.getElementById(id) as HTMLButtonElement;
     if (buttonElement) {
       buttonElement.disabled = false;
-      if (isError) {
-        const spans = buttonElement.querySelectorAll('span');
+      const spans = buttonElement.querySelectorAll('span');
         if (spans.length >= 2) {
           spans[0].classList.add('visually-hidden');
-          spans[1].innerHTML = dataText;
+          spans[1].innerHTML = (spans[1]?.getAttribute('data-label') ?? '')!;
         }
-      }
     }
   }
 
   validateForm(id: string): any {
+    this.disableButton(id);
     let response: any = {};
     let errors: any = [];
     const formId = (document.getElementById(id) as HTMLElement).closest(
@@ -39,7 +39,7 @@ export class FormValidationService {
     let error = '';
     let i = 0;
     let isError = false;
-
+    let errormessage: { id: string, msg: string }[] = [];
     const formElement = document.getElementById(formId!);
     const formInputs: NodeListOf<HTMLInputElement> | null = formElement
       ? formElement.querySelectorAll<HTMLInputElement>(
@@ -54,7 +54,7 @@ export class FormValidationService {
       if (inputElement) {
         response[inputElement.name] = inputElement.value;
       }
-      let errormessage = [];
+
       if (inputElement) {
         const isSelect = inputElement.tagName === 'SELECT';
         const isInput = inputElement.tagName === 'INPUT';
@@ -65,25 +65,25 @@ export class FormValidationService {
           (!(inputElement as HTMLInputElement).value ||
             (inputElement as HTMLInputElement).value === null)
         ) {
-          errormessage.push(`${inputElement.getAttribute('ErrorMessage')}`);
-          isError = true;
+          errormessage.push({"id":inputElement.getAttribute('id') as string ,"msg":inputElement.getAttribute('ErrorMessage')as string});
+          i++;
         }
 
         if (isInput) {
           const inputValue = (input as HTMLInputElement).value;
           if (inputElement.getAttribute('required') === 'true' && !inputValue) {
-            errormessage.push(`${inputElement.getAttribute('ErrorMessage')}`);
-            isError = true;
+            errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":inputElement.getAttribute('ErrorMessage') as string});
+            i++;
           }
 
           const minLengthAttr = inputElement.getAttribute('min');
           const minLength = minLengthAttr !== null ? +minLengthAttr : 0;
-          if (minLength > 0 && minLength > inputValue.length) {
+          if (minLength > 0 && minLength > inputValue.length && inputValue.length > 0) {
             const msg = `Invalid ${inputElement.getAttribute(
               'label'
             )} Minimum ${minLength} characters required`;
-            errormessage.push(`${msg}`);
-            isError = true;
+            errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+            i++;
           }
 
           const maxLengthAttr = inputElement.getAttribute('maxlength');
@@ -92,15 +92,15 @@ export class FormValidationService {
             const msg = `Invalid ${inputElement.getAttribute(
               'label'
             )} Maximum ${maxLength} characters Allowed`;
-            errormessage.push(`${msg}`);
-            isError = true;
+            errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+            i++;
           }
 
           if (inputElement.getAttribute('type') === 'email' && inputValue) {
             if (!this.isEmail(inputValue)) {
               const msg = `Invalid ${inputElement.getAttribute('label')}`;
-              errormessage.push(`${msg}`);
-              isError = true;
+              errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+              i++;
             }
           }
 
@@ -111,23 +111,37 @@ export class FormValidationService {
             const fileSizeAttr = inputElement.getAttribute('data-filesize');
             if (fileSizeAttr !== null && +fileSizeAttr <= size) {
               const msg = `File Must be less than ${fileSizeAttr} kb`;
-              errormessage.push(`${msg}`);
-              isError = true;
+              errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+              i++;
             }
           }
         }
       }
       errors = errors.concat(errormessage);
     });
+    setTimeout(() => {
+      this.enableButton(id);
+  }, 25);
+  if(i != 0){
+    this.ErrorTagComponent.updateBatch(i);
+    this.RenderErrorMsg(errormessage)
+   }
+   return { response, errors };
 
-    this.enableButton(id, isError, 'Please Verify the credentials');
-
-    return { response, errors };
   }
 
   isEmail(email: string): boolean {
     const regex =
       /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
+  }
+  RenderErrorMsg(error:{ id: string, msg: string }[]){
+    let listitem='';
+    for (let i = 0; i < error.length; i++) {
+      let errorMessage = error[i];
+      listitem +="<li><a tabindex='0' class='Errorlist cursor-pointer' data-focus='" +errorMessage.id + "'>" + errorMessage.msg + "</a></li>"
+
+    }
+    console.log(listitem);
   }
 }

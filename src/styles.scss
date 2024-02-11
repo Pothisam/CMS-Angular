@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@fortawesome/fontawesome-free/css/all.css';
 @import './assets/MaterialStyle/textbox.scss';
+@import './assets/CSS/ErrorTag.scss';
 .dropdown-toggle {
 	&::after {
 		display: inline-block;

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     const clickedElement = event.currentTarget as HTMLElement;
     if (clickedElement.children[0].id) {
       const buttonId = clickedElement.children[0].id;
-      this.globalService.disableButton(buttonId);
+      //this.globalService.disableButton(buttonId);
       this.ValidateForm(Object.keys(this));
     }
     }

@@ -7,16 +7,18 @@
   <form id="login-form">
     <div class="row">
       <div class="col-12">
-       <helper-textbox entity="username" maxlength="25" label="User name"></helper-textbox>
+       <helper-textbox entity="username" maxlength="25" label="User name"  required="true"></helper-textbox>
       </div>
       <div class="col-12">
-       <helper-textbox-password entity="Password" label="Password"></helper-textbox-password>
+       <helper-textbox-password entity="Password" label="Password" required="true"></helper-textbox-password>
       </div>
       <div class="col-12">
        <helper-button entity="Login1" label="Login" Type="P" (click)="onClick($event)" id="login-btn"></helper-button>
       </div>
      </div>
+     <helper-Error-Tag></helper-Error-Tag>
   </form>
 </div>
 </div>
 </div>
+

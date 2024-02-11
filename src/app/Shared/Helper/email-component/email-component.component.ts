@@ -1,15 +1,15 @@
 import { Component, OnInit,Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'helper-textbox',
-  templateUrl: './textbox-component.component.html',
-  styleUrls: ['./textbox-component.component.css']
+  selector: 'helper-email',
+  templateUrl: './email-component.component.html',
+  styleUrls: ['./email-component.component.css']
 })
-export class TextboxComponent implements OnInit {
+export class EmailComponent implements OnInit {
 
   @Input() entity: string = '';
   @Input() label: string = '';
-  @Input() required: string = 'true';
+  @Input() required: string = 'false';
   @Input() min: number| string = 3;
   @Input() maxlength: number| string = 50;
   @Output() entityValueChange: EventEmitter<any> = new EventEmitter<any>();
@@ -35,13 +35,6 @@ export class TextboxComponent implements OnInit {
       this.spanClass += ' d-none';
     }
   }
-  onKeyPress(event: any) {
-    // Add your keypress validation logic here
-    const key = event.key;
-    if (!/[a-z\s]/i.test(key)) {
-      event.preventDefault();
-    }
-  }
+
 
 }
-
