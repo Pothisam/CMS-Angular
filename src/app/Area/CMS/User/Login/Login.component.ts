@@ -1,61 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/Global/Service/layout.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { FormValidationService } from 'src/app/Shared/formValidation.service';
-
+import { TextboxType } from 'src/app/Shared/Helper/helper-service.service';
+import {LoginRequest} from 'src/app/Modules/CMS/User/Request/login.model'
 @Component({
   selector: 'app-Login',
   templateUrl: './Login.component.html',
   styleUrls: ['./Login.component.css'],
 })
-export class LoginComponent implements OnInit {
-
-  islo:string | null | undefined;
+export class LoginComponent implements OnInit , AfterViewInit {
+  TextboxType = TextboxType;
+  islo: string | null | undefined;
+  LoginRequest: LoginRequest
   constructor(
-      private Location:Location,
-      private router: Router,
-      private layout:LayoutService,
-      private globalService:GlobalService,
-      private FormValidationService: FormValidationService
-    ) {
-    username:String;
-
+    private Location: Location,
+    private router: Router,
+    private layout: LayoutService,
+    private globalService: GlobalService,
+    private ValidationService: FormValidationService,
+  ) {
+    this.LoginRequest={
+      userName :'asds',
+      password :''
+    }
   }
 
   ngOnInit() {
     this.layout.IsCMSNavVisible = false;
-    if(this.Location.path().split('/')[1] == "CMS"){
-     this.islo = this.globalService.GLSG("Login");
-     console.log(this.islo);
-     if(this.islo == "true"){
-     this.router.navigate(['CMS/Dashboard']);
-     }
+    if (this.Location.path().split('/')[1] == 'CMS') {
+      this.islo = this.globalService.GLSG('Login');
+      console.log(this.islo);
+      if (this.islo == 'true') {
+        this.router.navigate(['CMS/Dashboard']);
+      }
     }
   }
-  public onClick(event: MouseEvent){
-    const {response, errors} = this.FormValidationService.validateForm("login-btn");
-    console.log("This is response", response);
-    console.log("This is errors", errors);
+  ngAfterViewInit(): void {
+
+  }
+  public onClick(event: MouseEvent) {
+    if (this.ValidationService.validate(event)) {
+console.log("true")
+console.log(this.LoginRequest)
+    }
+
+
     //this.layout.IsCMSNavVisible = true;
     //this.globalService.GLSS("Login","true")
     //this.router.navigate(['CMS/Dashboard']);
-    const clickedElement = event.currentTarget as HTMLElement;
-    if (clickedElement.children[0].id) {
-      const buttonId = clickedElement.children[0].id;
-      //this.globalService.disableButton(buttonId);
-      this.ValidateForm(Object.keys(this));
-    }
-    }
-    ValidateForm(inputProperties:any): void{
-      for (const property of inputProperties) {
-        if (property.startsWith('entity')) {
-          // Do something with each input property
-          console.log(`${property}`);
-        }
+  }
+  ValidateForm(inputProperties: any): void {
+    for (const property of inputProperties) {
+      if (property.startsWith('entity')) {
+        // Do something with each input property
+        console.log(`${property}`);
       }
     }
-
-
+  }
 }

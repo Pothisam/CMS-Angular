@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'helper-button',
   templateUrl: './button-component.component.html',
   styleUrls: ['./button-component.component.css']
 })
-export class ButtonComponentComponent implements OnInit {
+export class ButtonComponentComponent implements OnInit, AfterViewInit {
   id: string | undefined;
   @Input() entity: string = '';
   @Input() label: string = '';
@@ -25,5 +25,10 @@ export class ButtonComponentComponent implements OnInit {
       this.BtnClass += 'btn-danger'
     }
   }
+  ngAfterViewInit(): void {
 
+  }
+  onClick() {
+    //this.buttonClicked.emit((event.target as HTMLButtonElement).id);
+  }
 }

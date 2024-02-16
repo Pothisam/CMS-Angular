@@ -1,18 +1,8 @@
 <div class="pure-material-textbox">
-  <input
-    type="text"
-    class="pure-material-textbox-input"
-    [attr.id]="id"
-    (keypress)="onKeyPress($event)"
-    [attr.name]="entity"
-    [attr.min]="min"
-    [attr.maxLength]="maxlength"
-    [attr.ErrorMessage]="message"
-    [attr.required]="required.toString().toLowerCase()"
-    [attr.label]="label"
-    (ngModel)="entityValue"
-  />
+  <input type="text" [class]="inputClass" [attr.id]="id" [attr.name]="entity" [attr.min]="min"
+    [attr.maxLength]="maxlength" [attr.ErrorMessage]="message" [attr.required]="required.toString().toLowerCase()"
+    [attr.aria-label]="label" (ngModel)="entityValue" tabindex="0" [value]="Modelvalue" />
   <span class="highlight"></span>
   <span class="bar"></span>
-  <label>{{ label }} <span [class]="spanClass">*</span></label>
+  <label [attr.for]="entity">{{ label }} <span [class]="spanClass">*</span></label>
 </div>

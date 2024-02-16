@@ -1,24 +1,26 @@
 <div class="body">
-<div class="login-div " role="main">
-  <div class="logo"></div>
-<div class="title"><h2>CMS Admin</h2></div>
-<div class="sub-title">V 3.0</div>
-<div class="m-auto">
-  <form id="login-form">
-    <div class="row">
-      <div class="col-12">
-       <helper-textbox entity="username" maxlength="25" label="User name"  required="true"></helper-textbox>
-      </div>
-      <div class="col-12">
-       <helper-textbox-password entity="Password" label="Password" required="true"></helper-textbox-password>
-      </div>
-      <div class="col-12">
-       <helper-button entity="Login1" label="Login" Type="P" (click)="onClick($event)" id="login-btn"></helper-button>
-      </div>
-     </div>
-     <helper-Error-Tag></helper-Error-Tag>
-  </form>
+  <div class="login-div " role="main">
+    <div class="logo"></div>
+    <div class="title">
+      <h2>CMS Admin</h2>
+    </div>
+    <div class="sub-title">V 3.0</div>
+    <div class="m-auto">
+      <form id="login-form">
+        <div class="row">
+          <div class="col-12">
+            <helper-textbox entity="username" label="User name" [Modelvalue]="LoginRequest.userName" required="true"></helper-textbox>
+          </div>
+          <div class="col-12">
+            <helper-textbox-password entity="Password" label="Password" required="true" [Modelvalue]="LoginRequest.password"></helper-textbox-password>
+          </div>
+          <div class="col-12">
+            <helper-button entity="Login" label="Login" Type="P" (click)="onClick($event)"
+              id="login-btn"></helper-button>
+          </div>
+        </div>
+        <helper-Error-Tag></helper-Error-Tag>
+      </form>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-

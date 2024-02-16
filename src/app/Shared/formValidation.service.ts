@@ -1,10 +1,11 @@
 import { Injectable, ViewChild } from '@angular/core';
 import { BadgeService } from './Helper/Error-Tag/BadgeService.service';
+import {HelperService} from 'src/app/Shared/Helper/helper-service.service';
 @Injectable({
   providedIn: 'root',
 })
 export class FormValidationService {
-  constructor(private badgeService: BadgeService) {}
+  constructor(private badgeService: BadgeService,private helperService:HelperService) {}
   disableButton(id: string): void {
     const buttonElement = document.getElementById(id) as HTMLButtonElement;
     if (buttonElement) {
@@ -22,14 +23,16 @@ export class FormValidationService {
     if (buttonElement) {
       buttonElement.disabled = false;
       const spans = buttonElement.querySelectorAll('span');
-        if (spans.length >= 2) {
-          spans[0].classList.add('visually-hidden');
-          spans[1].innerHTML = (spans[1]?.getAttribute('data-label') ?? '')!;
-        }
+      if (spans.length >= 2) {
+        spans[0].classList.add('visually-hidden');
+        spans[1].innerHTML = (spans[1]?.getAttribute('data-label') ?? '')!;
+      }
     }
   }
 
-  validateForm(id: string): any {
+  validate(event: MouseEvent) {
+    const clickedElement = event.currentTarget as HTMLElement;
+    let id = clickedElement.children[0].id;
     this.badgeService.errorIconShowHide(false);
     this.disableButton(id);
     let response: any = {};
@@ -37,10 +40,9 @@ export class FormValidationService {
     const formId = (document.getElementById(id) as HTMLElement).closest(
       'form'
     )?.id;
-    let error = '';
     let i = 0;
-    let isError = false;
-    let errormessage: { id: string, msg: string }[] = [];
+    let isValidForm = true;
+    let errormessage: { id: string; msg: string }[] = [];
     const formElement = document.getElementById(formId!);
     const formInputs: NodeListOf<HTMLInputElement> | null = formElement
       ? formElement.querySelectorAll<HTMLInputElement>(
@@ -66,24 +68,37 @@ export class FormValidationService {
           (!(inputElement as HTMLInputElement).value ||
             (inputElement as HTMLInputElement).value === null)
         ) {
-          errormessage.push({"id":inputElement.getAttribute('id') as string ,"msg":inputElement.getAttribute('ErrorMessage')as string});
+          errormessage.push({
+            id: inputElement.getAttribute('id') as string,
+            msg: inputElement.getAttribute('ErrorMessage') as string,
+          });
           i++;
         }
 
         if (isInput) {
           const inputValue = (input as HTMLInputElement).value;
           if (inputElement.getAttribute('required') === 'true' && !inputValue) {
-            errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":inputElement.getAttribute('ErrorMessage') as string});
+            errormessage.push({
+              id: inputElement.getAttribute('id') as string,
+              msg: inputElement.getAttribute('ErrorMessage') as string,
+            });
             i++;
           }
 
           const minLengthAttr = inputElement.getAttribute('min');
           const minLength = minLengthAttr !== null ? +minLengthAttr : 0;
-          if (minLength > 0 && minLength > inputValue.length && inputValue.length > 0) {
+          if (
+            minLength > 0 &&
+            minLength > inputValue.length &&
+            inputValue.length > 0
+          ) {
             const msg = `Invalid ${inputElement.getAttribute(
               'label'
             )} Minimum ${minLength} characters required`;
-            errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+            errormessage.push({
+              id: inputElement.getAttribute('id') as string,
+              msg: msg,
+            });
             i++;
           }
 
@@ -93,14 +108,20 @@ export class FormValidationService {
             const msg = `Invalid ${inputElement.getAttribute(
               'label'
             )} Maximum ${maxLength} characters Allowed`;
-            errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+            errormessage.push({
+              id: inputElement.getAttribute('id') as string,
+              msg: msg,
+            });
             i++;
           }
 
           if (inputElement.getAttribute('type') === 'email' && inputValue) {
             if (!this.isEmail(inputValue)) {
               const msg = `Invalid ${inputElement.getAttribute('label')}`;
-              errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+              errormessage.push({
+                id: inputElement.getAttribute('id') as string,
+                msg: msg,
+              });
               i++;
             }
           }
@@ -112,7 +133,10 @@ export class FormValidationService {
             const fileSizeAttr = inputElement.getAttribute('data-filesize');
             if (fileSizeAttr !== null && +fileSizeAttr <= size) {
               const msg = `File Must be less than ${fileSizeAttr} kb`;
-              errormessage.push({"id":inputElement.getAttribute('id') as string,"msg":msg});
+              errormessage.push({
+                id: inputElement.getAttribute('id') as string,
+                msg: msg,
+              });
               i++;
             }
           }
@@ -122,19 +146,24 @@ export class FormValidationService {
     errors = errors.concat(errormessage);
     setTimeout(() => {
       this.enableButton(id);
-  }, 25);
-  if(i != 0){
-    this.badgeService.updateBadgeValue(i);
-    this.badgeService.updateErrorMsg(errors);
-    this.badgeService.errorIconShowHide(true);
-   }
-   return { response, errors };
-
+    }, 25);
+    if (i != 0) {
+      this.badgeService.updateBadgeValue(i);
+      this.badgeService.updateErrorMsg(errors);
+      this.badgeService.errorIconShowHide(true);
+      isValidForm = false;
+      this.helperService.playAudio("D");
+    }
+    return isValidForm;
+    //return { response, errors };
   }
 
   isEmail(email: string): boolean {
     const regex =
       /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
+  }
+  setClassValue<T>(clazz: { new (): T }): T {
+    return new clazz();
   }
 }
