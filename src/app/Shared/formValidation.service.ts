@@ -1,11 +1,15 @@
 import { Injectable, ViewChild } from '@angular/core';
 import { BadgeService } from './Helper/Error-Tag/BadgeService.service';
-import {HelperService} from 'src/app/Shared/Helper/helper-service.service';
+import { HelperService } from 'src/app/Shared/Helper/helper-service.service';
 @Injectable({
   providedIn: 'root',
 })
 export class FormValidationService {
-  constructor(private badgeService: BadgeService,private helperService:HelperService) {}
+  constructor(
+    private badgeService: BadgeService,
+    private helperService: HelperService
+  ) {}
+
   disableButton(id: string): void {
     const buttonElement = document.getElementById(id) as HTMLButtonElement;
     if (buttonElement) {
@@ -152,7 +156,7 @@ export class FormValidationService {
       this.badgeService.updateErrorMsg(errors);
       this.badgeService.errorIconShowHide(true);
       isValidForm = false;
-      this.helperService.playAudio("D");
+      this.helperService.playAudio('D');
     }
     return isValidForm;
     //return { response, errors };
@@ -163,6 +167,36 @@ export class FormValidationService {
       /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     return regex.test(email);
   }
+
+  getValue<T>(instance: T, id: string): T {
+    const formId = (document.getElementById(id) as HTMLElement).closest(
+      'form'
+    )?.id;
+    const formElement = document.getElementById(formId!);
+    const formInputs: NodeListOf<HTMLInputElement> | null = formElement
+      ? formElement.querySelectorAll<HTMLInputElement>(
+          'input:not([type="button"])'
+        )
+      : null;
+
+    formInputs!.forEach((input) => {
+      const inputElement = input.closest('input') as
+        | HTMLInputElement
+        | HTMLSelectElement
+        | null;
+      if (typeof instance === 'object' && instance !== null && inputElement) {
+        for (const key in instance) {
+          if (Object.prototype.hasOwnProperty.call(instance, key)) {
+            if (key.toLowerCase() === inputElement.name.toLowerCase()) {
+              (instance as any)[key] = inputElement.value;
+            }
+          }
+        }
+      }
+    });
+    return instance;
+  }
+
   setClassValue<T>(clazz: { new (): T }): T {
     return new clazz();
   }
