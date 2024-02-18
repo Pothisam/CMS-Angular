@@ -9,10 +9,10 @@
       <form id="login-form">
         <div class="row">
           <div class="col-12">
-            <helper-textbox entity="username" label="User name" [Modelvalue]="LoginRequest.userName" required="true"></helper-textbox>
+            <helper-textbox entity="userName" label="User name" required="true"></helper-textbox>
           </div>
           <div class="col-12">
-            <helper-textbox-password entity="Password" label="Password" required="true" [Modelvalue]="LoginRequest.password"></helper-textbox-password>
+            <helper-textbox-password entity="Password" label="Password" required="true"></helper-textbox-password>
           </div>
           <div class="col-12">
             <helper-button entity="Login" label="Login" Type="P" (click)="onClick($event)"
@@ -20,6 +20,7 @@
           </div>
         </div>
         <helper-Error-Tag></helper-Error-Tag>
+        <helper-Toast></helper-Toast>
       </form>
     </div>
   </div>

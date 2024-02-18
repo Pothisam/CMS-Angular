@@ -65,5 +65,8 @@ export class GlobalService {
     // If no parent with the specified class name is found, return null
     return null;
 }
+getAPIBaseUrl(){
+  return 'http://www.saras.ind.in/API';
+}
 
 }

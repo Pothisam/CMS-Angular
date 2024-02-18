@@ -1,0 +1,5 @@
+.toast-container {
+  > :not(:last-child) {
+    margin-bottom: 0.3rem;
+  }
+}

@@ -168,7 +168,9 @@ export class FormValidationService {
     return regex.test(email);
   }
 
-  getValue<T>(instance: T, id: string): T {
+  getValue<T>(instance: T, event: MouseEvent): T {
+    const clickedElement = event.currentTarget as HTMLElement;
+    let id = clickedElement.children[0].id;
     const formId = (document.getElementById(id) as HTMLElement).closest(
       'form'
     )?.id;

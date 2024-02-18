@@ -29,7 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CmsdashboardComponent } from './Area/CMS/Dashboard/cmsdashboard/cmsdashboard.component';
 import { HtmlHelperModule } from './Shared/Helper/htmlhelper.module';
 import { HelperService } from './Shared/Helper/helper-service.service';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +59,8 @@ import { HelperService } from './Shared/Helper/helper-service.service';
     MatSortModule,
     MatSnackBarModule,
     MatDialogModule,
-    HtmlHelperModule
+    HtmlHelperModule,
+    HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [HelperService],
