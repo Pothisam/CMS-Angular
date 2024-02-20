@@ -1,13 +1,13 @@
 import { Injectable, ViewChild } from '@angular/core';
 import { BadgeService } from './Helper/Error-Tag/BadgeService.service';
-import { HelperService } from 'src/app/Shared/Helper/helper-service.service';
+import { GlobalService } from '../Global/Service/global.service';
 @Injectable({
   providedIn: 'root',
 })
 export class FormValidationService {
   constructor(
     private badgeService: BadgeService,
-    private helperService: HelperService
+    private globalService: GlobalService
   ) {}
 
   disableButton(id: string): void {
@@ -156,7 +156,7 @@ export class FormValidationService {
       this.badgeService.updateErrorMsg(errors);
       this.badgeService.errorIconShowHide(true);
       isValidForm = false;
-      this.helperService.playAudio('D');
+      this.globalService.playAudio('D');
     }
     return isValidForm;
     //return { response, errors };

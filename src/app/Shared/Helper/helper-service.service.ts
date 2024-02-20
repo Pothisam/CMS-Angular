@@ -84,13 +84,6 @@ export class HelperService {
       }
     });
   }
-  playAudio(type: string): void {
-    const audio = new Audio(this.getAudioUrl(type));
-    audio.play();
-  }
-  private getAudioUrl(type: string): string {
-    return window.location.origin +`/assets/Audio/${type === 'D' ? 'Error-Notification' : 'Popup'}.mp3`;
-  }
 }
 
 export enum TextboxType {

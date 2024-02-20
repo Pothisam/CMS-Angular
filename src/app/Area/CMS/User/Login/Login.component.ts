@@ -13,7 +13,7 @@ import { UserService } from 'src/app//Area/CMS/User/User.service';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   islo: string | null | undefined;
-  private LoginRequest: ILoginRequest = {
+  public LoginRequest: ILoginRequest = {
     userName: '',
     password: '',
   };

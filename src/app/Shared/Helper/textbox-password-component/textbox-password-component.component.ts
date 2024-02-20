@@ -12,18 +12,15 @@ export class TextboxPasswordComponent implements OnInit {
   @Input() min: number | string = 3;
   @Input() maxlength: number | string = 50;
   @Input() css: string = '';
-  @Input() Modelvalue: string = '';
-  @Output() entityValueChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input() setModelvalue: string = '';
+  @Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
   id: string | undefined;
   message: string | undefined;
   spanClass!: string;
   inputClass!: string;
-  get entityValue(): any {
-    return this.entityValue;
-  }
 
-  set entityValue(value: any) {
-    this.entityValueChange.emit(value);
+  onInputChange(event: any) {
+    this.getModelValue.emit(event.target.value);
   }
   constructor() {}
 
@@ -37,6 +34,14 @@ export class TextboxPasswordComponent implements OnInit {
     }
     if (this.css != '') {
       this.inputClass += ' ' + this.css;
+    }
+  }
+  ngAfterViewInit(): void {
+    if(this.setModelvalue != ''){
+      let label = document.getElementById(this.id as string)?.parentElement?.querySelector('label');
+      if (label) {
+        label.classList.add('pure-material-textbox-label');
+      }
     }
   }
 }
