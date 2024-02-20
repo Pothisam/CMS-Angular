@@ -76,7 +76,6 @@ export class ApiCallService {
     let body = parameter;
     return http.post<Response>(url, body).pipe(
       tap((response: Response) => {
-        console.log('Response:', response);
         if (response.message != '' && response.status != '')
           this.ToastTrigger(response.message, response.status);
       })

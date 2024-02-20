@@ -24,25 +24,7 @@ export class GlobalService {
       this.layout.IsStaffNavVisible = true;
     }
   }
-  disableButton(id: string): void {
-    const element = document.querySelector('#' + id) as HTMLElement | null;
-    if (!element) return;
 
-    element.setAttribute('disabled', 'true');
-
-    const children = Array.from(element.children);
-    if (
-      children.length >= 2 &&
-      children[0] instanceof HTMLElement &&
-      children[1] instanceof HTMLElement
-    ) {
-      const firstSpan = children[0] as HTMLElement;
-      firstSpan.classList.remove('visually-hidden');
-
-      const secondSpan = children[1] as HTMLElement;
-      secondSpan.innerHTML = ' Please wait...';
-    }
-  }
   ValidateForm(inputProperties: any): void {
     for (const property of inputProperties) {
       if (property.startsWith('entity')) {
@@ -82,5 +64,34 @@ export class GlobalService {
       window.location.origin +
       `/assets/Audio/${type === 'D' ? 'Error-Notification' : 'Popup'}.mp3`
     );
+  }
+  disableButton(id: string): void {
+    const buttonElement = document.getElementById(id) as HTMLButtonElement;
+    if (buttonElement) {
+      buttonElement.disabled = true;
+      const spans = buttonElement.querySelectorAll('span');
+      if (spans.length >= 2) {
+        spans[0].classList.remove('visually-hidden');
+        spans[1].innerHTML = ' Please wait...';
+      }
+    }
+  }
+
+  enableButton(id: string): void {
+    setTimeout(() => {
+      const buttonElement = document.getElementById(id) as HTMLButtonElement;
+      if (buttonElement) {
+        buttonElement.disabled = false;
+        const spans = buttonElement.querySelectorAll('span');
+        if (spans.length >= 2) {
+          spans[0].classList.add('visually-hidden');
+          spans[1].innerHTML = (spans[1]?.getAttribute('data-label') ?? '')!;
+        }
+      }
+    }, 250);
+  }
+  getButtonID(event: MouseEvent) {
+    const clickedElement = event.currentTarget as HTMLElement;
+    return  clickedElement.children[0].id;
   }
 }

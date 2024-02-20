@@ -10,35 +10,13 @@ export class FormValidationService {
     private globalService: GlobalService
   ) {}
 
-  disableButton(id: string): void {
-    const buttonElement = document.getElementById(id) as HTMLButtonElement;
-    if (buttonElement) {
-      buttonElement.disabled = true;
-      const spans = buttonElement.querySelectorAll('span');
-      if (spans.length >= 2) {
-        spans[0].classList.remove('visually-hidden');
-        spans[1].innerHTML = ' Please wait...';
-      }
-    }
-  }
 
-  enableButton(id: string): void {
-    const buttonElement = document.getElementById(id) as HTMLButtonElement;
-    if (buttonElement) {
-      buttonElement.disabled = false;
-      const spans = buttonElement.querySelectorAll('span');
-      if (spans.length >= 2) {
-        spans[0].classList.add('visually-hidden');
-        spans[1].innerHTML = (spans[1]?.getAttribute('data-label') ?? '')!;
-      }
-    }
-  }
 
   validate(event: MouseEvent) {
     const clickedElement = event.currentTarget as HTMLElement;
     let id = clickedElement.children[0].id;
     this.badgeService.errorIconShowHide(false);
-    this.disableButton(id);
+    this.globalService.disableButton(id);
     let response: any = {};
     let errors: any = [];
     const formId = (document.getElementById(id) as HTMLElement).closest(
@@ -148,15 +126,13 @@ export class FormValidationService {
       }
     });
     errors = errors.concat(errormessage);
-    setTimeout(() => {
-      this.enableButton(id);
-    }, 25);
     if (i != 0) {
       this.badgeService.updateBadgeValue(i);
       this.badgeService.updateErrorMsg(errors);
       this.badgeService.errorIconShowHide(true);
       isValidForm = false;
       this.globalService.playAudio('D');
+      this.globalService.enableButton(id);
     }
     return isValidForm;
     //return { response, errors };

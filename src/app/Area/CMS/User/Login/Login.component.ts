@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.layout.IsCMSNavVisible = false;
     if (this.Location.path().split('/')[1] == 'CMS') {
       this.islo = this.globalService.GLSG('Login');
-      console.log(this.islo);
       if (this.islo == 'true') {
         this.router.navigate(['CMS/Dashboard']);
       }
@@ -39,12 +38,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   public onClick(event: MouseEvent) {
+    let buttonid =this.globalService.getButtonID(event);
     if (this.ValidationService.validate(event)) {
       this.ValidationService.getValue(this.LoginRequest, event);
       console.log(this.LoginRequest);
       this.userService.userLogin(this.LoginRequest).subscribe({
         next: (Response) => {
           console.log(Response);
+          this.globalService.enableButton(buttonid);
         },
       });
     }

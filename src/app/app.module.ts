@@ -26,7 +26,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CmsdashboardComponent } from './Area/CMS/Dashboard/cmsdashboard/cmsdashboard.component';
 import { HtmlHelperModule } from './Shared/Helper/htmlhelper.module';
 import { HelperService } from './Shared/Helper/helper-service.service';
 import { HttpClientModule } from '@angular/common/http';
