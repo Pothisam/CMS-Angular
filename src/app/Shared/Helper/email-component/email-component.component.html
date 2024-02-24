@@ -7,9 +7,10 @@
     [attr.min]="min"
     [attr.maxLength]="maxlength"
     [attr.ErrorMessage]="message"
-    [attr.required]="required.toString().toLowerCase()"
+    [attr.required]="_required.toString().toLowerCase()"
     [attr.label]="label"
-    (ngModel)="entityValue"
+    (input)="onInputChange($event)"
+    [disabled]="_disabled"
   />
   <span class="highlight"></span>
   <span class="bar"></span>

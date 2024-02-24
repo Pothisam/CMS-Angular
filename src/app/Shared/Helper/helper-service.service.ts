@@ -9,11 +9,44 @@ export class HelperService {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
   initializeEventHandling() {
-    this.renderer.listen('document', 'focusin', this.handleEvent.bind(this));
-    this.renderer.listen('document', 'focusout', this.handleEvent.bind(this));
-    this.renderer.listen('document', 'change', this.handleEvent.bind(this));
-    this.renderer.listen('document', 'click', this.handleEvent.bind(this));
-    this.renderer.listen('document', 'keydown', this.handleEvent.bind(this));
+   // this.renderer.listen('document', 'focusin', this.handleEvent.bind(this));
+   // this.renderer.listen('document', 'focusout', this.handleEvent.bind(this));
+   // this.renderer.listen('document', 'change', this.handleEvent.bind(this));
+   // this.renderer.listen('document', 'click', this.handleEvent.bind(this));
+    //this.renderer.listen('document', 'keydown', this.handleEvent.bind(this));
+  }
+  handleChangeEvent(value: string,id:string){
+    let label = document
+        .getElementById(id)
+        ?.parentElement?.querySelector('label');
+    if (value !== '' && label != null) {
+      label.classList.add('pure-material-textbox-label');
+    }
+    else if(label != null){
+      label.classList.remove('pure-material-textbox-label');
+    }
+  }
+  handleEyeEvent(event: Event){
+    const target = event.target as HTMLInputElement;
+    if(event instanceof KeyboardEvent && event.key != "Enter")
+    return
+    if (target.classList.contains('pure-material-textbox-password-icon')) {
+      if (target.classList.contains('fa-eye')) {
+        this.renderer.removeClass(target, 'fa-eye');
+        this.renderer.addClass(target, 'fa-eye-slash');
+        const inputField = target.parentElement?.querySelector('input');
+        if (inputField) {
+          this.renderer.setAttribute(inputField, 'type', 'password');
+        }
+      } else {
+        this.renderer.removeClass(target, 'fa-eye-slash');
+        this.renderer.addClass(target, 'fa-eye');
+        const inputField = target.parentElement?.querySelector('input');
+        if (inputField) {
+          this.renderer.setAttribute(inputField, 'type', 'text');
+        }
+      }
+    }
   }
   handleEvent(event: Event) {
     const target = event.target as HTMLInputElement;

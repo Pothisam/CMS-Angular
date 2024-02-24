@@ -9,14 +9,15 @@
       <form id="login-form">
         <div class="row">
           <div class="col-12">
-            <helper-textbox entity="userName" label="User name" required="true" (getModelValue)="LoginRequest.userName=$event"></helper-textbox>
+            <helper-textbox entity="userName" label="User name" [required]="true"   (getModelValue)="LoginRequest.userName=$event"></helper-textbox>
           </div>
           <div class="col-12">
-            <helper-textbox-password entity="Password" label="Password" required="true" (getModelValue)="LoginRequest.password=$event"></helper-textbox-password>
+            <helper-textbox-password entity="Password" label="Password" [required]="true"  (getModelValue)="LoginRequest.password=$event"></helper-textbox-password>
           </div>
           <div class="col-12">
-            <helper-button entity="Login" label="Login" Type="P" (click)="onClick($event)"
+            <helper-button entity="Login" label="Login" Type="P"  (click)="onClick($event)"
               id="login-btn"></helper-button>
+
           </div>
         </div>
         <helper-Error-Tag></helper-Error-Tag>

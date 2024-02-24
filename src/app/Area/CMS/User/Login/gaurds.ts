@@ -6,8 +6,7 @@ export const CMSIsLogin: CanActivateFn =
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
       const router = inject(Router);
       const globalService = inject(GlobalService);
-      const value = globalService.GLSG("Login");
-      if(value == "true"){
+      if(globalService.GLSG("CMSToken") != null){
         return true;
       }
       else{

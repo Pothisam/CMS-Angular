@@ -13,7 +13,7 @@
           <div class="card-body px-1 py-1" id="Errorbody" >
             <ol>
               <li *ngFor="let item of errormessage">
-                <a tabindex='0' class='Errorlist cursor-pointer' (click)="errorInputFocus(item.id)" [attr.data-focus]="item.id">{{ item.msg }}</a>
+                <a tabindex='0' class='Errorlist cursor-pointer' (keyup.enter)="errorInputFocus(item.id)" (click)="errorInputFocus(item.id)" [attr.data-focus]="item.id">{{ item.msg }}</a>
               </li>
             </ol>
           </div>

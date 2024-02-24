@@ -19,7 +19,7 @@ export class GlobalService {
     this.layout.IsCMSNavVisible = false;
     this.layout.IsStaffNavVisible = false;
     if (area == 'CMS') {
-      if (this.GLSG('Login')) this.layout.IsCMSNavVisible = true;
+      if (this.GLSG('CMSToken')) this.layout.IsCMSNavVisible = true;
     } else if (area == 'Staff') {
       this.layout.IsStaffNavVisible = true;
     }

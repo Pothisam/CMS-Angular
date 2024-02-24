@@ -1,7 +1,8 @@
 <div class="pure-material-textbox">
-  <input type="text" [class]="inputClass" [attr.id]="id" [attr.name]="entity" [attr.min]="min" (input)="onInputChange($event)"
-    [attr.maxLength]="maxlength" [attr.ErrorMessage]="message" [attr.required]="required.toString().toLowerCase()"
-    [attr.aria-label]="label" tabindex="0" [value]="setModelvalue" />
+  <input type="text" [class]="inputClass" [attr.id]="id" [attr.name]="entity" [attr.min]="min"
+    (input)="onInputChange($event)" [attr.maxLength]="maxlength" [attr.ErrorMessage]="message"
+    [attr.required]="_required.toString().toLowerCase()" [attr.aria-label]="label" tabindex="0" [value]="setModelvalue"
+    [disabled]="_disabled" />
   <span class="highlight"></span>
   <span class="bar"></span>
   <label [attr.for]="entity">{{ label }} <span [class]="spanClass">*</span></label>

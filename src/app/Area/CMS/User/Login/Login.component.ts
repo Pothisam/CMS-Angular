@@ -13,6 +13,7 @@ import { UserService } from 'src/app//Area/CMS/User/User.service';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   islo: string | null | undefined;
+  CMSToken: string | null | undefined;
   public LoginRequest: ILoginRequest = {
     userName: '',
     password: '',
@@ -29,8 +30,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.layout.IsCMSNavVisible = false;
     if (this.Location.path().split('/')[1] == 'CMS') {
-      this.islo = this.globalService.GLSG('Login');
-      if (this.islo == 'true') {
+      if (this.globalService.GLSG('CMSToken') != null) {
         this.router.navigate(['CMS/Dashboard']);
       }
     }
@@ -44,7 +44,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
       console.log(this.LoginRequest);
       this.userService.userLogin(this.LoginRequest).subscribe({
         next: (Response) => {
-          console.log(Response);
+          if(Response.data != null){
+            this.globalService.GLSS("CMSToken",JSON.stringify(Response.data));
+            this.router.navigate(['CMS/Dashboard']);
+          }
           this.globalService.enableButton(buttonid);
         },
       });
@@ -53,13 +56,5 @@ export class LoginComponent implements OnInit, AfterViewInit {
     //this.layout.IsCMSNavVisible = true;
     //this.globalService.GLSS("Login","true")
     //this.router.navigate(['CMS/Dashboard']);
-  }
-  ValidateForm(inputProperties: any): void {
-    for (const property of inputProperties) {
-      if (property.startsWith('entity')) {
-        // Do something with each input property
-        console.log(`${property}`);
-      }
-    }
   }
 }

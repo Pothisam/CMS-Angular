@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { HelperService } from '../helper-service.service';
 
 @Component({
   selector: 'helper-textbox-password',
@@ -8,7 +9,17 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class TextboxPasswordComponent implements OnInit {
   @Input() entity: string = '';
   @Input() label: string = '';
-  @Input() required: string = 'false';
+  public _required: boolean = false;
+  @Input()
+  set required(value: boolean) {
+    this._required = value;
+    this.UpdateValidation();
+  }
+  public _disabled: boolean = false;
+  @Input()
+  set disabled(value: boolean) {
+    this._disabled = value;
+  }
   @Input() min: number | string = 3;
   @Input() maxlength: number | string = 50;
   @Input() css: string = '';
@@ -18,23 +29,39 @@ export class TextboxPasswordComponent implements OnInit {
   message: string | undefined;
   spanClass!: string;
   inputClass!: string;
-
+  passwordbuttonClass: string | undefined;
+  @ViewChild('eyeicon') EyeIcon: ElementRef | undefined;
   onInputChange(event: any) {
     this.getModelValue.emit(event.target.value);
+    if (this.id) {
+      this.helperService.handleChangeEvent(event.target.value, this.id);
+    }
   }
-  constructor() {}
+  constructor(private helperService: HelperService) {
+
+    this.spanClass = 'text-danger';
+  }
 
   ngOnInit() {
     this.id = 'Txt' + this.entity;
     this.message = 'Please Enter ' + this.label;
-    this.spanClass = 'text-danger';
     this.inputClass = 'pure-material-textbox-input';
-    if (this.required.toLowerCase() === 'false') {
-      this.spanClass += ' d-none';
-    }
     if (this.css != '') {
       this.inputClass += ' ' + this.css;
     }
+  }
+  UpdateValidation(): void {
+    if (this._required === false) {
+      this.spanClass += ' d-none';
+    } else {
+      this.spanClass = this.spanClass.replace(' d-none', '');
+    }
+  }
+  handleEyeClick(event:MouseEvent){
+    this.helperService.handleEyeEvent(event);
+  }
+  handleEyeKeyDown(event: KeyboardEvent) {
+    this.helperService.handleEyeEvent(event);
   }
   ngAfterViewInit(): void {
     if(this.setModelvalue != ''){
