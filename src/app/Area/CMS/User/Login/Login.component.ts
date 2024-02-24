@@ -40,8 +40,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public onClick(event: MouseEvent) {
     let buttonid =this.globalService.getButtonID(event);
     if (this.ValidationService.validate(event)) {
-      this.ValidationService.getValue(this.LoginRequest, event);
-      console.log(this.LoginRequest);
+      //this.ValidationService.getValue(this.LoginRequest, event);
       this.userService.userLogin(this.LoginRequest).subscribe({
         next: (Response) => {
           if(Response.data != null){

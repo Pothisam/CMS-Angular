@@ -30,7 +30,6 @@ export class TextboxPasswordComponent implements OnInit {
   spanClass!: string;
   inputClass!: string;
   passwordbuttonClass: string | undefined;
-  @ViewChild('eyeicon') EyeIcon: ElementRef | undefined;
   onInputChange(event: any) {
     this.getModelValue.emit(event.target.value);
     if (this.id) {

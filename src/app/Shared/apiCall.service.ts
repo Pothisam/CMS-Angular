@@ -2,11 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { GlobalService } from '../Global/Service/global.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiCallService {
-  constructor() {}
+  constructor(private globalService:GlobalService,private location: Location,private router: Router) {}
   private static playAudio(type: string): void {
     const audio = new Audio(this.getAudioUrl(type));
     audio.play();
@@ -81,6 +83,32 @@ export class ApiCallService {
       })
     );
   }
+  public static PostwithAuth(http: HttpClient,url: string,parameter: any,area:string): Observable<Response> {
+    let body = parameter;
+    let token =this.GetToken(area);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return http.post<Response>(url, body,{ headers }).pipe(
+      tap((response: Response) => {
+        if (response.message != '' && response.status != '')
+          this.ToastTrigger(response.message, response.status);
+      })
+    );
+  }
+  public static GetToken(area: string): string | null {
+    if(area == 'CMS'){
+    const Storage = localStorage.getItem('CMSToken');
+    if (Storage !== null) {
+      // Parse the JSON string to an object
+      return JSON.parse(Storage).token;
+      }
+    }
+    // Your logic here
+    return null;
+  }
+
 }
 export class Response {
   public message?: string;

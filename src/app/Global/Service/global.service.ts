@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2 } from '@angular/core';
 import { Location } from '@angular/common';
-import { NavigationEnd } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { LayoutService } from './layout.service';
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,15 @@ export class GlobalService {
       this.layout.IsStaffNavVisible = true;
     }
   }
-
+  getArea(): string {
+    return this.location.path().split('/')[1];
+  }
+  getToken() {
+    if (this.location.path().split('/')[1] == 'CMS') {
+      if (this.GLSG('CMSToken')) {
+      }
+    }
+  }
   ValidateForm(inputProperties: any): void {
     for (const property of inputProperties) {
       if (property.startsWith('entity')) {
@@ -92,6 +100,47 @@ export class GlobalService {
   }
   getButtonID(event: MouseEvent) {
     const clickedElement = event.currentTarget as HTMLElement;
-    return  clickedElement.children[0].id;
+    return clickedElement.children[0].id;
+  }
+
+  CreateOptions(name: string, value: string, text: string, datastring: string, json: any) {
+    const selectElement = document.querySelector(`select[name="${name}"]`);
+    if (!selectElement) {
+      return;
+    }
+    const count = Object.keys(json).length;
+    if (count > 0) {
+      if (text.includes("|")) {
+        const arr = text.split('|');
+        const optionValue = arr[1] !== "" ? arr[1] : '';
+        selectElement.innerHTML = `<option value="${optionValue}">${optionValue}</option>`;
+      } else {
+        selectElement.innerHTML = '<option value=""></option>';
+      }
+
+      Object.keys(json).forEach((index) => {
+        const Value = json[index];
+        let html = '';
+        if (text.includes("|")) {
+          const arr = text.split('|');
+          const arrText = arr[0];
+          html = `<option value="${Value[value]}">${Value[arrText]}</option>`;
+        } else {
+          html = `<option value="${Value[value]}">${Value[text]}</option>`;
+        }
+        selectElement.innerHTML += html;
+        if (datastring !== '') {
+          const arr = datastring.split(',');
+          arr.forEach((val) => {
+            const option = selectElement.querySelector(`option[value="${Value[value]}"]:last-child`);
+            if (option) {
+              option.setAttribute('data-' + val, Value[val]);
+            }
+          });
+        }
+      });
+    } else {
+      selectElement.innerHTML = '<option value=""></option>';
+    }
   }
 }

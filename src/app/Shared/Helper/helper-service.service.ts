@@ -1,12 +1,17 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { ApiCallService } from '../apiCall.service';
+import { GlobalService } from 'src/app/Global/Service/global.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelperService {
   private renderer: Renderer2;
-  constructor(private rendererFactory: RendererFactory2) {
+  baseurl:string = '';
+  constructor(private rendererFactory: RendererFactory2,private globalService:GlobalService,private http: HttpClient) {
     this.renderer = rendererFactory.createRenderer(null, null);
+    this.baseurl = this.globalService.getAPIBaseUrl()
   }
   initializeEventHandling() {
    // this.renderer.listen('document', 'focusin', this.handleEvent.bind(this));
@@ -16,6 +21,17 @@ export class HelperService {
     //this.renderer.listen('document', 'keydown', this.handleEvent.bind(this));
   }
   handleChangeEvent(value: string,id:string){
+    let label = document
+        .getElementById(id)
+        ?.parentElement?.querySelector('label');
+    if (value !== '' && label != null) {
+      label.classList.add('pure-material-textbox-label');
+    }
+    else if(label != null){
+      label.classList.remove('pure-material-textbox-label');
+    }
+  }
+  handleSelectChangeEvent(value: string,id:string){
     let label = document
         .getElementById(id)
         ?.parentElement?.querySelector('label');
@@ -116,6 +132,9 @@ export class HelperService {
         }
       }
     });
+  }
+  callSelectAPI(url:string,parameter:any,area:string){
+    return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area);
   }
 }
 

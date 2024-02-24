@@ -1,0 +1,19 @@
+<div class="pure-material-select">
+  <select [class]="inputClass" [attr.id]="id" [attr.name]="entity" [attr.ErrorMessage]="message"
+    [attr.required]="_required" [disabled]="_disabled" [attr.aria-label]="label" tabindex="0"
+    (change)="onSelectChange($event)">
+    <ng-container *ngIf="array.length >0">
+      <ng-container *ngFor="let i of array">
+        <ng-container *ngIf="i.includes('|'); else elseBlock">
+          <option [value]="i.split('|')[0]">{{ i.split('|')[1] }}</option>
+        </ng-container>
+        <ng-template #elseBlock>
+          <option [value]="i">{{ i }}</option>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+  </select>
+  <span class="pure-material-select-highlight"></span>
+  <span class="pure-material-select-bar"></span>
+  <label [class]="labelClass" [attr.for]="entity">{{ label }} <span [class]="spanClass">*</span></label>
+</div>

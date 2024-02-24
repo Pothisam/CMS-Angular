@@ -6,12 +6,13 @@ import { ButtonComponentComponent } from './button-component/button-component.co
 import { EmailComponent } from './email-component/email-component.component';
 import { ErrorTagComponent } from './Error-Tag/Error-Tag.component';
 import { ToastComponent } from './Toast/Toast.component';
+import { SelectComponent } from './Select-component/Select-component.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent],
-  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent]
+  declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent],
+  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent]
 })
 export class HtmlHelperModule { }
