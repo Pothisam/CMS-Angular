@@ -67,10 +67,10 @@
 
           "configurations": {
             "production": {
-              "browserTarget": "CMS-Angular:build:production"
+              "buildTarget": "CMS-Angular:build:production"
             },
             "development": {
-              "browserTarget": "CMS-Angular:build:development"
+              "buildTarget": "CMS-Angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CMS-Angular:build"
+            "buildTarget": "CMS-Angular:build"
           }
         },
         "test": {
