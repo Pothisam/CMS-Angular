@@ -14,8 +14,20 @@ export class SelectComponent implements OnInit {
   @Input() apiUrl: string = '';
   @Input() nameAndValue: string = '';
   @Input() dataAttribute: string = '';
-  @Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
-  @Output() getModelText: EventEmitter<any> = new EventEmitter<any>();
+  public arrayDate: { text: string, value: string }[] = [];
+  @Input()
+  set dataArray(value: { text: string, value: string }[]) {
+    this.arrayDate = value;
+    if (this.arrayDate.length > 0) {
+      const firstValue = this.arrayDate[0];
+      if (this.id) {
+      this.helperService.handleChangeEvent(firstValue.value, this.id);
+      }
+    }
+  }
+  @Output() getModelValue: EventEmitter<string> = new EventEmitter<string>();
+  @Output() getModelText: EventEmitter<string> = new EventEmitter<string>();
+
   @Output() getSelectedOption = new EventEmitter<{
     value: string;
     text: string;
@@ -72,19 +84,6 @@ export class SelectComponent implements OnInit {
     });
   }
   ngAfterViewInit(): void {
-    // if (this.stringArray != '') {
-    //   let array: string[] = this.stringArray.split(",");
-    //   if(array.length > 0){
-    //     for (let i of array) {
-    //       if (i.includes('|')) {
-    //           let values: string[] = i.split('|');
-    //           console.log(`<option value="${values[0]}">${values[1]}</option>`);
-    //       } else {
-    //           console.log(`<option value="${i}">${i}</option>`);
-    //       }
-    //   }
-    //   }
-    // }
     if (this.apiUrl != '' && this.nameAndValue != '') {
       this.helperService
         .callSelectAPI(this.apiUrl, this.parameter, this.area)

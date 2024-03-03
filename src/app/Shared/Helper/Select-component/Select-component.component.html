@@ -12,6 +12,9 @@
         </ng-template>
       </ng-container>
     </ng-container>
+    <ng-container *ngIf="arrayDate.length > 0">
+      <option *ngFor="let item of arrayDate" [value]="item.value">{{ item.text }}</option>
+    </ng-container>
   </select>
   <span class="pure-material-select-highlight"></span>
   <span class="pure-material-select-bar"></span>

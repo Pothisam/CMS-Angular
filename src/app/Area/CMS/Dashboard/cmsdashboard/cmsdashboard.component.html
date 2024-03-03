@@ -6,8 +6,19 @@
     <div class="container-fluid ps-0 pe-0 overflow-hidden">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <helper-Select entity="DashboardType" label="Dashboard Type" apiUrl="/Management/CMS/GetDepartmentList"
-            nameAndValue="departmentName,departmentCode" stringArray=",List|L,Graph"
+          <helper-Select entity="DashboardType" label="Dashboard Type"
+            (getSelectedOption)="onModelValueChanges($event)"></helper-Select>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <helper-AutoComplete entity="Name" label="Autocomplete"></helper-AutoComplete>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <helper-Select entity="DashboardType1" label="Dashboard Type"
+            (getSelectedOption)="onModelValueChanges($event)"  nameAndValue="departmentName,departmentCode" [dataArray]="departments"></helper-Select>
+        </div><div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <helper-Select entity="DashboardType" label="Dashboard Type"
             (getSelectedOption)="onModelValueChanges($event)"></helper-Select>
         </div>
       </div>

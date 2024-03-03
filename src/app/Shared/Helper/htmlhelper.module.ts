@@ -7,12 +7,13 @@ import { EmailComponent } from './email-component/email-component.component';
 import { ErrorTagComponent } from './Error-Tag/Error-Tag.component';
 import { ToastComponent } from './Toast/Toast.component';
 import { SelectComponent } from './Select-component/Select-component.component';
+import { AutoCompleteComponent } from './AutoComplete/AutoComplete.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent],
-  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent]
+  declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent],
+  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent]
 })
 export class HtmlHelperModule { }
