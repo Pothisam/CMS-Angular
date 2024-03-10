@@ -8,12 +8,13 @@ import { ErrorTagComponent } from './Error-Tag/Error-Tag.component';
 import { ToastComponent } from './Toast/Toast.component';
 import { SelectComponent } from './Select-component/Select-component.component';
 import { AutoCompleteComponent } from './AutoComplete/AutoComplete.component';
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MatAutocompleteModule
   ],
   declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent],
-  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent]
+  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent,MatAutocompleteModule]
 })
 export class HtmlHelperModule { }

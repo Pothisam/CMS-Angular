@@ -3,7 +3,8 @@
 @import './assets/MaterialStyle/textbox.scss';
 @import './assets/MaterialStyle/select.scss';
 @import './assets/CSS/ErrorTag.scss';
-@import './assets/CSS/bootstrap.scss';
+ @import './assets/CSS/bootstrap.scss';
+ @import './assets/CSS/MatInput.scss';
 .dropdown-toggle {
 	&::after {
 		display: inline-block;

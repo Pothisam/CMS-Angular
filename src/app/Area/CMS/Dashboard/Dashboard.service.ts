@@ -15,12 +15,12 @@ export class DashboardService {
   constructor(private http: HttpClient, private globalService: GlobalService) {
     this.baseurl = this.globalService.getAPIBaseUrl();
   }
-  getDepartmentDetails(LoginRequest:ILoginRequest): Observable<any> {
+  getDepartmentDetails(): Observable<any> {
     this.url = '/Department/GetActiveDepartmentListDistinct';
     return ApiCallService.PostwithAuth(
       this.http,
       this.baseurl + this.url,
-      LoginRequest,
+      '',
       this.Area
     );
   }

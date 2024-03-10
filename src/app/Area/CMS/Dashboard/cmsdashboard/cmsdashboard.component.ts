@@ -26,7 +26,7 @@ ngAfterViewInit(): void {
 
 }
 CallService(){
-this.dashboardService.getDepartmentDetails(this.LoginRequest).subscribe({
+this.dashboardService.getDepartmentDetails().subscribe({
   next: (Response) => {
     if(Response.data != null){
       this.departments = Response.data.map((item: any) => ({

@@ -1,0 +1,14 @@
+<mat-form-field class="MatInput">
+  <mat-label>{{ label }} <span class="text-danger" *ngIf="_required">*</span></mat-label>
+  <input type="text" matInput #input (input)="onInputChange($event)" [attr.maxLength]="maxlength"
+    [value]="setModelvalue" [attr.aria-label]="label" [attr.ErrorMessage]="message" [attr.name]="entity"
+    [attr.min]="min" [attr.aria-required]="_required">
+  @if (setModelvalue && _showClearAll) {
+  <button matSuffix mat-icon-button aria-label="Clear" (click)="clearInputValue()" tabindex="-1">
+    <mat-icon tabindex="0">close</mat-icon>
+  </button>
+  }
+  @if(_showMaxCount){
+  <mat-hint align="end">{{input.value.length}}/{{maxlength}}</mat-hint>
+  }
+</mat-form-field>

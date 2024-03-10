@@ -5,11 +5,13 @@ import { CMSRoutingModule } from './CMS-routing.module';
 import { LoginComponent } from '../../User/Login/Login.component';
 import { HtmlHelperModule } from 'src/app/Shared/Helper/htmlhelper.module';
 import { CmsdashboardComponent } from '../../Dashboard/cmsdashboard/cmsdashboard.component';
+import { MatHelperModule } from "../../../../Shared/MatHelper/MatHelper/MatHelper.module";
 
 @NgModule({
-  imports: [
-    CommonModule,CMSRoutingModule,HtmlHelperModule
-  ],
-  declarations: [InstitutionComponent,LoginComponent,CmsdashboardComponent]
+    declarations: [InstitutionComponent, LoginComponent, CmsdashboardComponent],
+    imports: [
+        CommonModule, CMSRoutingModule, HtmlHelperModule,
+        MatHelperModule
+    ]
 })
 export class CMSModule { }

@@ -29,6 +29,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HtmlHelperModule } from './Shared/Helper/htmlhelper.module';
 import { HelperService } from './Shared/Helper/helper-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatHelperModule } from './Shared/MatHelper/MatHelper/MatHelper.module';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +61,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSnackBarModule,
     MatDialogModule,
     HtmlHelperModule,
-    HttpClientModule
+    HttpClientModule,
+    MatHelperModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [HelperService],

@@ -84,7 +84,7 @@ export class ApiCallService {
     );
   }
   public static PostwithAuth(http: HttpClient,url: string,parameter: any,area:string): Observable<Response> {
-    let body = '';
+    let body = parameter;
     let token =this.GetToken(area);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

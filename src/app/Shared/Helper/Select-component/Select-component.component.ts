@@ -25,6 +25,11 @@ export class SelectComponent implements OnInit {
       }
     }
   }
+  public _parameter: any;
+  @Input()
+  set parameter(value: any) {
+    this._parameter = value;
+  }
   @Output() getModelValue: EventEmitter<string> = new EventEmitter<string>();
   @Output() getModelText: EventEmitter<string> = new EventEmitter<string>();
 
@@ -37,7 +42,7 @@ export class SelectComponent implements OnInit {
   spanClass!: string;
   inputClass!: string;
   labelClass: string = 'pure-material-select-label';
-  parameter: any;
+
   area: string = this.globalService.getArea();
   public _required: boolean = false;
   array: string[] = [];
@@ -86,7 +91,7 @@ export class SelectComponent implements OnInit {
   ngAfterViewInit(): void {
     if (this.apiUrl != '' && this.nameAndValue != '') {
       this.helperService
-        .callSelectAPI(this.apiUrl, this.parameter, this.area)
+        .callSelectAPI(this.apiUrl, this._parameter, this.area)
         .subscribe({
           next: (Response) => {
             if (Response.data != null) {

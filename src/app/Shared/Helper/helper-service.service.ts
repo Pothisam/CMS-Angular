@@ -136,10 +136,19 @@ export class HelperService {
   callSelectAPI(url:string,parameter:any,area:string){
     return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area);
   }
+  toTitleCase(str: string): string {
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  }
 }
 
 export enum TextboxType {
   Number = 'NumberOnly',
   Text = 'TextOnly',
   All = 'All',
+}
+export enum CaseType {
+  U = 'UpperCase',
+  L = 'LowerCase',
+  T = 'TitleCase',
+  N = 'NoCase',
 }

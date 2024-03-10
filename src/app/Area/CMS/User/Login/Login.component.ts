@@ -6,6 +6,7 @@ import { GlobalService } from 'src/app/Global/Service/global.service';
 import { FormValidationService } from 'src/app/Shared/formValidation.service';
 import { ILoginRequest } from 'src/app/Modules/CMS/User/Request/login.model';
 import { UserService } from 'src/app//Area/CMS/User/User.service';
+import { CaseType } from 'src/app/Shared/Helper/helper-service.service';
 @Component({
   selector: 'app-Login',
   templateUrl: './Login.component.html',
@@ -14,9 +15,10 @@ import { UserService } from 'src/app//Area/CMS/User/User.service';
 export class LoginComponent implements OnInit, AfterViewInit {
   islo: string | null | undefined;
   CMSToken: string | null | undefined;
+  CaseType:CaseType =CaseType.U
   public LoginRequest: ILoginRequest = {
-    userName: '',
-    password: '',
+    userName: 'asd',
+    password: 'asd',
   };
   constructor(
     private Location: Location,

@@ -46,7 +46,7 @@ export class FormValidationService {
 
         if (
           isSelect &&
-          inputElement.getAttribute('required') === 'true' &&
+          inputElement.getAttribute('aria-required') === 'true' &&
           (!(inputElement as HTMLInputElement).value ||
             (inputElement as HTMLInputElement).value === null)
         ) {
@@ -59,7 +59,7 @@ export class FormValidationService {
 
         if (isInput) {
           const inputValue = (input as HTMLInputElement).value;
-          if (inputElement.getAttribute('required') === 'true' && !inputValue) {
+          if (inputElement.getAttribute('aria-required') === 'true' && !inputValue) {
             errormessage.push({
               id: inputElement.getAttribute('id') as string,
               msg: inputElement.getAttribute('ErrorMessage') as string,
