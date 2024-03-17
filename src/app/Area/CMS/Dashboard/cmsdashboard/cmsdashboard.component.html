@@ -6,27 +6,12 @@
     <div class="container-fluid ps-0 pe-0 overflow-hidden">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <helper-Select entity="DashboardType" label="Dashboard Type"
-            (getSelectedOption)="onModelValueChanges($event)"></helper-Select>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <helper-AutoComplete entity="Name" label="Autocomplete"></helper-AutoComplete>
+          <app-select entity="Department" label="Department List"  [isrequired]="true" [isMultiSelect]="false"
+            (getSelectedOptions)="onModelValueChanges($event)"
+              [jsonData]="this.jsondata" valueAndname="departmentCode,departmentName"></app-select>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <helper-Select  entity="DashboardType1" label="Dashboard Type"
-            (getSelectedOption)="onModelValueChanges($event)" [parameter]="LoginRequest" apiUrl="/Department/GetActiveDepartmentListDistinct"   nameAndValue="departmentName,departmentCode" ></helper-Select>
-        </div><div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <helper-Select entity="DashboardType" label="Dashboard Type"
-            (getSelectedOption)="onModelValueChanges($event)"></helper-Select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <app-textbox  entity="Name" label="Name" [required]="true"  [showMaxCount]="true" [showClearAll]="true"></app-textbox></div>
-
-      </div>
+      <!-- apiUrl="/Department/GetActiveDepartmentListDistinct" commaSeparatedString="Apple,Mango,Orange" -->
     </div>
   </div>
 </div>

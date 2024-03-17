@@ -20,7 +20,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -54,7 +53,6 @@ import { FormsModule } from '@angular/forms';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatCardModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

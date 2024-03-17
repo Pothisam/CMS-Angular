@@ -17,6 +17,7 @@ public LoginRequest: ILoginRequest = {
   password: 'va',
 };
 departments: SelectInterface[] = []
+jsondata:any[]=[];
 constructor(private dashboardService: DashboardService,private globalService: GlobalService) {
 }
 ngOnInit() {
@@ -29,11 +30,13 @@ CallService(){
 this.dashboardService.getDepartmentDetails().subscribe({
   next: (Response) => {
     if(Response.data != null){
+      this.jsondata = Response.data;
+
       this.departments = Response.data.map((item: any) => ({
         text: item.departmentName,
         value: item.departmentCode
       }));
-    this.globalService.CreateOptions("DashboardType","departmentCode","departmentName","status",Response.data)
+    //this.globalService.CreateOptions("DashboardType","departmentCode","departmentName","status",Response.data)
     }
   },
 });
@@ -42,9 +45,9 @@ onModelValueChange(value: any) {
   // Handle the change event here
   console.log('Model value changed:', value);
 }
-onModelValueChanges(option: { value: string, text: string }) {
+onModelValueChanges(options: { value: string, text: string }) {
   // Handle the change event here
-  console.log('Model value changed:', option.value);
-  console.log('Model text changed:', option.text);
+  console.log('Model value changed:', options.value);
+  console.log('Model text changed:', options.text);
 }
 }

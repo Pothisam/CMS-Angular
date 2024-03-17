@@ -21,6 +21,7 @@ mat-icon:focus-visible {
 button {
   outline: none;
   border: none;
+  background: transparent;
 }
 .mat-mdc-text-field-wrapper {
   .mat-mdc-form-field-flex {
@@ -29,11 +30,18 @@ button {
     }
   }
 }
-.mdc-text-field--filled {
-  .mdc-floating-label--float-above {
-    transform: translateY(-170%) scale(0.75) !important;
-  }
+
+//Multi Select
+.additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
 }
-.mat-input-element {
-  height: 40px; // Set your desired height here
-}
+
+// .mdc-text-field--filled {
+//   .mdc-floating-label--float-above {
+//     transform: translateY(-170%) scale(0.75) !important;
+//   }
+// }
+// .mat-input-element {
+//   height: 40px; // Set your desired height here
+// }

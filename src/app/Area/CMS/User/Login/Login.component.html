@@ -9,18 +9,14 @@
       <form id="login-form">
         <div class="row">
           <div class="col-12">
-            <app-textbox entity="Name" label="Name"  [required]="false" [setModelvalue]="LoginRequest.userName" (getModelValue)="LoginRequest.userName=$event"   [showClearAll]="true"></app-textbox>
+            <app-textbox entity="Name" label="Name"  [required]="false"  (getModelValue)="LoginRequest.userName=$event"   [showClearAll]="true"></app-textbox>
           </div>
           <div class="col-12">
             <app-password entity="Password" label="Password"  (getModelValue)="LoginRequest.password=$event" ></app-password>
           </div>
           <div class="col-12">
-            <helper-textbox-password entity="Password" label="Password" [required]="true"  (getModelValue)="LoginRequest.password=$event"></helper-textbox-password>
-          </div>
-          <div class="col-12">
-            <helper-button entity="Login" label="Login" Type="P"  (click)="onClick($event)"
-              id="login-btn"></helper-button>
-
+            <helper-button entity="Login" label="Login" Type="P"
+              id="login-btn" (click)="onClick($event)"></helper-button>
           </div>
         </div>
         <helper-Error-Tag></helper-Error-Tag>

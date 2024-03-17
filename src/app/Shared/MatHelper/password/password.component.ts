@@ -48,6 +48,7 @@ export class PasswordComponent implements OnInit {
     this.message = 'Please Enter ' + this.label;
   }
   onInputChange(event: any) {
+    this.outputValue = event.target.value;
     this.getModelValue.emit(this.outputValue);
     this.setModelvalue = this.outputValue;
   }

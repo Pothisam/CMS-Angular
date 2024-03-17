@@ -10,8 +10,6 @@ export class FormValidationService {
     private globalService: GlobalService
   ) {}
 
-
-
   validate(event: MouseEvent) {
     const clickedElement = event.currentTarget as HTMLElement;
     let id = clickedElement.children[0].id;
@@ -28,20 +26,29 @@ export class FormValidationService {
     const formElement = document.getElementById(formId!);
     const formInputs: NodeListOf<HTMLInputElement> | null = formElement
       ? formElement.querySelectorAll<HTMLInputElement>(
-          'input:not([type="button"])'
+          'mat-select, input,input:not([type="button"])'
         )
       : null;
     formInputs!.forEach((input) => {
-      const inputElement = input.closest('select, input') as
+      const inputElement = input.closest('mat-select, select, input') as
         | HTMLInputElement
         | HTMLSelectElement
         | null;
       if (inputElement) {
-        response[inputElement.name] = inputElement.value;
+        if (inputElement.tagName === 'MAT-SELECT') {
+          const nameAttribute = inputElement.getAttribute('name');
+          if (nameAttribute !== null) {
+            response[nameAttribute] =
+              inputElement.getAttribute('aria-selectedvalue');
+          }
+        } else {
+          response[inputElement.name] = inputElement.value;
+        }
       }
 
       if (inputElement) {
         const isSelect = inputElement.tagName === 'SELECT';
+        const isMatSelect = inputElement.tagName === 'MAT-SELECT';
         const isInput = inputElement.tagName === 'INPUT';
 
         if (
@@ -56,10 +63,24 @@ export class FormValidationService {
           });
           i++;
         }
-
+        if (
+          isMatSelect &&
+          inputElement.getAttribute('aria-required') === 'true' &&
+          (!inputElement.getAttribute('aria-selectedvalue') ||
+          inputElement.getAttribute('aria-selectedvalue') === null)
+        ) {
+          errormessage.push({
+            id: inputElement.getAttribute('id') as string,
+            msg: inputElement.getAttribute('ErrorMessage') as string,
+          });
+          i++;
+        }
         if (isInput) {
           const inputValue = (input as HTMLInputElement).value;
-          if (inputElement.getAttribute('aria-required') === 'true' && !inputValue) {
+          if (
+            inputElement.getAttribute('aria-required') === 'true' &&
+            !inputValue
+          ) {
             errormessage.push({
               id: inputElement.getAttribute('id') as string,
               msg: inputElement.getAttribute('ErrorMessage') as string,

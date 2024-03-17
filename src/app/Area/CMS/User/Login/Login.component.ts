@@ -15,7 +15,8 @@ import { CaseType } from 'src/app/Shared/Helper/helper-service.service';
 export class LoginComponent implements OnInit, AfterViewInit {
   islo: string | null | undefined;
   CMSToken: string | null | undefined;
-  CaseType:CaseType =CaseType.U
+  CaseType:CaseType =CaseType.U;
+  LoginButtonLoading:boolean = false;
   public LoginRequest: ILoginRequest = {
     userName: 'asd',
     password: 'asd',
