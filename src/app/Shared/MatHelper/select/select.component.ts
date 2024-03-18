@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -68,16 +69,44 @@ export class SelectComponent implements OnInit {
   apiValueAndname: string[] = [];
   @Input()
   set valueAndname(value: string) {
-    if(value != '')
-    this.apiValueAndname = value.split(',');
+    if (value != '') this.apiValueAndname = value.split(',');
   }
-
-
+  public _triggerAPI: boolean = false;
+  get triggerAPI() {
+    return this._triggerAPI;
+  }
+  @Input()
+  set triggerAPI(value: any) {
+    if (this._triggerAPI === value) {
+      return;
+    }
+    this._triggerAPI = value;
+    this.triggerAPIChange.emit(this._triggerAPI);
+    if(value){
+      this. getAPIData();
+      // this._triggerAPI = false;
+      // this.triggerAPIChange.emit(this._triggerAPI);
+      // this.cdr.detectChanges();
+    }
+  }
+  @Output()
+  triggerAPIChange = new EventEmitter<any>();
+  // #region parameter
   public _parameter: any;
+  get parameter() {
+    return this._parameter;
+  }
   @Input()
   set parameter(value: any) {
+    if (this._parameter === value) {
+      return;
+    }
     this._parameter = value;
+    this.parameterChange.emit(this._parameter);
   }
+  @Output()
+  parameterChange = new EventEmitter<any>();
+  // #endregion
   @Input()
   set dataArray(value: { text: string; value: string }[]) {
     this.arrayDate = value;
@@ -103,7 +132,8 @@ export class SelectComponent implements OnInit {
   }>();
   constructor(
     private helperService: HelperService,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   area: string = this.globalService.getArea();
@@ -165,10 +195,13 @@ export class SelectComponent implements OnInit {
                 };
               });
             }
+            Promise.resolve().then(() => {
+              this._triggerAPI = false; // Change your value here
+              this.triggerAPIChange.emit(this._triggerAPI);
+            });
           },
         });
-    }
-    else if(this.apiUrl != '' && this.valueAndname == ''){
+    } else if (this.apiUrl != '' && this.valueAndname == '') {
       console.warn('Input Parameter valueAndname is empty');
     }
   }

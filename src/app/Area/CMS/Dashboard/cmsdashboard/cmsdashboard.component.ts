@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { DashboardService } from '../Dashboard.service';
-import { ILoginRequest } from 'src/app/Modules/CMS/User/Request/login.model';
+import { ILoginRequest,IAutoCompleateRequest } from 'src/app/Modules/CMS/User/Request/login.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';
 
@@ -12,13 +12,24 @@ import { SelectInterface } from 'src/app/Global/Interface/common-interface';
 export class CmsdashboardComponent {
 SelectOptionvalue:string='';
 SelectOptionText:string='';
+triggerApi:boolean=false;
 public LoginRequest: ILoginRequest = {
   userName: 'Test',
   password: 'va',
 };
+public AutocompleteRequest: IAutoCompleateRequest ={
+  columnName: 'UniversityName',
+  searchParam: this.SelectOptionText
+}
+public AutocompleteRequest2: IAutoCompleateRequest ={
+  columnName: 'Caste',
+  searchParam: ''
+}
+automodelValue:string ='';
 departments: SelectInterface[] = []
 jsondata:any[]=[];
-constructor(private dashboardService: DashboardService,private globalService: GlobalService) {
+disable:boolean = false;
+constructor(private dashboardService: DashboardService,private globalService: GlobalService,private cdr: ChangeDetectorRef) {
 }
 ngOnInit() {
   this.CallService();
@@ -47,7 +58,19 @@ onModelValueChange(value: any) {
 }
 onModelValueChanges(options: { value: string, text: string }) {
   // Handle the change event here
+  this.SelectOptionText = options.value;
   console.log('Model value changed:', options.value);
   console.log('Model text changed:', options.text);
+}
+buttonclick(){
+  console.log("Test")
+  this.disable =true;
+  console.log(this.AutocompleteRequest)
+  this.AutocompleteRequest.columnName = "InstituionName";
+  console.log(this.AutocompleteRequest)
+  this.triggerApi =true;
+}
+chage(){
+  return this.AutocompleteRequest
 }
 }

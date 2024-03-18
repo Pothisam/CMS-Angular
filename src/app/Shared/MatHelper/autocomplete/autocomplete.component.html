@@ -1,0 +1,18 @@
+<mat-form-field class="MatInput">
+  <mat-label>{{ label }} <span class="text-danger" *ngIf="_required">*</span></mat-label>
+  <input type="text" [attr.required]="_required"  (input)="onInputChange($event)" [disabled]="_disabled" [attr.aria-label]="label" [attr.name]="entity"
+    matInput [matAutocomplete]="auto" [value]="setModelvalue">
+    @if (setModelvalue && _showClearAll) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="clearInputValue()" tabindex="-1">
+        <mat-icon tabindex="0">close</mat-icon>
+      </button>
+      }
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectChange($event)">
+    <!-- @for (option of options; track option) {
+    <mat-option [value]="option">{{option}}</mat-option>
+    } -->
+    <ng-container *ngIf="arrayDate.length > 0">
+      <mat-option *ngFor="let item of arrayDate" [value]="item.value">{{ item.text }}</mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</mat-form-field>

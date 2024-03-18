@@ -14,6 +14,8 @@ import { SelectComponent } from '../select/select.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule} from '@angular/material/list';
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,9 +27,10 @@ import {MatListModule} from '@angular/material/list';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatTooltipModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule
   ],
-  declarations: [MatHelperComponent,TextboxComponent,PasswordComponent,ButtonComponent,SelectComponent],
-  exports:[MatProgressSpinnerModule,MatGridListModule,MatCardModule,MatInputModule,TextboxComponent,MatIconModule,FormsModule,PasswordComponent,ButtonComponent,SelectComponent]
+  declarations: [MatHelperComponent,TextboxComponent,PasswordComponent,ButtonComponent,SelectComponent,AutocompleteComponent],
+  exports:[MatProgressSpinnerModule,MatGridListModule,MatCardModule,MatInputModule,TextboxComponent,MatIconModule,FormsModule,PasswordComponent,ButtonComponent,SelectComponent,AutocompleteComponent]
 })
 export class MatHelperModule { }

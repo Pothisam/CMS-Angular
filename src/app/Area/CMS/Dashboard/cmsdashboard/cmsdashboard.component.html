@@ -8,8 +8,23 @@
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
           <app-select entity="Department" label="Department List"  [isrequired]="true" [isMultiSelect]="false"
             (getSelectedOptions)="onModelValueChanges($event)"
-              [jsonData]="this.jsondata" valueAndname="departmentCode,departmentName"></app-select>
+             apiUrl="/Department/GetActiveDepartmentListDistinct" [(parameter)]="AutocompleteRequest" valueAndname="departmentCode,departmentName" [(triggerAPI)]="triggerApi"></app-select>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <app-autocomplete entity="Auto" label="Auto List" apiUrl="/Student/GetStudentAutoComplete" valueAndname="column,column" (getModelValue)="automodelValue=$event" [(parameter)]="AutocompleteRequest" (isrequired)="disable"></app-autocomplete>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          {{automodelValue}}
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <app-autocomplete entity="Caste" label="Caste" apiUrl="/Student/GetStudentAutoComplete" [showClearAll]="true" valueAndname="column,column" (getModelValue)="automodelValue=$event" [parameter]="AutocompleteRequest2" [isrequired]="true"></app-autocomplete>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <button (click)="buttonclick()" class="btn btn-primary">Change</button>
+        </div>
+
       </div>
       <!-- apiUrl="/Department/GetActiveDepartmentListDistinct" commaSeparatedString="Apple,Mango,Orange" -->
     </div>
