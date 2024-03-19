@@ -9,10 +9,10 @@
       <form id="login-form">
         <div class="row">
           <div class="col-12">
-            <app-textbox entity="Name" label="Name"  [required]="false"  (getModelValue)="LoginRequest.userName=$event"   [showClearAll]="true"></app-textbox>
+            <app-textbox entity="Name" label="Name"  [required]="false" [(modelValue)]="LoginRequest.userName"   [showClearAll]="true"></app-textbox>
           </div>
           <div class="col-12">
-            <app-password entity="Password" label="Password"  (getModelValue)="LoginRequest.password=$event" ></app-password>
+            <app-password entity="Password" label="Password"  [(modelValue)]="LoginRequest.password" ></app-password>
           </div>
           <div class="col-12">
             <helper-button entity="Login" label="Login" Type="P"

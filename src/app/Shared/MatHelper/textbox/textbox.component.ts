@@ -47,7 +47,22 @@ export class TextboxComponent implements OnInit {
   @Input() setModelvalue: string = '';
   @Input() Case: string = CaseType.N;
 
-  @Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
+  public _modelValue:string ='';
+  @Input()
+  get modelValue() {
+    return this._modelValue;
+  }
+  set modelValue(value: any) {
+    if (this._modelValue === value) {
+      return;
+    }
+    this._modelValue = value;
+    this.modelValueChange.emit(this._modelValue);
+  }
+  @Output()
+  modelValueChange = new EventEmitter<any>();
+
+  //@Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
 
   id: string = '';
   message: string = '';
@@ -58,22 +73,21 @@ export class TextboxComponent implements OnInit {
     private helperService: HelperService
   ) {}
   onInputChange(event: any) {
-    this.outputValue = event.target.value;
+    this._modelValue = event.target.value;
     if (this.Case == 'U') {
-      this.outputValue = event.target.value.toUpperCase();
+      this._modelValue = event.target.value.toUpperCase();
     }
     if (this.Case == 'L') {
-      this.outputValue = event.target.value.toLowerCase();
+      this._modelValue = event.target.value.toLowerCase();
     }
     if (this.Case == 'T') {
-      this.outputValue = this.helperService.toTitleCase(event.target.value);
+      this._modelValue = this.helperService.toTitleCase(event.target.value);
     }
-    this.getModelValue.emit(this.outputValue);
-    this.setModelvalue = this.outputValue;
+    this.modelValueChange.emit(this._modelValue);
   }
   clearInputValue() {
-    this.setModelvalue = '';
-    this.getModelValue.emit('');
+    this._modelValue = '';
+    this.modelValueChange.emit('');
   }
   ngOnInit() {
     this.message = 'Please Enter ' + this.label;

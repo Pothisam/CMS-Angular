@@ -12,13 +12,13 @@ import { SelectInterface } from 'src/app/Global/Interface/common-interface';
 export class CmsdashboardComponent {
 SelectOptionvalue:string='';
 SelectOptionText:string='';
-triggerApi:boolean=false;
+triggerApi:boolean=true;
 public LoginRequest: ILoginRequest = {
   userName: 'Test',
   password: 'va',
 };
 public AutocompleteRequest: IAutoCompleateRequest ={
-  columnName: 'UniversityName',
+  columnName: 'Name',
   searchParam: this.SelectOptionText
 }
 public AutocompleteRequest2: IAutoCompleateRequest ={
@@ -26,13 +26,16 @@ public AutocompleteRequest2: IAutoCompleateRequest ={
   searchParam: ''
 }
 automodelValue:string ='';
+automodelValue2:string ='';
+automodelValue3:string ='';
+SelectedValue:string ='BIO4013,BUS4026';
 departments: SelectInterface[] = []
 jsondata:any[]=[];
 disable:boolean = false;
 constructor(private dashboardService: DashboardService,private globalService: GlobalService,private cdr: ChangeDetectorRef) {
 }
 ngOnInit() {
-  this.CallService();
+  //this.CallService();
 }
 ngAfterViewInit(): void {
 
@@ -63,12 +66,13 @@ onModelValueChanges(options: { value: string, text: string }) {
   console.log('Model text changed:', options.text);
 }
 buttonclick(){
-  console.log("Test")
   this.disable =true;
-  console.log(this.AutocompleteRequest)
   this.AutocompleteRequest.columnName = "InstituionName";
-  console.log(this.AutocompleteRequest)
-  this.triggerApi =true;
+
+  //this.triggerApi =true;
+  console.log(this.triggerApi)
+  console.log(this.SelectedValue)
+ // this.SelectedValue ="BIO4013";
 }
 chage(){
   return this.AutocompleteRequest

@@ -23,7 +23,7 @@ export class SelectComponent implements OnInit {
 
   public arrayDate: { value: string; text: string }[] = [];
   id: string = '';
-  selectedOptions: string = '';
+  // selectedOptions: string = '';
   selectedText: string = '';
   selectedTextArray: string[] = [];
   message: string = '';
@@ -50,7 +50,11 @@ export class SelectComponent implements OnInit {
   set isDisabled(value: boolean) {
     this._disabled = value;
   }
-
+  public _TriggerAPIOnload: boolean = false;
+  @Input()
+  set triggerAPIOnload(value: boolean) {
+    this._TriggerAPIOnload = value;
+  }
   commaSeparatedarray: string[] = [];
   @Input()
   set commaSeparatedString(value: string) {
@@ -82,11 +86,8 @@ export class SelectComponent implements OnInit {
     }
     this._triggerAPI = value;
     this.triggerAPIChange.emit(this._triggerAPI);
-    if(value){
-      this. getAPIData();
-      // this._triggerAPI = false;
-      // this.triggerAPIChange.emit(this._triggerAPI);
-      // this.cdr.detectChanges();
+    if (value) {
+      this.getAPIData();
     }
   }
   @Output()
@@ -107,6 +108,28 @@ export class SelectComponent implements OnInit {
   @Output()
   parameterChange = new EventEmitter<any>();
   // #endregion
+  public _modelValue: string = '';
+  public _modelValueArray: string[] = [];
+  @Input()
+  get modelValue() {
+    return this._modelValue;
+  }
+  set modelValue(value: any) {
+    if (this._modelValue === value) {
+      return;
+    }
+    this._modelValue = value;
+    if (!this._Multiple) {
+      this.modelValueChange.emit(this._modelValue);
+    } else {
+      this._modelValueArray = this._modelValue.split(',');
+      this.CheckSelectedValue();
+      this.modelValueChange.emit(this._modelValue);
+    }
+  }
+  @Output()
+  modelValueChange = new EventEmitter<any>();
+
   @Input()
   set dataArray(value: { text: string; value: string }[]) {
     this.arrayDate = value;
@@ -147,14 +170,15 @@ export class SelectComponent implements OnInit {
 
   onSelectChange(value: string) {
     if (!this._Multiple) {
-      this.selectedOptions = value;
+      this._modelValue = value;
       this.getSelectedOptions.emit({
-        value: value || '',
+        value: this._modelValue || '',
         text:
-          this.arrayDate.find((option) => option.value === value)?.text || '',
+          this.arrayDate.find((option) => option.value === this._modelValue)
+            ?.text || '',
       });
     } else {
-      this.selectedOptions = (value as unknown as string[]).join(',');
+      this._modelValue = (value as unknown as string[]).join(',');
       let selectedTexts = (value as unknown as string[]).map(
         (value) =>
           this.arrayDate.find((option) => option.value === value)?.text || ''
@@ -162,9 +186,10 @@ export class SelectComponent implements OnInit {
       this.selectedTextArray = selectedTexts;
       this.selectedText = selectedTexts.join(',');
       this.getSelectedOptions.emit({
-        value: this.selectedOptions,
+        value: this._modelValue,
         text: this.selectedText,
       });
+      this.modelValueChange.emit(this._modelValue);
     }
   }
 
@@ -178,9 +203,23 @@ export class SelectComponent implements OnInit {
   ngAfterViewInit(): void {
     this.id = this.matSelect?.id!;
     this.UpdateValidation();
-    this.getAPIData();
+    if (this._TriggerAPIOnload) {
+      this.getAPIData();
+    }
   }
-
+  async CheckSelectedValue(): Promise<void> {
+    await this.waitForArrayDate();
+    let selectedTexts = this._modelValueArray.map(
+      (value) =>
+        this.arrayDate.find((option) => option.value === value)?.text || ''
+    );
+    this.selectedTextArray = selectedTexts;
+  }
+  async waitForArrayDate(): Promise<void> {
+    while (this.arrayDate.length === 0) {
+      await new Promise((resolve) => setTimeout(resolve, 100)); // wait for 100ms
+    }
+  }
   getAPIData() {
     if (this.apiUrl != '' && this.valueAndname != '') {
       this.helperService
@@ -194,6 +233,7 @@ export class SelectComponent implements OnInit {
                   text: item[this.apiValueAndname[1]],
                 };
               });
+              //if(this._modelValue != '' &&)
             }
             Promise.resolve().then(() => {
               this._triggerAPI = false; // Change your value here

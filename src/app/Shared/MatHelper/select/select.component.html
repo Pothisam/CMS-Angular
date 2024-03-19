@@ -1,7 +1,7 @@
 <mat-form-field class="MatInput">
   <mat-label>{{ label }} <span class="text-danger" *ngIf="_required">*</span></mat-label>
   <mat-select [attr.required]="_required" [attr.ErrorMessage]="message" #input [attr.name]="entity"
-    [disabled]="_disabled" [multiple]="_Multiple" [attr.aria-selectedValue]="selectedOptions"
+    [disabled]="_disabled" [multiple]="_Multiple" [value]="_Multiple ? _modelValueArray : _modelValue" [attr.aria-selectedValue]="_modelValue"
     (valueChange)="onSelectChange($event)">
     <mat-select-trigger *ngIf="_Multiple" [matTooltip]="selectedText" [matTooltipShowDelay]="500"
       [matTooltipHideDelay]="3000" [matTooltipDisabled]="!_Multiple" matTooltipClass="custom-tooltip">

@@ -6,25 +6,27 @@
     <div class="container-fluid ps-0 pe-0 overflow-hidden">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <app-select entity="Department" label="Department List"  [isrequired]="true" [isMultiSelect]="false"
+          <app-select entity="Department" label="Department List"  [isrequired]="true" [isMultiSelect]="true"
             (getSelectedOptions)="onModelValueChanges($event)"
-             apiUrl="/Department/GetActiveDepartmentListDistinct" [(parameter)]="AutocompleteRequest" valueAndname="departmentCode,departmentName" [(triggerAPI)]="triggerApi"></app-select>
+             apiUrl="/Department/GetActiveDepartmentListDistinct"  [(modelValue)]="SelectedValue" [(parameter)]="AutocompleteRequest" valueAndname="departmentCode,departmentName" [(triggerAPI)]="triggerApi"></app-select>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <app-autocomplete entity="Auto" label="Auto List" apiUrl="/Student/GetStudentAutoComplete" valueAndname="column,column" (getModelValue)="automodelValue=$event" [(parameter)]="AutocompleteRequest" (isrequired)="disable"></app-autocomplete>
+          <app-autocomplete entity="Auto" label="Auto List" apiUrl="/Student/GetStudentAutoComplete" valueAndname="column,column" [(modelValue)]="automodelValue" [(parameter)]="AutocompleteRequest" (isrequired)="disable"></app-autocomplete>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
           {{automodelValue}}
         </div>
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-          <app-autocomplete entity="Caste" label="Caste" apiUrl="/Student/GetStudentAutoComplete" [showClearAll]="true" valueAndname="column,column" (getModelValue)="automodelValue=$event" [parameter]="AutocompleteRequest2" [isrequired]="true"></app-autocomplete>
+          <app-autocomplete entity="Caste" label="Caste" apiUrl="/Student/GetStudentAutoComplete" [showClearAll]="true" valueAndname="column,column" [(modelValue)]="automodelValue2" [parameter]="AutocompleteRequest2" [isrequired]="true"></app-autocomplete>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
           <button (click)="buttonclick()" class="btn btn-primary">Change</button>
         </div>
-
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+          <app-textbox entity="Text" label="Test Textbox" [required]="true" [(modelValue)]="automodelValue3" Case="T"></app-textbox>
+        </div>
       </div>
       <!-- apiUrl="/Department/GetActiveDepartmentListDistinct" commaSeparatedString="Apple,Mango,Orange" -->
     </div>

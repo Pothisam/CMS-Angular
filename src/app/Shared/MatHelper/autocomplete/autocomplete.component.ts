@@ -20,11 +20,11 @@ export class AutocompleteComponent implements OnInit {
   @Input() apiUrl: string = '';
   message: string = '';
   minimumlength: number = 3;
-  outputValue: string = '';
+ // outputValue: string = '';
   @Input() entity: string = '';
   @Input() label: string = '';
   @Input() Case: string = CaseType.N;
-  @Input() setModelvalue: string = '';
+ // @Input() setModelvalue: string = '';
 
   public _required: boolean = false;
   @Input()
@@ -37,7 +37,22 @@ export class AutocompleteComponent implements OnInit {
   set isDisabled(value: boolean) {
     this._disabled = value;
   }
-  @Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
+  //@Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
+
+  public _modelValue:string ='';
+  @Input()
+  get modelValue() {
+    return this._modelValue;
+  }
+  set modelValue(value: any) {
+    if (this._modelValue === value) {
+      return;
+    }
+    this._modelValue = value;
+    this.modelValueChange.emit(this._modelValue);
+  }
+  @Output()
+  modelValueChange = new EventEmitter<any>();
 
   commaSeparatedarray: string[] = [];
   @Input()
@@ -115,31 +130,31 @@ export class AutocompleteComponent implements OnInit {
   //   }
   // }
   onInputChange(event: any) {
-    this.outputValue = event.target.value;
+    this._modelValue = event.target.value;
     if (this.Case == 'U') {
-      this.outputValue = event.target.value.toUpperCase();
+      this._modelValue = event.target.value.toUpperCase();
     }
     if (this.Case == 'L') {
-      this.outputValue = event.target.value.toLowerCase();
+      this._modelValue = event.target.value.toLowerCase();
     }
     if (this.Case == 'T') {
-      this.outputValue = this.helperService.toTitleCase(event.target.value);
+      this._modelValue = this.helperService.toTitleCase(event.target.value);
     }
-    this.getModelValue.emit(this.outputValue);
-    this.setModelvalue = this.outputValue;
-    this._parameter = { ...this._parameter, searchParam: this.outputValue };
+    this.modelValueChange.emit(this._modelValue);
+    this._parameter = { ...this._parameter, searchParam: this._modelValue };
     this.parameterChange.emit(this._parameter);
-    if (this.outputValue.length >= this.minimumlength) {
+    if (this._modelValue.length >= this.minimumlength) {
       this.getAPIData();
     }
   }
   onSelectChange(event: MatAutocompleteSelectedEvent) {
-    this.getModelValue.emit(event.option.value);
+    this._modelValue = event.option.value;
+    this.modelValueChange.emit(this._modelValue);
   }
 
   clearInputValue() {
-    this.setModelvalue = '';
-    this.getModelValue.emit('');
+    this._modelValue = '';
+    this.modelValueChange.emit(this._modelValue);
   }
 
   getAPIData() {

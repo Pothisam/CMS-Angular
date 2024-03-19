@@ -34,27 +34,37 @@ export class PasswordComponent implements OnInit {
 
   @Input() min: number | string = 0;
   @Input() maxlength: number | string = 50;
-  @Input() setModelvalue: string = '';
-
-  @Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
 
   id: string = '';
   message: string = '';
-  outputValue: string = '';
+  //outputValue: string = '';
   hide:boolean = true;
+  public _modelValue:string ='';
+  @Input()
+  get modelValue() {
+    return this._modelValue;
+  }
+  set modelValue(value: any) {
+    if (this._modelValue === value) {
+      return;
+    }
+    this._modelValue = value;
+    this.modelValueChange.emit(this._modelValue);
+  }
+  @Output()
+  modelValueChange = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit() {
     this.message = 'Please Enter ' + this.label;
   }
   onInputChange(event: any) {
-    this.outputValue = event.target.value;
-    this.getModelValue.emit(this.outputValue);
-    this.setModelvalue = this.outputValue;
+    this._modelValue = event.target.value;
+    this.modelValueChange.emit(this._modelValue);
   }
   clearInputValue() {
-    this.setModelvalue = '';
-    this.getModelValue.emit('');
+    this._modelValue = '';
+    this.modelValueChange.emit(this._modelValue);
   }
   UpdateValidation(): void {
     this.input?.nativeElement.setAttribute('aria-required', this._required);
