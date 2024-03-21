@@ -1,10 +1,12 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
   Output,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { CaseType, HelperService } from '../../Helper/helper-service.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
@@ -16,11 +18,14 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./autocomplete.component.css'],
 })
 export class AutocompleteComponent implements OnInit {
+  @ViewChild('input', { static: false }) input: ElementRef | undefined;
   public arrayDate: { value: string; text: string }[] = [];
+  public filter: { value: string; text: string }[] = [];
   @Input() apiUrl: string = '';
   message: string = '';
   minimumlength: number = 3;
  // outputValue: string = '';
+ id: string = '';
   @Input() entity: string = '';
   @Input() label: string = '';
   @Input() Case: string = CaseType.N;
@@ -30,6 +35,7 @@ export class AutocompleteComponent implements OnInit {
   @Input()
   set isrequired(value: boolean) {
     this._required = value;
+    this.UpdateValidation();
   }
 
   public _disabled: boolean = false;
@@ -37,7 +43,6 @@ export class AutocompleteComponent implements OnInit {
   set isDisabled(value: boolean) {
     this._disabled = value;
   }
-  //@Output() getModelValue: EventEmitter<any> = new EventEmitter<any>();
 
   public _modelValue:string ='';
   @Input()
@@ -54,6 +59,21 @@ export class AutocompleteComponent implements OnInit {
   @Output()
   modelValueChange = new EventEmitter<any>();
 
+  public _selectedOptionValue:string ='';
+  @Input()
+  get selectedOptionValue() {
+    return this._selectedOptionValue;
+  }
+  set selectedOptionValue(value: any) {
+    if (this._selectedOptionValue === value) {
+      return;
+    }
+    this._selectedOptionValue = value;
+    this.selectedOptionValueChange.emit(this._selectedOptionValue);
+  }
+  @Output()
+  selectedOptionValueChange = new EventEmitter<any>();
+
   commaSeparatedarray: string[] = [];
   @Input()
   set commaSeparatedString(value: string) {
@@ -63,9 +83,9 @@ export class AutocompleteComponent implements OnInit {
     this.commaSeparatedarray.forEach((value) => {
       if (value.includes('|')) {
         let parts = value.split('|');
-        this.arrayDate.push({ value: parts[0], text: parts[1] });
+        this.filter.push({ value: parts[0], text: parts[1] });
       } else {
-        this.arrayDate.push({ value: value, text: value });
+        this.filter.push({ value: value, text: value });
       }
     });
   }
@@ -79,7 +99,7 @@ export class AutocompleteComponent implements OnInit {
   @Input()
   set jsonData(jsondata: any[]) {
     if (this.apiValueAndname.length > 0) {
-      this.arrayDate = jsondata.map((item: any) => {
+      this.filter = jsondata.map((item: any) => {
         return {
           value: item[this.apiValueAndname[0]],
           text: item[this.apiValueAndname[1]],
@@ -119,7 +139,6 @@ export class AutocompleteComponent implements OnInit {
     private globalService: GlobalService
   ) {}
   area: string = this.globalService.getArea();
-  options: string[] = ['One', 'Two', 'Three'];
   ngOnInit() {
     this.message = 'Please Select ' + this.label;
   }
@@ -143,18 +162,25 @@ export class AutocompleteComponent implements OnInit {
     this.modelValueChange.emit(this._modelValue);
     this._parameter = { ...this._parameter, searchParam: this._modelValue };
     this.parameterChange.emit(this._parameter);
-    if (this._modelValue.length >= this.minimumlength) {
+    if (this._modelValue.length >= this.minimumlength && this.apiUrl != '') {
       this.getAPIData();
+    }
+    if(this.filter.length > 0 && this.apiUrl == ''){
+      this.arrayDate = this.filter.filter(o => o.text.toLowerCase().includes(event.target.value.toLowerCase())|| o.value.toLowerCase().includes(event.target.value.toLowerCase()));
     }
   }
   onSelectChange(event: MatAutocompleteSelectedEvent) {
-    this._modelValue = event.option.value;
+    this._modelValue = event.option.viewValue;
     this.modelValueChange.emit(this._modelValue);
+    this._selectedOptionValue = event.option.value ;
+    this.selectedOptionValueChange.emit(this._selectedOptionValue);
   }
 
   clearInputValue() {
     this._modelValue = '';
     this.modelValueChange.emit(this._modelValue);
+    this._selectedOptionValue ='';
+    this.selectedOptionValueChange.emit(this._selectedOptionValue);
   }
 
   getAPIData() {
@@ -176,5 +202,12 @@ export class AutocompleteComponent implements OnInit {
     } else if (this.apiUrl != '' && this.valueAndname == '') {
       console.warn('Input Parameter valueAndname is empty');
     }
+  }
+  UpdateValidation(): void {
+    this.input?.nativeElement.setAttribute('aria-required', this._required);
+  }
+  ngAfterViewInit(): void {
+    this.id = this.input?.nativeElement.id;
+    this.UpdateValidation();
   }
 }

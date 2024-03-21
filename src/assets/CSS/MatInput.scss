@@ -36,7 +36,9 @@ button {
   opacity: 0.75;
   font-size: 0.75em;
 }
-
+.mdc-line-ripple{
+  z-index: 0;
+}
 // .mdc-text-field--filled {
 //   .mdc-floating-label--float-above {
 //     transform: translateY(-170%) scale(0.75) !important;

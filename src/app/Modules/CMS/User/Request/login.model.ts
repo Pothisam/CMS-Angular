@@ -6,3 +6,8 @@ export interface IAutoCompleateRequest {
   columnName:string | undefined;
   searchParam:string | undefined;
 }
+export interface IDepartmentResponse {
+  departmentName:string ;
+  departmentCode:string ;
+  // status:string;
+}

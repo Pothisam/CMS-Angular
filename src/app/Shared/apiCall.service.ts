@@ -1,14 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { GlobalService } from '../Global/Service/global.service';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiCallService {
-  constructor(private globalService:GlobalService,private location: Location,private router: Router) {}
+  constructor(
+    private globalService: GlobalService,
+    private location: Location,
+    private router: Router
+  ) {}
   private static playAudio(type: string): void {
     const audio = new Audio(this.getAudioUrl(type));
     audio.play();
@@ -83,32 +87,50 @@ export class ApiCallService {
       })
     );
   }
-  public static PostwithAuth(http: HttpClient,url: string,parameter: any,area:string): Observable<Response> {
+  public static PostwithAuth(
+    http: HttpClient,
+    url: string,
+    parameter: any,
+    area: string
+  ): Observable<Response> {
     let body = parameter;
-    let token =this.GetToken(area);
+    let token = this.GetToken(area);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-    return http.post<Response>(url, body,{ headers }).pipe(
+    return http.post<Response>(url, body, { headers }).pipe(
       tap((response: Response) => {
-        if (response.message != '' && response.status != '')
+        if (response.message != '' && response.status != '') {
           this.ToastTrigger(response.message, response.status);
+        }
+      }),
+      catchError((error: any) => {
+        if (error.status === 401) {
+          this.RemoveToken(area);
+          // Handle unauthorized error, for example, redirect to login page
+          //console.log('Unauthorized error occurred:', error);
+          // You can also show a toast message or perform any other action
+        }
+        return throwError(() => error); // Rethrow the error to propagate it
       })
     );
   }
   public static GetToken(area: string): string | null {
-    if(area == 'CMS'){
-    const Storage = localStorage.getItem('CMSToken');
-    if (Storage !== null) {
-      // Parse the JSON string to an object
-      return JSON.parse(Storage).token;
+    if (area == 'CMS') {
+      const Storage = localStorage.getItem('CMSToken');
+      if (Storage !== null) {
+        // Parse the JSON string to an object
+        return JSON.parse(Storage).token;
       }
     }
-    // Your logic here
     return null;
   }
-
+  public static RemoveToken(area: string) {
+    if (area == 'CMS') {
+      localStorage.removeItem('CMSToken');
+    }
+  }
 }
 export class Response {
   public message?: string;
