@@ -3,11 +3,11 @@ import { DashboardService } from '../Dashboard.service';
 import {
   ILoginRequest,
   IAutoCompleateRequest,
-  IDepartmentResponse,
-  IDatatable,
+  IDepartmentResponse
 } from 'src/app/Modules/CMS/User/Request/login.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';
+import { ITableSettings } from 'src/app/Shared/MatHelper/table/table.model';
 
 @Component({
   selector: 'app-cmsdashboard',
@@ -23,7 +23,7 @@ export class CmsdashboardComponent {
   //  myDatatable = new IDatatable({
 
   //  });
-  public IDatatable: IDatatable = {
+  public tableSettings: ITableSettings = {
     showFotter: false,
     showPagination: true,
     jsonData: undefined,
@@ -55,7 +55,8 @@ export class CmsdashboardComponent {
       },
     ],
     columnSticky: [0, 1],
-    headerSticky: true
+    headerSticky: true,
+    filter: true
   };
   ConvertToDate(value: any): string {
     // Example implementation, replace with your actual date conversion logic
@@ -100,7 +101,7 @@ export class CmsdashboardComponent {
       next: (Response) => {
         if (Response.data != null) {
           this.departmentList = Response.data;
-          this.IDatatable.jsonData = Response.data;
+          this.tableSettings.jsonData = Response.data;
           // this.departments = Response.data.map((item: any) => ({
           //   text: item.departmentName,
           //   value: item.departmentCode,
@@ -127,7 +128,7 @@ export class CmsdashboardComponent {
     //this.triggerApi =true;
     console.log(this.triggerApi);
     console.log(this.SelectedValue);
-    console.log(this.IDatatable);
+    console.log(this.tableSettings);
     // this.SelectedValue ="BIO4013";
   }
   chage() {

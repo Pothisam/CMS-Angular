@@ -11,10 +11,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import {
-  IDatatable,
   IDepartmentResponse,
 } from 'src/app/Modules/CMS/User/Request/login.model';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ITableSettings } from './table.model';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -26,21 +26,21 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any[]>();
   datalist: any;
-  public _tableSettings: IDatatable | undefined;
+  public _tableSettings: ITableSettings | undefined;
 
   @Input()
-  set tableSettings(value: IDatatable | undefined) {
+  set tableSettings(value: ITableSettings | undefined) {
     if (this._tableSettings !== value) {
       this._tableSettings = value;
       this.prepareTable();
       this.tableSettingsChange.emit(this._tableSettings);
     }
   }
-  get tableSettings(): IDatatable | undefined {
+  get tableSettings(): ITableSettings | undefined {
     return this._tableSettings;
   }
 
-  @Output() tableSettingsChange = new EventEmitter<IDatatable | undefined>();
+  @Output() tableSettingsChange = new EventEmitter<ITableSettings | undefined>();
 
   public _gridEdit:string ='';
   @Input()
@@ -178,7 +178,16 @@ export class TableComponent implements OnInit {
     this.matDeleteClickChange.emit(this._gridDelete);
   }
   //End Grid Button Click
+ // Filter
+ applyFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value;
+  this.dataSource.filter = filterValue.trim().toLowerCase();
 
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
+}
+ //End Filter
   //CheckBox Control
   isAllSelected() {
     const numSelected = this.selection.selected.length;
