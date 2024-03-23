@@ -4,7 +4,7 @@ import {
   ILoginRequest,
   IAutoCompleateRequest,
   IDepartmentResponse,
-  IDatatable
+  IDatatable,
 } from 'src/app/Modules/CMS/User/Request/login.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';
@@ -19,18 +19,48 @@ export class CmsdashboardComponent {
   SelectOptionText: string = '';
   triggerApi: boolean = true;
   apiUrl: string = '/Department/GetActiveDepartmentListDistinct';
-  departmentList:IDepartmentResponse[] =[];
+  departmentList: IDepartmentResponse[] = [];
   //  myDatatable = new IDatatable({
 
   //  });
   public IDatatable: IDatatable = {
     showFotter: false,
-    tableColumnsName: ['Department Name', 'Department Code', 'Status'],
-    apiColumnsName: ['departmentName', 'departmentCode', 'status'],
     showPagination: true,
     jsonData: undefined,
-    shorting: false
+    shorting: true,
+    slno: true,
+    checkbox: false,
+    columns: [
+      {
+        title: 'Department Name',
+        data: 'departmentName',
+        short: true,
+        width: 70,
+      },
+      { title: 'Department Code', data: 'departmentCode', width: 40 },
+      {
+        title: 'Status',
+        data: 'status',
+        width: 20,
+        render: (value: any) => this.ConvertToDate(value),
+      },
+      {
+        title: 'Action',
+        data: 'Mat-Action',
+        width: 20,
+        buttongroup: [
+          { button: true, buttondata: 'departmentCode', buttons: ['edit', 'delete'] },
+        ],
+        buttonlabel: 'departmentCode'
+      },
+    ],
+    columnSticky: [0, 1],
+    headerSticky: true
   };
+  ConvertToDate(value: any): string {
+    // Example implementation, replace with your actual date conversion logic
+    return value + '1234';
+  }
   public LoginRequest: ILoginRequest = {
     userName: 'Test',
     password: 'va',
@@ -50,6 +80,7 @@ export class CmsdashboardComponent {
   automodelValue: string = '';
   automodelValue2: string = '';
   automodelValue3: string = '';
+  matButtonClicked: string = '';
   autoSelectedOption: string = '';
   SelectedValue: string = 'BIO4013,BUS4026';
   departments: SelectInterface[] = [];
@@ -69,7 +100,7 @@ export class CmsdashboardComponent {
       next: (Response) => {
         if (Response.data != null) {
           this.departmentList = Response.data;
-          this.IDatatable.jsonData =  Response.data;
+          this.IDatatable.jsonData = Response.data;
           // this.departments = Response.data.map((item: any) => ({
           //   text: item.departmentName,
           //   value: item.departmentCode,
@@ -96,7 +127,7 @@ export class CmsdashboardComponent {
     //this.triggerApi =true;
     console.log(this.triggerApi);
     console.log(this.SelectedValue);
-    console.log(this.IDatatable)
+    console.log(this.IDatatable);
     // this.SelectedValue ="BIO4013";
   }
   chage() {

@@ -11,3 +11,12 @@
   --bs-table-group: 224.224,224;
   --bs-body-color: 255,255,255;
 }
+@mixin generate-width-classes($start, $end) {
+  @for $i from $start through $end {
+    .Mat-th-width-#{$i} {
+      width: #{$i}+'%';
+    }
+  }
+}
+
+@include generate-width-classes(1, 100);

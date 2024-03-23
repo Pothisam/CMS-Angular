@@ -18,7 +18,10 @@ import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { TableComponent } from '../table/table.component';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import {  MatTableModule } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import {MatSortModule} from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +36,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
     MatListModule,
     MatAutocompleteModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatSort,
+    MatSortModule,
+    MatCheckboxModule
   ],
   declarations: [MatHelperComponent,TextboxComponent,PasswordComponent,ButtonComponent,SelectComponent,AutocompleteComponent,TableComponent],
   exports:[MatProgressSpinnerModule,MatGridListModule,MatCardModule,MatInputModule,TextboxComponent,MatIconModule,FormsModule,PasswordComponent,ButtonComponent,SelectComponent,AutocompleteComponent,TableComponent]

@@ -6,3 +6,11 @@
 table {
   width: 100%;
 }
+mat-icon {
+  cursor: pointer;
+}
+.example-container {
+  height: 400px;
+  max-width: 100%;
+  overflow: auto;
+}

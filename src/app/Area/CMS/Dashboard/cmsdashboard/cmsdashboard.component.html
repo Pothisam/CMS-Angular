@@ -54,7 +54,7 @@
         </div>
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <app-table [parameter]="IDatatable" [jsonData]="this.departmentList"></app-table>
+            <app-table [tableSettings]="IDatatable" [(matDeleteClick)]="automodelValue2"  [(matEditClick)]="automodelValue3" [jsonData]="this.departmentList"></app-table>
              </div>
         </div>
         <!-- apiUrl="/Department/GetActiveDepartmentListDistinct" commaSeparatedString="Apple,Mango,Orange" -->
