@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   CaseType:CaseType =CaseType.U;
   LoginButtonLoading:boolean = false;
   public LoginRequest: ILoginRequest = {
-    userName: 'asd',
-    password: 'asd',
+    userName: '',
+    password: '',
   };
   constructor(
     private Location: Location,
@@ -29,7 +29,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private ValidationService: FormValidationService,
     private userService: UserService
   ) {}
+  isDarkMode = false;
 
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+  }
   ngOnInit() {
     this.layout.IsCMSNavVisible = false;
     if (this.Location.path().split('/')[1] == 'CMS') {

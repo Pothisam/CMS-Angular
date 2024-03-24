@@ -1,26 +1,31 @@
-<div class="body">
-  <div class="login-div " role="main">
-    <div class="logo"></div>
-    <div class="title">
-      <h2>CMS Admin</h2>
-    </div>
-    <div class="sub-title">V 3.0</div>
-    <div class="m-auto">
-      <form id="login-form">
-        <div class="row">
-          <div class="col-12">
-            <app-textbox entity="Name" label="Name"  [required]="false" [(modelValue)]="LoginRequest.userName"   [showClearAll]="true"></app-textbox>
-          </div>
-          <div class="col-12">
-            <app-password entity="Password" label="Password"  [(modelValue)]="LoginRequest.password" ></app-password>
-          </div>
-          <div class="col-12">
-            <helper-button entity="Login" label="Login" Type="P"
-              id="login-btn" (click)="onClick($event)"></helper-button>
-          </div>
-        </div>
+<mat-card class="login-card mat-elevation-z8" [ngClass]="{'dark-theme': isDarkMode}">
+  <mat-card-header class="mat-card-header-center">
 
-      </form>
-    </div>
-  </div>
-</div>
+    <br>
+    <mat-card-title>
+      <div class="mat-card-avatar">
+        <img src="../../../../../assets/SARAS Logo 100.png" alt="CMS Admin">
+      </div><br>
+      CMS Admin</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <form class="login-form" id="Login">
+      <div class="row">
+        <div class="col-12">
+          <app-textbox entity="Name" label="Name"  [required]="false" [(modelValue)]="LoginRequest.userName"   [showClearAll]="true"></app-textbox>
+        </div>
+        <div class="col-12">
+          <app-password entity="Password" label="Password"  [(modelValue)]="LoginRequest.password" ></app-password>
+        </div>
+        <div class="col-12">
+          <helper-button entity="Login" label="Login" Type="P"
+          id="login-btn" (click)="onClick($event)"></helper-button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- Login Button -->
+  </mat-card-actions>
+</mat-card>
