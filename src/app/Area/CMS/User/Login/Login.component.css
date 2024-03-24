@@ -1,49 +1,38 @@
-body {
-  overflow-x: hidden;
-  overflow-y:hidden;
-}
-.body {
-  overflow-x: hidden;
-  margin: 0;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #555;
-  background: #ecf0f3;
-  background-image: url('../../../../../assets/Images/pexels-veeterzy-303383.jpg');
+.login-card {
+  max-width: 400px;
+  margin: 1em auto;
+  height: calc(100vh - 100px);
+  border-radius: 5%;
 }
 
-.login-div {
-  width: 400px;
-  height: 650px;
-  padding: 60px 35px 35px 35px;
-  border-radius: 40px;
-  background: #ecf0f3;
-  box-shadow: 0 0 3px 3px #dddddd, 6px 6px 8px 4px rgba(136,136,136,0.7), -6px -6px 8px 4px rgba(244,244,244,0.7);
-  justify-content: center;
-}
-.login-form-flex {
+.login-form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  flex-direction: column;
 }
 
-.button-flex-container {
-  display: flex;
+/* mat-form-field {
   width: 100%;
-  justify-content: flex-end;
+  margin-bottom: 16px;
 }
-.logo {
-  background: url("../../../../../assets/Images/Logo New.png");
-  width: 100px;
-  height: 100px;
+
+button {
+  margin-top: 8px;
+} */
+.mat-card-header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mat-card-avatar {
+  width: 100px; /* or the size you want */
+  height: 100px; /* or the size you want */
   border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 8px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
   box-shadow:
   /* logo shadow */
@@ -55,45 +44,3 @@ body {
   /* top left */
   -8px -8px 15px #ffffff;
 }
-
-.title {
-  text-align: center;
-  font-size: 28px;
-  padding-top: 24px;
-  letter-spacing: 0.5px;
-}
-
-.sub-title {
-  text-align: center;
-  font-size: 15px;
-  padding-top: 7px;
-  letter-spacing: 3px;
-}
-
-.TextBox {
-  margin-bottom: 20px;
-}
-
-.fullscreen_bg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: repeat;
-  justify-content: center;
-   background-image: url('../../../../../assets/Images/pexels-veeterzy-303383.jpg');
-}
-
-.Check {
-  color: yellow;
-}
-mat-card-title,
-      mat-card-content {
-        display: flex;
-        justify-content: center;
-
-      }
-
