@@ -9,10 +9,12 @@ import { ToastComponent } from './Toast/Toast.component';
 import { SelectComponent } from './Select-component/Select-component.component';
 import { AutoCompleteComponent } from './AutoComplete/AutoComplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 @NgModule({
   imports: [
     CommonModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
   ],
   declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent],
   exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,EmailComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent,MatAutocompleteModule]

@@ -16,7 +16,7 @@ export class ButtonComponent implements OnInit {
   _label: string = '';
   @Input() label: string = '';
   _loading: boolean = false;
-
+  @Input() auth: boolean = true;
   @Input() parameter: any;
 
   public _apiResponse: any;
@@ -61,7 +61,7 @@ export class ButtonComponent implements OnInit {
     this._label = this._loading ? 'Please wait...' : this.label;
   }
   callAPI() {
-    if (this.apiUrl != '') {
+    if (this.apiUrl != '' && this.auth == true) {
       this.helperService
         .callSelectAPI(this.apiUrl, this.parameter, this.area)
         .subscribe({
@@ -74,6 +74,22 @@ export class ButtonComponent implements OnInit {
                 this.updateLabel();
               }, 500);
             }
+          },
+        });
+    }
+    else if(this.apiUrl != '' && this.auth == false){
+      this.helperService
+        .callwithNoAuth(this.apiUrl, this.parameter, this.area)
+        .subscribe({
+          next: (Response) => {
+            if (Response.data != null) {
+              this._apiResponse = Response.data;
+              this.apiResponseChange.emit(this._apiResponse);
+            }
+            setTimeout(() => {
+              this._loading = !this._loading;
+              this.updateLabel();
+            }, 500);
           },
         });
     }

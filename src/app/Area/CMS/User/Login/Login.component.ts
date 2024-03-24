@@ -13,10 +13,8 @@ import { CaseType } from 'src/app/Shared/Helper/helper-service.service';
   styleUrls: ['./Login.component.css'],
 })
 export class LoginComponent implements OnInit, AfterViewInit {
-  islo: string | null | undefined;
   CMSToken: string | null | undefined;
-  CaseType:CaseType =CaseType.U;
-  LoginButtonLoading:boolean = false;
+  CaseType: CaseType = CaseType.U;
   public LoginRequest: ILoginRequest = {
     userName: '',
     password: '',
@@ -25,15 +23,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private Location: Location,
     private router: Router,
     private layout: LayoutService,
-    private globalService: GlobalService,
-    private ValidationService: FormValidationService,
-    private userService: UserService
+    private globalService: GlobalService
   ) {}
-  isDarkMode = false;
 
-  toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
-  }
   ngOnInit() {
     this.layout.IsCMSNavVisible = false;
     if (this.Location.path().split('/')[1] == 'CMS') {
@@ -44,23 +36,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
   ngAfterViewInit(): void {}
 
-  public onClick(event: MouseEvent) {
-    let buttonid =this.globalService.getButtonID(event);
-    if (this.ValidationService.validate(event)) {
-      //this.ValidationService.getValue(this.LoginRequest, event);
-      this.userService.userLogin(this.LoginRequest).subscribe({
-        next: (Response) => {
-          if(Response.data != null){
-            this.globalService.GLSS("CMSToken",JSON.stringify(Response.data));
-            this.router.navigate(['CMS/Dashboard']);
-          }
-          this.globalService.enableButton(buttonid);
-        },
-      });
+  onRespons(Response:any){
+    if (Response != null) {
+      this.globalService.GLSS('CMSToken', JSON.stringify(Response));
+      this.router.navigate(['CMS/Dashboard']);
     }
-
-    //this.layout.IsCMSNavVisible = true;
-    //this.globalService.GLSS("Login","true")
-    //this.router.navigate(['CMS/Dashboard']);
   }
 }

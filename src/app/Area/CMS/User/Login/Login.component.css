@@ -4,20 +4,30 @@
   height: calc(100vh - 100px);
   border-radius: 5%;
 }
-
+.FullBg {
+  background-image: url("../../../../../assets/Images/pexels-veeterzy-303383.jpg");
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 .login-form {
   display: flex;
   flex-direction: column;
 }
-
-/* mat-form-field {
-  width: 100%;
-  margin-bottom: 16px;
+.title {
+  text-align: center;
+  font-size: 28px;
+  letter-spacing: 0.5px;
 }
-
-button {
-  margin-top: 8px;
-} */
+.sub-title {
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 3px;
+}
 .mat-card-header-center {
   display: flex;
   flex-direction: column;

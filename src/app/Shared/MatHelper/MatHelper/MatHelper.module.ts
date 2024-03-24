@@ -40,7 +40,7 @@ import { CardComponent } from '../card/card.component';
     MatTableModule,
     MatSort,
     MatSortModule,
-    MatCheckboxModule,
+    MatCheckboxModule
   ],
   declarations: [
     MatHelperComponent,
