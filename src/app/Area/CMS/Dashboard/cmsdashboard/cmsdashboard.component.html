@@ -5,63 +5,59 @@
     </div>
     <div class="card-body">
       <div class="container-fluid ps-0 pe-0 overflow-hidden">
-        <div class="scrolldiv">
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <app-select entity="Department" label="Department List" [isrequired]="true" [isMultiSelect]="true"
-                (getSelectedOptions)="onModelValueChanges($event)" [apiUrl]="apiUrl" [(modelValue)]="SelectedValue"
-                [(parameter)]="AutocompleteRequest" valueAndname="departmentCode,departmentName"
-                [(triggerAPI)]="triggerApi"></app-select>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <app-autocomplete entity="Auto" label="Auto List" apiUrl="/Student/GetStudentAutoComplete"
-                valueAndname="column,column" [(modelValue)]="automodelValue" [(parameter)]="AutocompleteRequest"
-                (isrequired)="disable"></app-autocomplete>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              {{automodelValue}}
-              {{autoSelectedOption}}
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <app-autocomplete entity="Caste" label="Caste" apiUrl="/Student/GetStudentAutoComplete"
-                [showClearAll]="true" valueAndname="column,column" [(modelValue)]="automodelValue2"
-                [parameter]="AutocompleteRequest2" [isrequired]="true"></app-autocomplete>
-            </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-select entity="Department" label="Department List" [isrequired]="true" [isMultiSelect]="true"
+              (getSelectedOptions)="onModelValueChanges($event)" [apiUrl]="apiUrl" [(modelValue)]="SelectedValue"
+              [(parameter)]="AutocompleteRequest" valueAndname="departmentCode,departmentName"
+              [(triggerAPI)]="triggerApi"></app-select>
           </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <button (click)="buttonclick()" class="btn btn-primary">Change</button>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <app-textbox entity="Text" label="Test Textbox" [required]="true" [(modelValue)]="automodelValue3"
-                Case="T"></app-textbox>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <app-autocomplete entity="Caste" label="Auto Complete Json" [jsonData]="jsondata" [showClearAll]="true"
-                valueAndname="departmentCode,departmentName" [(selectedOptionValue)]="autoSelectedOption"
-                [(modelValue)]="automodelValue2" [isrequired]="true"></app-autocomplete>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <app-autocomplete entity="Caste" label="Auto Complete comma Separated String"
-                commaSeparatedString="yes,no,maybe" [showClearAll]="true" valueAndname="departmentCode,departmentName"
-                [(selectedOptionValue)]="autoSelectedOption" [(modelValue)]="automodelValue2"
-                [isrequired]="true"></app-autocomplete>
-            </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-autocomplete entity="Auto" label="Auto List" apiUrl="/Student/GetStudentAutoComplete"
+              valueAndname="column,column" [(modelValue)]="automodelValue" [(parameter)]="AutocompleteRequest"
+              (isrequired)="disable"></app-autocomplete>
           </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <app-button label="Submit" apiUrl="/Department/GetActiveDepartmentListDistinct"
-                [parameter]="AutocompleteRequest3" [(apiResponse)]="departmentList"></app-button>
-            </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            {{automodelValue}}
+            {{autoSelectedOption}}
           </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <app-table [tableSettings]="tableSettings" [(matDeleteClick)]="automodelValue2"
-                [(matEditClick)]="automodelValue3" [jsonData]="this.departmentList"></app-table>
-            </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-autocomplete entity="Caste" label="Caste" apiUrl="/Student/GetStudentAutoComplete"
+              [showClearAll]="true" valueAndname="column,column" [(modelValue)]="automodelValue2"
+              [parameter]="AutocompleteRequest2" [isrequired]="true"></app-autocomplete>
           </div>
-          <!-- apiUrl="/Department/GetActiveDepartmentListDistinct" commaSeparatedString="Apple,Mango,Orange" -->
         </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <button (click)="buttonclick()" class="btn btn-primary">Change</button>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-textbox entity="Text" label="Test Textbox" [required]="true" [(modelValue)]="automodelValue3"
+              Case="T"></app-textbox>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-autocomplete entity="Caste" label="Auto Complete Json" [jsonData]="jsondata" [showClearAll]="true"
+              valueAndname="departmentCode,departmentName" [(selectedOptionValue)]="autoSelectedOption"
+              [(modelValue)]="automodelValue2" [isrequired]="true"></app-autocomplete>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-autocomplete entity="Caste" label="Auto Complete comma Separated String"
+              commaSeparatedString="yes,no,maybe" [showClearAll]="true" valueAndname="departmentCode,departmentName"
+              [(selectedOptionValue)]="autoSelectedOption" [(modelValue)]="automodelValue2"
+              [isrequired]="true"></app-autocomplete>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <app-button label="Submit" apiUrl="/Department/GetActiveDepartmentListDistinct" [parameter]="AutocompleteRequest3" [(apiResponse)]="departmentList"></app-button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <app-table [tableSettings]="tableSettings" [(matDeleteClick)]="automodelValue2"  [(matEditClick)]="automodelValue3" [jsonData]="this.departmentList"></app-table>
+             </div>
+        </div>
+        <!-- apiUrl="/Department/GetActiveDepartmentListDistinct" commaSeparatedString="Apple,Mango,Orange" -->
       </div>
     </div>
   </div>

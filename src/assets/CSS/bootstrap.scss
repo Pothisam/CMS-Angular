@@ -10,7 +10,6 @@
   --bs-label: 0,0,0;
   --bs-table-group: 224.224,224;
   --bs-body-color: 255,255,255;
-  --bs-card-spacer-y: auto;
 }
 @mixin generate-width-classes($start, $end) {
   @for $i from $start through $end {
@@ -21,10 +20,3 @@
 }
 
 @include generate-width-classes(1, 100);
-.card {
-  --bs-card-spacer-y: 0;
-  --bs-card-spacer-x:0;
-}
-// .mat-mdc-form-field-subscript-wrapper {
-//   display: none;
-// }
