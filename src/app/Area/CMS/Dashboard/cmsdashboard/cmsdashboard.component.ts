@@ -27,9 +27,9 @@ export class CmsdashboardComponent {
     showFotter: false,
     showPagination: true,
     jsonData: undefined,
-    shorting: true,
-    slno: true,
-    checkbox: false,
+    shorting: false,
+    slno: false,
+    checkbox: true,
     columns: [
       {
         title: 'Department Name',
@@ -56,11 +56,11 @@ export class CmsdashboardComponent {
     ],
     columnSticky: [0, 1],
     headerSticky: true,
-    filter: true
+    filter: false
   };
   ConvertToDate(value: any): string {
     // Example implementation, replace with your actual date conversion logic
-    return value + '1234';
+    return value + ' 1234';
   }
   public LoginRequest: ILoginRequest = {
     userName: 'Test',
@@ -83,7 +83,7 @@ export class CmsdashboardComponent {
   automodelValue3: string = '';
   matButtonClicked: string = '';
   autoSelectedOption: string = '';
-  SelectedValue: string = 'BIO4013,BUS4026';
+  SelectedValue: string = 'BIO4013';
   departments: SelectInterface[] = [];
   jsondata: any[] = [];
   disable: boolean = false;

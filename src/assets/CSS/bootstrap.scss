@@ -17,9 +17,14 @@
     .Mat-th-width-#{$i} {
       width: #{$i}+'%';
     }
+    .width-#{$i} {
+      width: #{$i}+'%';
+    }
   }
 }
-
+:host ::ng-deep h2 {
+  font-style: italic;
+}
 @include generate-width-classes(1, 100);
 .card {
   --bs-card-spacer-y: 0;
