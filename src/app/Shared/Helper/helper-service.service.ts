@@ -136,6 +136,9 @@ export class HelperService {
   callSelectAPI(url:string,parameter:any,area:string){
     return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area);
   }
+  callAPI(url:string,parameter:any,area:string){
+    return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area);
+  }
   callwithNoAuth(url:string,parameter:any,area:string){
     return ApiCallService.Post(this.http, this.baseurl+url,parameter);
   }

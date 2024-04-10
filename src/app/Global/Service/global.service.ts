@@ -1,7 +1,10 @@
-import { Injectable, Renderer2 } from '@angular/core';
+import { Injectable, Renderer2, isDevMode } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { LayoutService } from './layout.service';
+import { ApiCallService } from 'src/app/Shared/apiCall.service';
+import { HttpClient } from '@angular/common/http';
+import { HelperService } from '../../../app/Shared/Helper/helper-service.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -29,6 +32,12 @@ export class GlobalService {
   }
   getToken() {
     if (this.location.path().split('/')[1] == 'CMS') {
+      if (this.GLSG('CMSToken')) {
+      }
+    }
+  }
+  loadLogo(area: string) {
+    if (area == 'CMS') {
       if (this.GLSG('CMSToken')) {
       }
     }
@@ -61,7 +70,7 @@ export class GlobalService {
     return null;
   }
   getAPIBaseUrl() {
-    return 'http://www.saras.ind.in/API';
+    return isDevMode() ? 'https://localhost:7083' : 'http://www.saras.ind.in/API';
   }
   playAudio(type: string): void {
     const audio = new Audio(this.getAudioUrl(type));
@@ -103,16 +112,22 @@ export class GlobalService {
     return clickedElement.children[0].id;
   }
 
-  CreateOptions(name: string, value: string, text: string, datastring: string, json: any) {
+  CreateOptions(
+    name: string,
+    value: string,
+    text: string,
+    datastring: string,
+    json: any
+  ) {
     const selectElement = document.querySelector(`select[name="${name}"]`);
     if (!selectElement) {
       return;
     }
     const count = Object.keys(json).length;
     if (count > 0) {
-      if (text.includes("|")) {
+      if (text.includes('|')) {
         const arr = text.split('|');
-        const optionValue = arr[1] !== "" ? arr[1] : '';
+        const optionValue = arr[1] !== '' ? arr[1] : '';
         selectElement.innerHTML = `<option value="${optionValue}">${optionValue}</option>`;
       } else {
         selectElement.innerHTML = '<option value=""></option>';
@@ -121,7 +136,7 @@ export class GlobalService {
       Object.keys(json).forEach((index) => {
         const Value = json[index];
         let html = '';
-        if (text.includes("|")) {
+        if (text.includes('|')) {
           const arr = text.split('|');
           const arrText = arr[0];
           html = `<option value="${Value[value]}">${Value[arrText]}</option>`;
@@ -132,7 +147,9 @@ export class GlobalService {
         if (datastring !== '') {
           const arr = datastring.split(',');
           arr.forEach((val) => {
-            const option = selectElement.querySelector(`option[value="${Value[value]}"]:last-child`);
+            const option = selectElement.querySelector(
+              `option[value="${Value[value]}"]:last-child`
+            );
             if (option) {
               option.setAttribute('data-' + val, Value[val]);
             }

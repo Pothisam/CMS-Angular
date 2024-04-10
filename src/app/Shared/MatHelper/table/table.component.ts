@@ -141,7 +141,7 @@ export class TableComponent implements OnInit {
     return (this._tableSettings?.columnSticky ?? []).includes(index);
   }
   isHeaderSticky(): boolean {
-    return this._tableSettings?.headerSticky ?? false;
+    return this._tableSettings?.headerSticky ?? true;
   }
   generateSlno(data: any[]): void {
     if (data && data.length > 0) {

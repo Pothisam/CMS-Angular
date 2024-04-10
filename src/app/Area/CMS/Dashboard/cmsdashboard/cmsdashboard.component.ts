@@ -29,7 +29,7 @@ export class CmsdashboardComponent {
     jsonData: undefined,
     shorting: false,
     slno: false,
-    checkbox: true,
+    checkbox: false,
     columns: [
       {
         title: 'Department Name',

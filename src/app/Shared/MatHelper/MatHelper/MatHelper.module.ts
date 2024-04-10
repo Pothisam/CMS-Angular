@@ -23,6 +23,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CardComponent } from '../card/card.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -40,7 +42,8 @@ import { CardComponent } from '../card/card.component';
     MatTableModule,
     MatSort,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   declarations: [
     MatHelperComponent,
@@ -53,6 +56,7 @@ import { CardComponent } from '../card/card.component';
     CardComponent,
   ],
   exports: [
+    MatListModule,
     MatProgressSpinnerModule,
     MatGridListModule,
     MatCardModule,
@@ -66,6 +70,7 @@ import { CardComponent } from '../card/card.component';
     AutocompleteComponent,
     TableComponent,
     CardComponent,
+    MatExpansionModule,
   ],
 })
 export class MatHelperModule {}
