@@ -121,6 +121,9 @@ export class CmsdashboardComponent {
     console.log('Model value changed:', options.value);
     console.log('Model text changed:', options.text);
   }
+  onThemeChange(value: any) {
+    this.globalService.switchTheme(value.value);
+  }
   buttonclick() {
     this.disable = true;
     this.AutocompleteRequest.columnName = 'InstituionName';
@@ -130,6 +133,7 @@ export class CmsdashboardComponent {
     console.log(this.SelectedValue);
     console.log(this.tableSettings);
     // this.SelectedValue ="BIO4013";
+
   }
   chage() {
     return this.AutocompleteRequest;

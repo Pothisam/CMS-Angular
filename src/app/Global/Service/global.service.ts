@@ -1,17 +1,29 @@
-import { Injectable, Renderer2, isDevMode } from '@angular/core';
+import { Inject, Injectable, Renderer2, inject, isDevMode } from '@angular/core';
 import { Location } from '@angular/common';
-import { NavigationEnd, Router } from '@angular/router';
 import { LayoutService } from './layout.service';
-import { ApiCallService } from 'src/app/Shared/apiCall.service';
-import { HttpClient } from '@angular/common/http';
-import { HelperService } from '../../../app/Shared/Helper/helper-service.service';
+import {DOCUMENT} from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class GlobalService {
   router: any;
+  private drawerState = new BehaviorSubject<boolean>(false);
+  constructor(private location: Location, private layout: LayoutService,@Inject(DOCUMENT)private document:Document) {}
 
-  constructor(private location: Location, private layout: LayoutService) {}
+  menutoggle(): void {
+    this.drawerState.next(!this.drawerState.value);
+  }
+
+  get menustate() {
+    return this.drawerState.asObservable();
+  }
+  switchTheme(theme:string){
+    let themeLink = this.document.getElementById("app-theme") as HTMLLinkElement;
+    if(themeLink){
+      themeLink.href = theme+'.css';
+    }
+  }
   GLSS(name: string, value: string) {
     localStorage.setItem(name, value);
   }
@@ -70,7 +82,7 @@ export class GlobalService {
     return null;
   }
   getAPIBaseUrl() {
-    return isDevMode() ? 'https://localhost:7083' : 'http://www.saras.ind.in/API';
+    return isDevMode() ? 'http://www.saras.ind.in/API' : 'http://www.saras.ind.in/API';
   }
   playAudio(type: string): void {
     const audio = new Audio(this.getAudioUrl(type));

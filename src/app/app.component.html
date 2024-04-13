@@ -1,7 +1,17 @@
-<app-cms-nav *ngIf="IsCMSNavVisible()"></app-cms-nav>
-<app-cms-left-menu></app-cms-left-menu>
-<app-staff-nav *ngIf="IsStaffNavVisible()"></app-staff-nav>
-<router-outlet></router-outlet>
 <helper-Error-Tag></helper-Error-Tag>
 <helper-Toast></helper-Toast>
 
+<mat-drawer-container class="example-container" hasBackdrop="true">
+  <mat-drawer #drawer mode="over" (closed)="onDrawerClosed()">
+
+    <app-cms-left-menu *ngIf="IsCMSNavVisible()"></app-cms-left-menu>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-cms-nav *ngIf="IsCMSNavVisible()"></app-cms-nav>
+
+    <app-staff-nav *ngIf="IsStaffNavVisible()"></app-staff-nav>
+    <div class="pt-1">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

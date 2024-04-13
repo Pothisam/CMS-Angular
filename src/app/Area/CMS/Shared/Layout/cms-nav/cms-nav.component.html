@@ -1,77 +1,26 @@
-
-<nav class="navbar nav-fill  text-primary-emphasis bg-info-subtle  border  rounded-4 ">
-  <div class="container-fluid ">
-    <button class="navbar-toggler" type="button" tabindex="0" data-bs-toggle="offcanvas" data-bs-target="#LayoutleftOffcanvas" aria-controls="LayoutleftOffcanvas" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fas fa-bars text-w"></i>
-  </button>
-    <a class="navbar-brand">
-      <img id="LayoutImageLogo" height="30" width="200" alt="Logo"
-        [src]="src">
-    </a>
-    <form role="search">
-      <input type="search" class="form-control focus-ring focus-ring-primary" placeholder="Search..."
-        id="IDLayoutSerach" aria-label="Search">
-    </form>
-    <ul class="navbar-nav align-items-center ms-auto list-group-horizontal">
-      <li class="nav-item">
-        <a class="btn href-Navigation focus-ring focus-ring-primary border rounded-2"
-          data-navigation="/CMS/Dashboard/Dashboard" data-bs-placement="bottom" data-placement="bottom"
-          data-bs-toggle="tooltip" data-bs-original-title="Go To Dashboard">
-          <i class="fas fa-home text-w Layout" tabindex="0"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="btn">
-          <i class="fas fa-moon focus-ring focus-ring-primary border rounded-2" id="IDdark-version" tabindex="0"
-            data-bs-placement="bottom" data-placement="bottom" data-bs-toggle="tooltip"
-            data-bs-original-title="Toggle Night Mode"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="btn">
-          <i class="fas fa-sync refresh  focus-ring focus-ring-primary border rounded-2" tabindex="0"
-            data-bs-toggle="tooltip" data-bs-placement="bottom" data-placement="bottom"
-            data-bs-original-title="Refresh Page"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="btn">
-          <i class="fas fa-expand-arrows-alt text-w fullscreen Layout" tabindex="0" data-bs-placement="bottom"
-            data-placement="bottom" data-bs-toggle="tooltip" data-bs-original-title="Full Screen Mode"></i>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="BtnUserLogo" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          <span class="text-w"><small><label>{{ userName }}</label></small></span>
-          <img class="rounded-circle" alt="" id="LayoutUserImage" tabindex="0"
-            src="assets/FemaleUser.png" height="30" width="30" />
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end position-absolute " aria-labelledby="BtnUserLogo">
-
-          <li><a tabindex="0" class="dropdown-item cursor-pointer" (click)="Logout()">Logout</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-</nav>
-<!-- <div class="mat-elevation-z24">
-<mat-toolbar color="primary" class="width-100" >
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+<mat-toolbar class="mat-primary">
+  <button mat-icon-button class="example-icon" (click)="toggleDrawer()" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>logi</span>
-  <span><input type="text" name="search" class="custom-input" /> </span>
+  <span><img id="LayoutImageLogo" height="30" width="200" alt="Logo" [src]="src"></span>
   <span class="example-spacer"></span>
+  <span><input type="search" class="form-control focus-ring focus-ring-primary" placeholder="Search..."
+      id="IDLayoutSerach" aria-label="Search"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
+  </button>
+  <button matSuffix mat-icon-button (click)="darkMode()">
+    <mat-icon tabindex="0">{{darkmode ? 'brightness_2' : 'brightness_7'}}</mat-icon>
   </button>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
     <mat-icon>share</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>person</mat-icon>
+  <button [matMenuTriggerFor]="login">
+    <small class="text-small"><label>{{ userName }}</label></small>
+    <img class="rounded-circle" alt="" id="LayoutUserImage" tabindex="0" src="assets/FemaleUser.png" height="30"
+      width="30" />
   </button>
+  <mat-menu #login="matMenu">
+    <button mat-menu-item (click)="Logout()">Logout</button>
+  </mat-menu>
 </mat-toolbar>
-</div> -->

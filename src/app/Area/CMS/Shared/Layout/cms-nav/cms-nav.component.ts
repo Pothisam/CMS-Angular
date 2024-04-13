@@ -11,6 +11,7 @@ import { DOCUMENT } from '@angular/common';
 export class CmsNavComponent {
   userName: string | null | undefined;
   src: string = '';
+  darkmode:boolean =false;
   constructor(
     private router: Router,
     private globalService: GlobalService,
@@ -40,6 +41,18 @@ export class CmsNavComponent {
   }
   ngOnInit() {
     //this.loadLogo();
+  }
+  darkMode(){
+    this.darkmode = !this.darkmode;
+    if(this.darkmode){
+      this.globalService.switchTheme("cyan-orange")
+    }
+    else{
+      this.globalService.switchTheme("indigo-pink")
+    }
+  }
+  toggleDrawer(): void {
+    this.globalService.menutoggle();
   }
   loadLogo() {
     let token = localStorage.getItem('CMSToken');

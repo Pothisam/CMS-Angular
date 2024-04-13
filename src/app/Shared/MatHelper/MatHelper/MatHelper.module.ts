@@ -24,7 +24,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CardComponent } from '../card/card.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSidenavModule} from '@angular/material/sidenav';
 @NgModule({
   imports: [
     CommonModule,
@@ -43,7 +44,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatSort,
     MatSortModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule,
+    MatSidenavModule
   ],
   declarations: [
     MatHelperComponent,
@@ -71,6 +74,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     TableComponent,
     CardComponent,
     MatExpansionModule,
+    MatMenuModule,
+    MatSidenavModule
   ],
 })
 export class MatHelperModule {}

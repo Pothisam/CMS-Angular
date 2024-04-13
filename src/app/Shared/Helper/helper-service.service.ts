@@ -1,8 +1,7 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2, inject } from '@angular/core';
 import { ApiCallService } from '../apiCall.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { HttpClient } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root',
 })
