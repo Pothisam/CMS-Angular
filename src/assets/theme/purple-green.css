@@ -6,6 +6,12 @@
 	background-color: #004f4f;
 	color: white;
 }
+body{
+  background-color: #424242;
+}
+.mat-drawer {
+  background-color: #424242;
+}
 .hljs {
   display: block;
   overflow-x: auto;

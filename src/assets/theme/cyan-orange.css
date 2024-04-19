@@ -6,6 +6,12 @@
 	background-color: #004f4f;
 	color: #00dddd;
 }
+body{
+  background-color: #191c1c;
+}
+.mat-drawer {
+  background-color: #191c1c;
+}
 .hljs {
   display: block;
   overflow-x: auto;
@@ -1714,7 +1720,7 @@ app-cookie-popup .popup {
   --mdc-outlined-card-outline-width: 1px;
   --mat-card-subtitle-text-color: #e0e3e2;
   --mat-card-title-text-font: Roboto, sans-serif;
-  --mat-card-title-text-line-height: 1.75rem;
+  --mat-card-title-text-line-height: 32px;
   --mat-card-title-text-size: 1.375rem;
   --mat-card-title-text-tracking: 0rem;
   --mat-card-title-text-weight: 400;
@@ -2477,7 +2483,7 @@ app-cookie-popup .popup {
   --mat-sidenav-scrim-color: rgba(41, 50, 50, .4);
   --mat-sidenav-container-shape: 16px;
   --mat-sidenav-container-elevation-shadow: none;
-  --mat-sidenav-container-width: 360px;
+  --mat-sidenav-container-width: auto;
   --mat-sidenav-container-divider-color: transparent;
   --mat-stepper-header-icon-foreground-color: #191c1c;
   --mat-stepper-header-selected-state-icon-background-color: #00dddd;
@@ -2510,7 +2516,7 @@ app-cookie-popup .popup {
   --mat-toolbar-container-text-color: #e0e3e2;
   --mat-toolbar-title-text-font: Roboto, sans-serif;
   --mat-toolbar-title-text-line-height: 1.75rem;
-  --mat-toolbar-title-text-size: 1.375rem;
+  --mat-toolbar-title-text-size: 20px;
   --mat-toolbar-title-text-tracking: 0rem;
   --mat-toolbar-title-text-weight: 400;
   --mat-toolbar-standard-height: 64px;

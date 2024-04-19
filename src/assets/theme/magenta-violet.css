@@ -10,6 +10,12 @@
 	background-color: #810081;
 	color: #ffabf3;
 }
+body{
+  background-color: #1e1a1d;
+}
+.mat-drawer {
+  background-color: #1e1a1d;
+}
 .hljs{
   display:block;
   overflow-x:auto;
@@ -2330,7 +2336,7 @@ app-cookie-popup .popup{
   --mat-sidenav-scrim-color: rgba(55, 46, 52, .4);
   --mat-sidenav-container-shape: 16px;
   --mat-sidenav-container-elevation-shadow: none;
-  --mat-sidenav-container-width: 360px;
+  --mat-sidenav-container-width: auto;
   --mat-sidenav-container-divider-color: transparent;
   --mat-stepper-header-icon-foreground-color: #1e1a1d;
   --mat-stepper-header-selected-state-icon-background-color: #ffabf3;

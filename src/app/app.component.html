@@ -1,7 +1,7 @@
 <helper-Error-Tag></helper-Error-Tag>
 <helper-Toast></helper-Toast>
 
-<mat-drawer-container class="example-container" hasBackdrop="true">
+<mat-drawer-container class="example-container" hasBackdrop="true" (backdropClick)="onBackdropClicked()">
   <mat-drawer #drawer mode="over" (closed)="onDrawerClosed()">
 
     <app-cms-left-menu *ngIf="IsCMSNavVisible()"></app-cms-left-menu>
