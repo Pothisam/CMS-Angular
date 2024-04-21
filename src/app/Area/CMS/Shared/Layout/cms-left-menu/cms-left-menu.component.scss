@@ -4,3 +4,6 @@
   justify-content: space-between; /* This separates the logo and close button */
   padding: 2px;
 }
+.mat-expansion-panel-header[aria-disabled=true] {
+  color: inherit;
+}

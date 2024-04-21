@@ -26,6 +26,7 @@ import { CardComponent } from '../card/card.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   imports: [
     CommonModule,
@@ -46,7 +47,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatCheckboxModule,
     MatExpansionModule,
     MatMenuModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTabsModule
   ],
   declarations: [
     MatHelperComponent,
@@ -75,7 +77,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     CardComponent,
     MatExpansionModule,
     MatMenuModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTabsModule
   ],
 })
 export class MatHelperModule {}

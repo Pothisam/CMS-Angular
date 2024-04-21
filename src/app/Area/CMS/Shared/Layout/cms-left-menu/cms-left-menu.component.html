@@ -1,22 +1,31 @@
-<div class="header-container pb-1">
-  <img id="LayoutImageLogoMenu" class="logo" width="330" alt="Logo" [src]="src">
-  <button mat-icon-button class="close-button" (click)="closeMenu()">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
-<mat-accordion>
-  <mat-expansion-panel *ngFor="let item of menu" [disabled]="!item.subMenu">
+  <div class="header-container pb-1">
+    <img id="LayoutImageLogoMenu" class="logo" width="330" alt="Logo" [src]="src">
+    <button mat-icon-button class="close-button" (click)="closeMenu()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let item of menu" [disabled]="!item.subMenu">
 
-    <mat-expansion-panel-header>
-      <mat-panel-title [routerLink]="item.link">
-        {{ item.name }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-nav-list *ngIf="item.subMenu">
-      <a mat-list-item *ngFor="let subItem of item.subMenu" [routerLink]="subItem.link">
-        {{ subItem.name }}
-      </a>
-    </mat-nav-list>
+      <mat-expansion-panel-header>
+        <div *ngIf="item.subMenu; then ifBlock else elseBlock"></div>
+        <ng-template #ifBlock>
+          <mat-panel-title>
+            {{ item.name }}
+          </mat-panel-title>
+        </ng-template>
+        <ng-template #elseBlock>
+          <mat-panel-title [routerLink]="item.link" tabindex="0" (keydown)="handleKeydown($event, item.link!)">
+            {{ item.name }}
+          </mat-panel-title>
+        </ng-template>
 
-  </mat-expansion-panel>
-</mat-accordion>
+      </mat-expansion-panel-header>
+      <mat-nav-list *ngIf="item.subMenu">
+        <a mat-list-item *ngFor="let subItem of item.subMenu" [routerLink]="subItem.link">
+          {{ subItem.name }}
+        </a>
+      </mat-nav-list>
+
+    </mat-expansion-panel>
+  </mat-accordion>

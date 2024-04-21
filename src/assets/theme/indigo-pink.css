@@ -2180,7 +2180,7 @@ html {
 	--mat-expansion-header-disabled-state-text-color: rgba(0, 0, 0, 0.26);
 	--mat-expansion-header-text-color: rgba(0, 0, 0, 0.87);
 	--mat-expansion-header-description-color: rgba(0, 0, 0, 0.54);
-	--mat-expansion-header-indicator-color: rgba(0, 0, 0, 0.54)
+	--mat-expansion-header-indicator-color: rgba(0, 0, 0, 0.54);
 }
 
 html {
@@ -2238,7 +2238,12 @@ html {
 	--mat-sidenav-content-text-color: rgba(0, 0, 0, 0.87);
 	--mat-sidenav-scrim-color: rgba(0, 0, 0, 0.6)
 }
-
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+  color: #e0e3e2 !important;
+}
+.mat-mdc-tab.mdc-tab--active:focus .mdc-tab__text-label {
+  color: #e0e3e2 !important;
+}
 html {
 	--mat-stepper-header-icon-foreground-color: white;
 	--mat-stepper-header-selected-state-icon-background-color: #3f51b5;

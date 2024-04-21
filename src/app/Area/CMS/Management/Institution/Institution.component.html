@@ -1,15 +1,90 @@
-<div class="card ">
-  <div class="card-header bg-primary text-bg-primary">
-    Institution
-  </div>
-  <div class="card-body">
-  <div class="container-fluid ps-0 pe-0 overflow-hidden">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <helper-textbox entity="date" label="New"></helper-textbox>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+<mat-card>
+  <mat-card-header class="mat-card-header mat-primary rounded-top">
+    <!-- <mat-card-title class="text-center">Institution</mat-card-title> -->
+    <mat-tab-group #tabGroup (selectedTabChange)="onTabChange($event)" headerPosition="below">
+      <mat-tab label="Institution"></mat-tab> <!-- Empty content here -->
+      <mat-tab label="Change Logo"></mat-tab>
+    </mat-tab-group>
+  </mat-card-header>
+  <mat-card-content>
+    <form id="test">
+      <ng-container [ngSwitch]="selectedTabIndex">
+        <div *ngSwitchCase="0">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="institutionName" label="InstitutionName" [required]="true"
+                [(modelValue)]="request.institutionName"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="address1" label="Address1" [required]="true"
+                [(modelValue)]="request.address1"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="address2" label="Address2" [required]="true"
+                [(modelValue)]="request.address2"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="pincode" label="Postal Code" [required]="true"
+                [(modelValue)]="request.pincode"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-select entity="officeName" label="Post Office Name" apiUrl="/Common/GetPostOffice"
+                [isrequired]="true" [isMultiSelect]="false" [(modelValue)]="request.postofficeName"
+                valueAndname="officeName,officeName" [(parameter)]="postalrequest"
+                [triggerAPI]="triggerApi"></app-select>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="districtname" label="District" [required]="true"
+                [(modelValue)]="request.districtname"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="stateName" label="State" [required]="true"
+                [(modelValue)]="request.stateName"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="emailid" label="Email Id" [required]="true"
+                [(modelValue)]="request.emailid"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="mobileNumer" label="Mobile No" [required]="true"
+                [(modelValue)]="request.mobileNumer"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="alternateMobileNumer" label="Alternate Mobileno" [required]="true"
+                [(modelValue)]="request.alternateMobileNumer"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="landline" label="Landline" [required]="true"
+                [(modelValue)]="request.landline"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="institutionType" label="Institution Type" [isDisabled]="true"
+                [(modelValue)]="request.institutionType"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="staffIdprefix" label="Staff-ID Prefix" [required]="true"
+                [(modelValue)]="request.staffIdprefix"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="entredBy" label="Entred By" [isDisabled]="true"
+                [(modelValue)]="request.entredBy"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="modifiedby" label="Modified By" [isDisabled]="true"
+                [(modelValue)]="request.modifiedBy"></app-textbox>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <app-textbox entity="modifieddate" label="Modified Date" [isDisabled]="true"
+                [(modelValue)]="request.modifiedDate"></app-textbox>
+            </div>
+          </div>
 
+        </div>
+        <div *ngSwitchCase="1">
+          da
+        </div>
+
+      </ng-container>
+    </form>
+  </mat-card-content>
+</mat-card>

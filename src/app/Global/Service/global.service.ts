@@ -3,9 +3,14 @@ import { Location } from '@angular/common';
 import { LayoutService } from './layout.service';
 import {DOCUMENT} from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import 'reflect-metadata';
+interface SafeModel {
+  [key: string]: any;
+}
 @Injectable({
   providedIn: 'root',
 })
+
 export class GlobalService {
   router: any;
   private drawerState = new BehaviorSubject<boolean>(false);
@@ -171,5 +176,34 @@ export class GlobalService {
     } else {
       selectElement.innerHTML = '<option value=""></option>';
     }
+  }
+
+  bindDataToModel<T extends object>(model: T, data: any): T {
+    Object.keys(model).forEach((key) => {
+      const value = data[key];
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        (model as any)[key] = value || '';
+      }
+    });
+    return model;
+  }
+
+  private isundefinedProperty<T extends SafeModel>(model: T, property: string): boolean {
+    return model[property] instanceof Date ||
+           (
+            Reflect.getMetadata('design:type', model, property) === undefined);
+  }
+  formatDate(date: Date): string {
+    if (!date) {
+      return ''; // Or handle `undefined` differently, perhaps with a default value or by throwing an error.
+    }
+    const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+  const seconds = date.getSeconds().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 }

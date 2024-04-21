@@ -4,19 +4,26 @@
   </button>
   <span><img id="LayoutImageLogo" height="30" width="200" alt="Logo" [src]="src"></span>
   <span class="example-spacer"></span>
-  <span><input type="search" class="form-control focus-ring focus-ring-primary" placeholder="Search..."
-      id="IDLayoutSerach" aria-label="Search"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
+  <span><input type="search" class="form-control focus-ring focus-ring-primary" placeholder="Search..." #IDLayoutSerach
+      id="IDLayoutSerach" aria-label="Search" [(ngModel)]="searchText" (input)="onInputChange()"
+      [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectChange($event)">
+      <ng-container *ngIf="arrayDate.length > 0">
+        <mat-option *ngFor="let item of arrayDate" [value]="item.value">{{ item.text }}</mat-option>
+      </ng-container>
+    </mat-autocomplete>
+  </span>
+  <button mat-icon-button aria-label="go to Dashboard" routerLink="/CMS/Dashboard">
+    <mat-icon>home</mat-icon>
   </button>
-  <button matSuffix mat-icon-button (click)="darkMode()">
-    <mat-icon tabindex="0">{{darkmode ? 'brightness_2' : 'brightness_7'}}</mat-icon>
+  <button mat-icon-button (click)="darkMode()">
+    <mat-icon>{{darkmode ? 'brightness_2' : 'brightness_7'}}</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
+  <button mat-icon-button aria-label="refresh page">
+    <mat-icon>refresh</mat-icon>
   </button>
   <button [matMenuTriggerFor]="login">
-    <small class="text-small mat-card-header mat-primary" >{{ userName }}</small>
+    <small class="text-small mat-card-header mat-primary">{{ userName }}</small>
     <img class="rounded-circle" alt="" id="LayoutUserImage" tabindex="0" src="assets/FemaleUser.png" height="30"
       width="30" />
   </button>

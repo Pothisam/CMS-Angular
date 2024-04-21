@@ -1,12 +1,12 @@
 <helper-Error-Tag></helper-Error-Tag>
 <helper-Toast></helper-Toast>
 
-<mat-drawer-container class="example-container" hasBackdrop="true" (backdropClick)="onBackdropClicked()">
+<mat-drawer-container class="mat-drawer-content" hasBackdrop="true" (backdropClick)="onBackdropClicked()">
   <mat-drawer #drawer mode="over" (closed)="onDrawerClosed()">
 
     <app-cms-left-menu *ngIf="IsCMSNavVisible()"></app-cms-left-menu>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="mat-drawer-content">
     <app-cms-nav *ngIf="IsCMSNavVisible()"></app-cms-nav>
 
     <app-staff-nav *ngIf="IsStaffNavVisible()"></app-staff-nav>

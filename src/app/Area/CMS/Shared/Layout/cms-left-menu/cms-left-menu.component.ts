@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { IMenuItem } from 'src/app/Global/Interface/common-interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cms-left-menu',
   templateUrl: './cms-left-menu.component.html',
@@ -10,7 +11,7 @@ import { IMenuItem } from 'src/app/Global/Interface/common-interface';
 export class CmsLeftMenuComponent {
   src: string = '';
   panelOpenState = false;
-  constructor(private globalService: GlobalService) {}
+  constructor(private globalService: GlobalService,private router: Router) {}
   private retryCount = 0;
   ngOnInit() {
     this.setMenuLogo();
@@ -40,6 +41,13 @@ export class CmsLeftMenuComponent {
     },
     // ... other menu items
   ];
+  handleKeydown(event: KeyboardEvent, link?: string): void {
+    // Check if the 'Enter' key was pressed
+    if (event.key === 'Enter') {
+      // Use the Router to navigate to the link
+      this.router.navigate([link]);
+    }
+  }
   private setMenuLogo() {
     if (this.globalService.GLSG('CMSToken') != null) {
       let userJSON = localStorage.getItem('CMSToken');

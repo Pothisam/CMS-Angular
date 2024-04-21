@@ -47,6 +47,12 @@ export class TextboxComponent implements OnInit {
   @Input() setModelvalue: string = '';
   @Input() Case: string = CaseType.N;
 
+  public _disabled: boolean = false;
+  @Input()
+  set isDisabled(value: boolean) {
+    this._disabled = value;
+  }
+
   public _modelValue:string ='';
   @Input()
   get modelValue() {

@@ -11,3 +11,7 @@
   border-bottom: 0 !important;
   border-left: 0 !important;
 }
+.mat-drawer-content{
+  height: 100vh;
+  box-sizing: border-box; /* This ensures padding and borders are included in the height */
+}
