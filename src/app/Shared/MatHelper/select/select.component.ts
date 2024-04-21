@@ -23,6 +23,7 @@ export class SelectComponent implements OnInit {
 
   public arrayDate: { value: string; text: string }[] = [];
   id: string = '';
+
   // selectedOptions: string = '';
   selectedText: string = '';
   selectedTextArray: string[] = [];
@@ -153,6 +154,7 @@ export class SelectComponent implements OnInit {
     value: string;
     text: string;
   }>();
+  @Input() apicache: boolean = false;
   constructor(
     private helperService: HelperService,
     private globalService: GlobalService,
@@ -223,7 +225,7 @@ export class SelectComponent implements OnInit {
   getAPIData() {
     if (this.apiUrl != '' && this.valueAndname != '') {
       this.helperService
-        .callSelectAPI(this.apiUrl, this._parameter, this.area)
+        .callSelectAPI(this.apiUrl, this._parameter, this.area,this.apicache)
         .subscribe({
           next: (Response) => {
             if (Response.data != null) {

@@ -56,6 +56,7 @@ export class SelectComponent implements OnInit {
   set disabled(value: boolean) {
     this._disabled = value;
   }
+  @Input() apicache: boolean = false;
   constructor(
     private helperService: HelperService,
     private globalService: GlobalService
@@ -91,7 +92,7 @@ export class SelectComponent implements OnInit {
   ngAfterViewInit(): void {
     if (this.apiUrl != '' && this.nameAndValue != '') {
       this.helperService
-        .callSelectAPI(this.apiUrl, this._parameter, this.area)
+        .callSelectAPI(this.apiUrl, this._parameter, this.area,this.apicache)
         .subscribe({
           next: (Response) => {
             if (Response.data != null) {

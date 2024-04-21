@@ -133,7 +133,7 @@ export class AutocompleteComponent implements OnInit {
   @Output()
   parameterChange = new EventEmitter<any>();
   // #endregion
-
+  @Input() apicache: boolean = false;
   constructor(
     private helperService: HelperService,
     private globalService: GlobalService
@@ -186,7 +186,7 @@ export class AutocompleteComponent implements OnInit {
   getAPIData() {
     if (this.apiUrl != '' && this.valueAndname != '') {
       this.helperService
-        .callSelectAPI(this.apiUrl, this._parameter, this.area)
+        .callSelectAPI(this.apiUrl, this._parameter, this.area,this.apicache)
         .subscribe({
           next: (Response) => {
             if (Response.data != null) {

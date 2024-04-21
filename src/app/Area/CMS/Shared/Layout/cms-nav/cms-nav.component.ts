@@ -73,7 +73,7 @@ export class CmsNavComponent {
   loadLogo() {
     let token = localStorage.getItem('CMSToken');
 
-    this.helperService.callAPI('/Common/GetLogo', '', 'CMS').subscribe({
+    this.helperService.callAPI('/Common/GetLogo', '', 'CMS',false).subscribe({
       next: (Response) => {
         if (Response.data != null) {
           if (token) {

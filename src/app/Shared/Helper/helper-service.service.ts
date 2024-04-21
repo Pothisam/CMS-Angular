@@ -132,11 +132,11 @@ export class HelperService {
       }
     });
   }
-  callSelectAPI(url:string,parameter:any,area:string){
-    return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area);
+  callSelectAPI(url:string,parameter:any,area:string,cached:boolean){
+    return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area,cached);
   }
-  callAPI(url:string,parameter:any,area:string){
-    return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area);
+  callAPI(url:string,parameter:any,area:string,cached:boolean){
+    return ApiCallService.PostwithAuth(this.http, this.baseurl+url,parameter,area,cached);
   }
   callwithNoAuth(url:string,parameter:any,area:string){
     return ApiCallService.Post(this.http, this.baseurl+url,parameter);

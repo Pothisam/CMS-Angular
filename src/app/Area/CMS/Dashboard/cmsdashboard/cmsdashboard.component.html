@@ -8,9 +8,9 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
         <app-select entity="Department" label="Department List" [isrequired]="true" [isMultiSelect]="false"
-          (getSelectedOptions)="onModelValueChanges($event)" [apiUrl]="apiUrl" [(modelValue)]="SelectedValue"
+          (getSelectedOptions)="onModelValueChanges($event)" [apicache]="true"  [apiUrl]="apiUrl" [(modelValue)]="SelectedValue"
           [(parameter)]="AutocompleteRequest" valueAndname="departmentCode,departmentName"
-          [(triggerAPI)]="triggerApi" ></app-select>
+          [(triggerAPI)]="triggerApi"  ></app-select>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
         <app-autocomplete entity="Auto" label="Auto List" apiUrl="/Student/GetStudentAutoComplete"

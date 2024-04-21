@@ -33,7 +33,7 @@ export class ButtonComponent implements OnInit {
   }
   @Output()
   apiResponseChange = new EventEmitter<any>();
-
+  @Input() apicache: boolean = false;
   constructor(
     private ValidationService: FormValidationService,
     private helperService: HelperService,
@@ -63,7 +63,7 @@ export class ButtonComponent implements OnInit {
   callAPI() {
     if (this.apiUrl != '' && this.auth == true) {
       this.helperService
-        .callSelectAPI(this.apiUrl, this.parameter, this.area)
+        .callSelectAPI(this.apiUrl, this.parameter, this.area,this.apicache)
         .subscribe({
           next: (Response) => {
             if (Response.data != null) {

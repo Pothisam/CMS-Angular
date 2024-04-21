@@ -21,7 +21,8 @@ export class DashboardService {
       this.http,
       this.baseurl + this.url,
       '',
-      this.Area
+      this.Area,
+      true
     );
   }
 }

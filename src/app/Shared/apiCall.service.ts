@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, shareReplay, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { GlobalService } from '../Global/Service/global.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ApiCallService {
+  private static cache: { [url: string]: any } = {};
   constructor(
     private globalService: GlobalService,
     private location: Location,
@@ -91,7 +92,8 @@ export class ApiCallService {
     http: HttpClient,
     url: string,
     parameter: any,
-    area: string
+    area: string,
+    cached: boolean
   ): Observable<Response> {
     let body = parameter;
     let token = this.GetToken(area);
@@ -99,8 +101,15 @@ export class ApiCallService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
+    if (this.cache[url] && cached) {
+      return of(this.cache[url]); // Return cached data as an Observable
+    }
     return http.post<Response>(url, body, { headers }).pipe(
+      shareReplay(1),
       tap((response: Response) => {
+        if (cached) {
+          this.cache[url] = response;
+        }
         if (response.message != '' && response.status != '') {
           this.ToastTrigger(response.message, response.status);
         }
