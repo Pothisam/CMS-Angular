@@ -3,7 +3,11 @@ import { DashboardService } from '../Dashboard.service';
 import {
   ILoginRequest,
   IAutoCompleateRequest,
-  IDepartmentResponse
+  IDepartmentResponse,
+  IStaffTypeResponse,
+  IDepartmentNameResponse,
+  IBatchResponse,
+  IClassResponse,
 } from 'src/app/Modules/CMS/User/Request/login.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';
@@ -20,6 +24,12 @@ export class CmsdashboardComponent {
   triggerApi: boolean = true;
   apiUrl: string = '/Department/GetActiveDepartmentListDistinct';
   departmentList: IDepartmentResponse[] = [];
+  staffTypeList: IStaffTypeResponse[] = [];
+  departmentNameList: IDepartmentNameResponse[] = [];
+  ugBatchList: IBatchResponse[] = [];
+  pgBatchList: IBatchResponse[] = [];
+  ugclassList: IClassResponse[] = [];
+  pgclassList: IClassResponse[] = [];
   //  myDatatable = new IDatatable({
 
   //  });
@@ -27,7 +37,7 @@ export class CmsdashboardComponent {
     showFotter: false,
     showPagination: true,
     jsonData: undefined,
-    shorting: false,
+    shorting: true,
     slno: false,
     checkbox: false,
     columns: [
@@ -49,15 +59,129 @@ export class CmsdashboardComponent {
         data: 'Mat-Action',
         width: 20,
         buttongroup: [
-          { button: true, buttondata: 'departmentCode', buttons: ['edit', 'delete'] },
+          {
+            button: true,
+            buttondata: 'departmentCode',
+            buttons: ['edit', 'delete'],
+          },
         ],
-        buttonlabel: 'departmentCode'
+        buttonlabel: 'departmentCode',
       },
     ],
     columnSticky: [0, 1],
     headerSticky: true,
-    filter: false
+    filter: false,
   };
+  public tableStaffType: ITableSettings = {
+    showFotter: true,
+    showPagination: false,
+    jsonData: undefined,
+    shorting: true,
+    slno: true,
+    checkbox: false,
+    columns: [
+      {
+        title: 'Staff Type',
+        data: 'staffType',
+        short: true,
+        width: 80,
+      },
+      {
+        title: 'Count',
+        data: 'count',
+        short: true,
+        width: 10,
+        class: 'text-end',
+        footergroup: [{ sumfunction: true }],
+      },
+    ],
+    columnSticky: [0],
+    headerSticky: true,
+    filter: false,
+  };
+  public tabledepartment: ITableSettings = {
+    showFotter: true,
+    showPagination: false,
+    jsonData: undefined,
+    shorting: false,
+    slno: true,
+    checkbox: false,
+    columns: [
+      {
+        title: 'Department Name',
+        data: 'departmentName',
+        short: true,
+        width: 80,
+      },
+      {
+        title: 'Count',
+        data: 'count',
+        short: true,
+        width: 10,
+        class: 'text-end',
+        footergroup: [{ sumfunction: true }],
+      },
+    ],
+    columnSticky: [],
+    headerSticky: true,
+    filter: false,
+  };
+  public tablBatchWise: ITableSettings = {
+    showFotter: true,
+    showPagination: false,
+    jsonData: undefined,
+    shorting: false,
+    slno: true,
+    checkbox: false,
+    columns: [
+      {
+        title: 'Batch',
+        data: 'batch',
+        short: true,
+        width: 80,
+      },
+      {
+        title: 'Count',
+        data: 'count',
+        short: true,
+        width: 10,
+        class: 'text-end',
+        footergroup: [{ sumfunction: true }],
+      },
+    ],
+    columnSticky: [],
+    headerSticky: true,
+    filter: false,
+  };
+
+  public tableClasswise: ITableSettings = {
+    showFotter: true,
+    showPagination: false,
+    jsonData: undefined,
+    shorting: false,
+    slno: true,
+    checkbox: false,
+    columns: [
+      {
+        title: 'Course Name',
+        data: 'courseWithYearandSection',
+        short: true,
+        width: 80,
+      },
+      {
+        title: 'Count',
+        data: 'count',
+        short: true,
+        width: 10,
+        class: 'text-end',
+        footergroup: [{ sumfunction: true }],
+      },
+    ],
+    columnSticky: [],
+    headerSticky: true,
+    filter: false,
+  };
+
   ConvertToDate(value: any): string {
     // Example implementation, replace with your actual date conversion logic
     return value + ' 1234';
@@ -94,6 +218,7 @@ export class CmsdashboardComponent {
   ) {}
   ngOnInit() {
     this.CallService();
+    this.getdashboardservice();
   }
   ngAfterViewInit(): void {}
   CallService() {
@@ -101,12 +226,27 @@ export class CmsdashboardComponent {
       next: (Response) => {
         if (Response.data != null) {
           this.departmentList = Response.data;
-          this.tableSettings.jsonData = Response.data;
+          //this.tableSettings.jsonData = Response.data;
           // this.departments = Response.data.map((item: any) => ({
           //   text: item.departmentName,
           //   value: item.departmentCode,
           // }));
           //this.globalService.CreateOptions("DashboardType","departmentCode","departmentName","status",Response.data)
+        }
+      },
+    });
+  }
+  getdashboardservice() {
+    this.dashboardService.getdashboardList().subscribe({
+      next: (Response) => {
+        if (Response.data != null) {
+          this.tableStaffType.jsonData = Response.data.staffCount;
+          this.staffTypeList = Response.data.staffCount;
+          this.departmentNameList = Response.data.departmentCount;
+          this.ugBatchList = Response.data.getStudentCountUG;
+          this.pgBatchList = Response.data.getStudentCountPG;
+          this.ugclassList = Response.data.studentClassWiseUG;
+          this.pgclassList =Response.data.studentClassWisePG;
         }
       },
     });
@@ -133,7 +273,6 @@ export class CmsdashboardComponent {
     console.log(this.SelectedValue);
     console.log(this.tableSettings);
     // this.SelectedValue ="BIO4013";
-
   }
   chage() {
     return this.AutocompleteRequest;

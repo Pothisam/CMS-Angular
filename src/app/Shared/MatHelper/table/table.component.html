@@ -1,89 +1,121 @@
-<div class="row" *ngIf="_tableSettings?.filter">
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"></div>
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"></div>
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"></div>
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-    <app-textbox entity="Filter" label="Filter" (keyup)="applyFilter($event)"></app-textbox>
+<div class="full-page-container">
+  <div class="row" *ngIf="_tableSettings?.filter || tableName.length > 0">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+      {{tableName}}
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3"></div>
+    <div *ngIf="_tableSettings?.filter">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+        <app-textbox entity="Filter" label="Filter" (keyup)="applyFilter($event)"></app-textbox>
+      </div>
+    </div>
   </div>
-</div>
-<div class="example-container">
-  <table mat-table [dataSource]="dataSource" matSort>
-    <!-- (matSortChange)="Shorting($event)" -->
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- (matSortChange)="Shorting($event)" -->
 
-    <ng-container *ngFor="let column of tableColums let i = index">
-      <ng-container [matColumnDef]="column.data" [sticky]="isColumnSticky(i) ? true : false">
+      <ng-container *ngFor="let column of tableColums let i = index">
+        <ng-container [matColumnDef]="column.data" [sticky]="isColumnSticky(i) ? true : false">
 
-        <ng-container *ngIf="column.data =='chSelect'" ;else actionbutton>
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? toggleAllRows() : null" [checked]="selection.hasValue() && isAllSelected()"
-              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-            </mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-        <!--Action Button-->
-        <ng-container #actionbutton *ngIf="column.data =='Mat-Action'" ;else others>
-          <th mat-header-cell *matHeaderCellDef
-            [class]="column.width !== undefined ? 'Mat-th-width-' + column.width : ''">
-            {{column.title}}
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <div style="display: flex; flex-direction: row;">
-              <ng-container
-                *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('edit')">
-                <mat-icon mat-button matTooltip="Edit" tabindex="0" matTooltipPosition="above"
-                  [attr.aria-edit]="element[column.buttongroup[0].buttondata ? column.buttongroup[0].buttondata : '']"
-                  (keydown.enter)="onMatIconEdit(element)" (click)="onMatIconEdit(element)"
-                  aria-label="Edit">edit</mat-icon>
-              </ng-container>
-              <ng-container
-                *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('delete')">
-                <mat-icon mat-button color="bg-danger" tabindex="0" matTooltip="Delete" matTooltipPosition="above"
-                  [attr.aria-delete]="element[column.buttongroup[0].buttondata ? column.buttongroup[0].buttondata : '']"
-                  (keydown.enter)="onMatIconDelete(element)" (click)="onMatIconDelete(element)"
-                  aria-label="Delete">delete_forever</mat-icon>
-              </ng-container>
-
-            </div>
-          </td>
-        </ng-container>
-        <!--End Action Button-->
-
-        <ng-container #others *ngIf="column.short || _tableSettings?.shorting; else elseShortColumn">
-          <ng-container>
-            <th mat-header-cell *matHeaderCellDef mat-sort-header
-              [class]="column.width !== undefined ? 'Mat-th-width-' + column.width : ''">
+          <ng-container *ngIf="column.data =='chSelect'" ;else actionbutton>
+            <th mat-header-cell *matHeaderCellDef sticky>
+              <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <!--Action Button-->
+          <ng-container #actionbutton *ngIf="column.data =='Mat-Action'" ;else others>
+            <th mat-header-cell *matHeaderCellDef sticky
+              [class]="(column.width !== undefined ? 'Mat-th-width-' + column.width : '') + ' ' + (column.class !== undefined ? column.class : '')">
               {{column.title}}
             </th>
+            <td mat-cell *matCellDef="let element">
+              <div style="display: flex; flex-direction: row;">
+                <ng-container
+                  *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('edit')">
+                  <mat-icon mat-button matTooltip="Edit" tabindex="0" matTooltipPosition="above"
+                    [attr.aria-edit]="element[column.buttongroup[0].buttondata ? column.buttongroup[0].buttondata : '']"
+                    (keydown.enter)="onMatIconEdit(element)" (click)="onMatIconEdit(element)"
+                    aria-label="Edit">edit</mat-icon>
+                </ng-container>
+                <ng-container
+                  *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('delete')">
+                  <mat-icon mat-button color="bg-danger" tabindex="0" matTooltip="Delete" matTooltipPosition="above"
+                    [attr.aria-delete]="element[column.buttongroup[0].buttondata ? column.buttongroup[0].buttondata : '']"
+                    (keydown.enter)="onMatIconDelete(element)" (click)="onMatIconDelete(element)"
+                    aria-label="Delete">delete_forever</mat-icon>
+                </ng-container>
+
+              </div>
+            </td>
           </ng-container>
-        </ng-container>
-        <ng-template #elseShortColumn>
-          <th mat-header-cell *matHeaderCellDef
-            [class]="column.width !== undefined ? 'Mat-th-width-' + column.width : ''">
-            {{column.title}}
-          </th>
-        </ng-template>
+          <!--End Action Button-->
 
-        <ng-container *ngIf="column.render === undefined; else elserender">
-          <td mat-cell *matCellDef="let element">
-            {{element[column.data]}}
-          </td>
-        </ng-container>
-        <ng-template #elserender>
-          <td mat-cell *matCellDef="let element">
-            {{ column.render(element[column.data]) }}
-          </td>
-        </ng-template>
+          <!--Start Column Header-->
+          <ng-container #others *ngIf="column.short && _tableSettings?.shorting; else elseShortColumn">
+            <ng-container>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header sticky
+                [class]="(column.width !== undefined ? 'Mat-th-width-' + column.width : '') + ' ' + (column.class !== undefined ? column.class : '')">
+                {{column.title}}
+              </th>
+            </ng-container>
+          </ng-container>
+          <ng-template #elseShortColumn [class]="column.class !== undefined ? column.class : ''">
+            <th mat-header-cell *matHeaderCellDef sticky
+              [class]="(column.width !== undefined ? 'Mat-th-width-' + column.width : '') + ' ' + (column.class !== undefined ? column.class : '')">
+              {{column.title}}
+            </th>
+          </ng-template>
+          <!--End Column Header-->
 
+          <!--Start Column data-->
+          <ng-container *ngIf="column.render === undefined; else elserender">
+            <td mat-cell *matCellDef="let element"
+              [class]="(column.width !== undefined ? 'Mat-th-width-' + column.width : '') + ' ' + (column.class !== undefined ? column.class : '')">
+              {{element[column.data]}}
+            </td>
+          </ng-container>
+          <ng-template #elserender>
+            <td mat-cell *matCellDef="let element">
+              {{ column.render(element[column.data]) }}
+            </td>
+          </ng-template>
+          <!--END Column data-->
+
+          <!--Footer Start-->
+          <ng-container *ngIf="isFootertrue()">
+            <ng-container *ngIf="column.footergroup && column.footergroup[0].sumfunction== true;else footerelse">
+              <td mat-footer-cell *matFooterCellDef
+                [class]="(column.width !== undefined ? 'Mat-th-width-' + column.width : '') + ' ' + (column.class !== undefined ? column.class : '')">
+                {{getTotalCost(column.data)}} </td>
+            </ng-container>
+            <ng-template #footerelse>
+              <td mat-footer-cell *matFooterCellDef
+                [class]="(column.width !== undefined ? 'Mat-th-width-' + column.width : '') + ' ' + (column.class !== undefined ? column.class : '')">
+                <div *ngIf="i === 0">
+                  Total
+                </div>
+              </td>
+            </ng-template>
+          </ng-container>
+          <!--Footer End-->
+        </ng-container>
       </ng-container>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:isHeaderSticky()"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:isHeaderSticky()? true : false"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [style.border-bottom]="isFootertrue() ?'1px solid' : ''"></tr>
+      <ng-container *ngIf="isFootertrue()">
+        <tr mat-footer-row *matFooterRowDef="displayedColumns;sticky:isFootertrue()"></tr>
+      </ng-container>
+    </table>
 
-  <mat-paginator *ngIf="_tableSettings?.showPagination" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <mat-paginator *ngIf="_tableSettings?.showPagination" [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of users"></mat-paginator>
+  </div>
 </div>

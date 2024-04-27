@@ -4,25 +4,27 @@ export class ITableSettings {
   jsonData: any;
   shorting: boolean;
   slno: boolean;
-  checkbox:boolean;
+  checkbox: boolean;
   columns: {
     title: string;
     data: string;
     class?: string;
     short?: boolean;
     width?: number;
-    render?:any;
-    buttongroup?:{
-      button?:boolean;
-      buttons?:string[];
-      buttondata?:string;
-    }[],
-    buttonlabel?:string;
+    render?: any;
+    buttongroup?: {
+      button?: boolean;
+      buttons?: string[];
+      buttondata?: string;
+    }[];
+    footergroup?: {
+      sumfunction?: boolean;
+    }[];
+    buttonlabel?: string;
   }[];
-  columnSticky:number[];
-  headerSticky:boolean;
-  filter:boolean;
-
+  columnSticky: number[];
+  headerSticky: boolean;
+  filter: boolean;
   constructor() {
     this.showFotter = true;
     this.showPagination = true;
@@ -36,19 +38,24 @@ export class ITableSettings {
         class: 'string',
         short: true,
         width: 10,
-        render:'',
-        buttongroup:[
+        render: '',
+        buttongroup: [
           {
-            button:false,
-            buttons:['edit'],
-            buttondata:'string'
-          }
+            button: false,
+            buttons: ['edit'],
+            buttondata: 'string',
+          },
         ],
-        buttonlabel:''
+        footergroup: [
+          {
+            sumfunction: true,
+          },
+        ],
+        buttonlabel: '',
       },
     ];
-    this.columnSticky =[0,1,2],
-    this.headerSticky = false,
-    this.filter = false
+    (this.columnSticky = [0, 1, 2]),
+      (this.headerSticky = false),
+      (this.filter = false);
   }
 }

@@ -27,6 +27,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   imports: [
     CommonModule,
@@ -48,7 +49,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatExpansionModule,
     MatMenuModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressBarModule
   ],
   declarations: [
     MatHelperComponent,
@@ -78,7 +80,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatExpansionModule,
     MatMenuModule,
     MatSidenavModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressBarModule
   ],
 })
 export class MatHelperModule {}

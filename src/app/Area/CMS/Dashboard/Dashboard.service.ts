@@ -25,4 +25,14 @@ export class DashboardService {
       true
     );
   }
+  getdashboardList(): Observable<any> {
+    this.url = '/Dashboard/CMS/GetCount';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      '',
+      this.Area,
+      true
+    );
+  }
 }

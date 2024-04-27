@@ -6,13 +6,12 @@ import {
   OnInit,
   Output,
   ViewChild,
+  input,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import {
-  IDepartmentResponse,
-} from 'src/app/Modules/CMS/User/Request/login.model';
+import { IDepartmentResponse } from 'src/app/Modules/CMS/User/Request/login.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ITableSettings } from './table.model';
 @Component({
@@ -40,9 +39,11 @@ export class TableComponent implements OnInit {
     return this._tableSettings;
   }
 
-  @Output() tableSettingsChange = new EventEmitter<ITableSettings | undefined>();
+  @Output() tableSettingsChange = new EventEmitter<
+    ITableSettings | undefined
+  >();
 
-  public _gridEdit:string ='';
+  public _gridEdit: string = '';
   @Input()
   set matEditClick(value: any) {
     if (this._gridEdit === value) {
@@ -51,12 +52,12 @@ export class TableComponent implements OnInit {
     this._gridEdit = value;
     this.matEditClickChange.emit(this._gridEdit);
   }
-  get matEditClick(){
+  get matEditClick() {
     return this._gridEdit;
   }
   @Output() matEditClickChange = new EventEmitter<any>();
 
-  public _gridDelete:string ='';
+  public _gridDelete: string = '';
   @Input()
   set matDeleteClick(value: any) {
     if (this._gridDelete === value) {
@@ -65,7 +66,7 @@ export class TableComponent implements OnInit {
     this._gridDelete = value;
     this.matDeleteClickChange.emit(this._gridDelete);
   }
-  get matDeleteClick(){
+  get matDeleteClick() {
     return this._gridDelete;
   }
   @Output() matDeleteClickChange = new EventEmitter<any>();
@@ -77,6 +78,8 @@ export class TableComponent implements OnInit {
     }
     this.prepareTable();
   }
+  @Input() tableName: string = '';
+
   tableColums: {
     title: string;
     data: string;
@@ -88,6 +91,9 @@ export class TableComponent implements OnInit {
       button?: boolean;
       buttons?: string[];
       buttondata?: string;
+    }[];
+    footergroup?: {
+      sumfunction?: boolean;
     }[];
     buttonlabel?: string;
   }[] = [];
@@ -119,8 +125,12 @@ export class TableComponent implements OnInit {
         (column) => column.data === 'autoSlno'
       );
       if (!isExists) {
-        this.tableColums.unshift({ title: 'Slno', data: 'autoSlno', width: 5 });
-        console.log(this.tableColums);
+        if(this._tableSettings.shorting == true){
+        this.tableColums.unshift({ title: 'Slno', data: 'autoSlno', width: 5, short: true });
+        }
+        else{
+          this.tableColums.unshift({ title: 'Slno', data: 'autoSlno', width: 5 });
+        }
       }
     }
     if (this._tableSettings?.checkbox == true) {
@@ -133,7 +143,6 @@ export class TableComponent implements OnInit {
           data: 'chSelect',
           width: 5,
         });
-        console.log(this.tableColums);
       }
     }
   }
@@ -142,6 +151,9 @@ export class TableComponent implements OnInit {
   }
   isHeaderSticky(): boolean {
     return this._tableSettings?.headerSticky ?? true;
+  }
+  isFootertrue(): boolean {
+    return this._tableSettings ? this._tableSettings.showFotter : false;
   }
   generateSlno(data: any[]): void {
     if (data && data.length > 0) {
@@ -168,26 +180,24 @@ export class TableComponent implements OnInit {
   }
   //Grid Button Click
   onMatIconEdit(element: any) {
-    console.log('Clicked:', element['departmentCode']);
     this._gridEdit = element['departmentCode'];
     this.matEditClickChange.emit(this._gridEdit);
   }
   onMatIconDelete(element: any) {
-    console.log('Clicked:', element['departmentCode']);
     this._gridDelete = element['departmentCode'];
     this.matDeleteClickChange.emit(this._gridDelete);
   }
   //End Grid Button Click
- // Filter
- applyFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value;
-  this.dataSource.filter = filterValue.trim().toLowerCase();
+  // Filter
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  if (this.dataSource.paginator) {
-    this.dataSource.paginator.firstPage();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
-}
- //End Filter
+  //End Filter
   //CheckBox Control
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -208,9 +218,13 @@ export class TableComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    console.log(this.selection);
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
       row.position + 1
     }`;
+  }
+
+  getTotalCost(propertyName: string) {
+    return this.datalist.map((t: { [x: string]: any; }) => t[propertyName])
+      .reduce((acc: any, value: any) => acc + (value || 0), 0); // Added || 0 to handle null/undefined
   }
 }
