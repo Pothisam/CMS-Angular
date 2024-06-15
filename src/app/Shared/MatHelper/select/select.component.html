@@ -14,7 +14,7 @@
     </mat-select-trigger>
     <mat-option *ngIf="_isFirstOptionEmpty && !_Multiple"></mat-option>
     <ng-container *ngIf="arrayDate.length > 0">
-      <mat-option *ngFor="let item of arrayDate" [value]="item.value">{{ item.text }}</mat-option>
+      <mat-option *ngFor="let item of arrayDate" [value]="item.value.trim()">{{ item.text }}</mat-option>
     </ng-container>
   </mat-select>
 </mat-form-field>

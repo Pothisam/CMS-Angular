@@ -5,6 +5,7 @@ import { HelperService } from 'src/app/Shared/Helper/helper-service.service';
 import { DOCUMENT } from '@angular/common';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';
+import { ApiCallService } from 'src/app/Shared/apiCall.service';
 @Component({
   selector: 'app-cms-nav',
   templateUrl: './cms-nav.component.html',
@@ -91,6 +92,7 @@ export class CmsNavComponent {
     });
   }
   public Logout() {
+    ApiCallService.clearCache();
     localStorage.removeItem('CMSToken');
     this.router.navigate(['CMS/Login']);
   }
@@ -106,5 +108,9 @@ export class CmsNavComponent {
     this.router.navigate([strings]);
     this.searchText = '';
     this.arrayDate = [];
+  }
+  refreshPage() {
+    ApiCallService.clearCache();
+    location.reload();
   }
 }

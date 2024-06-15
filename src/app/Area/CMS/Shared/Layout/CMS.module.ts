@@ -6,9 +6,10 @@ import { LoginComponent } from '../../User/Login/Login.component';
 import { HtmlHelperModule } from 'src/app/Shared/Helper/htmlhelper.module';
 import { CmsdashboardComponent } from '../../Dashboard/cmsdashboard/cmsdashboard.component';
 import { MatHelperModule } from "../../../../Shared/MatHelper/MatHelper/MatHelper.module";
+import { DepartmentComponent } from '../../Management/department/department.component';
 
 @NgModule({
-    declarations: [InstitutionComponent, LoginComponent, CmsdashboardComponent],
+    declarations: [InstitutionComponent, LoginComponent, CmsdashboardComponent,DepartmentComponent],
     imports: [
         CommonModule, CMSRoutingModule, HtmlHelperModule,
         MatHelperModule

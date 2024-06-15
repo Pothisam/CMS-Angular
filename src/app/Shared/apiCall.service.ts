@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 })
 export class ApiCallService {
   private static cache: { [url: string]: any } = {};
+  static clearCache() {
+    this.cache = {};
+  }
   constructor(
     private globalService: GlobalService,
     private location: Location,
@@ -110,7 +113,7 @@ export class ApiCallService {
         if (cached) {
           this.cache[url] = response;
         }
-        if (response.message != '' && response.status != '') {
+        if (response.message != '' && response.message != null && response.status != '') {
           this.ToastTrigger(response.message, response.status);
         }
       }),

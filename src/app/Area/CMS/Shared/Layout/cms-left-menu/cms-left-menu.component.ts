@@ -25,7 +25,7 @@ export class CmsLeftMenuComponent {
       name: "Management",
       subMenu: [
         { name: "General Information", link: "CMS/Institution" },
-        { name: "Department", link: "#department" },
+        { name: "Department", link: "CMS/Department" },
         { name: "Course", link: "#course" },
         { name: "Section", link: "#section" },
         { name: "Batch", link: "#batch" },

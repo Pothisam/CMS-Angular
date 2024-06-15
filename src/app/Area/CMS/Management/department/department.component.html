@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header class="mat-card-header mat-primary rounded-top">
+    <mat-card-title class="text-center">Department</mat-card-title>
+  </mat-card-header>
+  <div class="scrolldiv">
+    <mat-card-content>
+
+      <form id="department">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-textbox entity="departmentName" [(modelValue)]="request.departmentname" label="Department Name" Case="U" [required]="true"  min="3" (keydown)="onValueChange()"></app-textbox>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-textbox entity="departmentCode" label="Department Code" [(modelValue)]="departmentcode" [isDisabled]="true"></app-textbox>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 pt-3">
+            <app-button label="Add Department" ></app-button>
+        </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </div>
+</mat-card>

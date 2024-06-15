@@ -19,7 +19,7 @@
   <button mat-icon-button (click)="darkMode()">
     <mat-icon>{{darkmode ? 'brightness_2' : 'brightness_7'}}</mat-icon>
   </button>
-  <button mat-icon-button aria-label="refresh page">
+  <button mat-icon-button aria-label="refresh page" (click)="refreshPage()">
     <mat-icon>refresh</mat-icon>
   </button>
   <button [matMenuTriggerFor]="login">

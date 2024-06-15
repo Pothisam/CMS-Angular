@@ -14,7 +14,7 @@ export interface IInstitutionRequest {
   staffIdprefix:string;
   entredBy:string;
   modifiedBy:string;
-  modifiedDate?:Date;
+  modifiedDate:string;
 }
 export interface IPostoffice{
   Pincode:string;

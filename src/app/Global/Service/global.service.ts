@@ -1,7 +1,13 @@
-import { Inject, Injectable, Renderer2, inject, isDevMode } from '@angular/core';
+import {
+  Inject,
+  Injectable,
+  Renderer2,
+  inject,
+  isDevMode,
+} from '@angular/core';
 import { Location } from '@angular/common';
 import { LayoutService } from './layout.service';
-import {DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import 'reflect-metadata';
 interface SafeModel {
@@ -10,11 +16,14 @@ interface SafeModel {
 @Injectable({
   providedIn: 'root',
 })
-
 export class GlobalService {
   router: any;
   private drawerState = new BehaviorSubject<boolean>(false);
-  constructor(private location: Location, private layout: LayoutService,@Inject(DOCUMENT)private document:Document) {}
+  constructor(
+    private location: Location,
+    private layout: LayoutService,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 
   menutoggle(): void {
     this.drawerState.next(!this.drawerState.value);
@@ -23,10 +32,12 @@ export class GlobalService {
   get menustate() {
     return this.drawerState.asObservable();
   }
-  switchTheme(theme:string){
-    let themeLink = this.document.getElementById("app-theme") as HTMLLinkElement;
-    if(themeLink){
-      themeLink.href = theme+'.css';
+  switchTheme(theme: string) {
+    let themeLink = this.document.getElementById(
+      'app-theme'
+    ) as HTMLLinkElement;
+    if (themeLink) {
+      themeLink.href = theme + '.css';
     }
   }
   GLSS(name: string, value: string) {
@@ -87,7 +98,9 @@ export class GlobalService {
     return null;
   }
   getAPIBaseUrl() {
-    return isDevMode() ? 'http://www.saras.ind.in/API' : 'http://www.saras.ind.in/API';
+    return isDevMode()
+      ? 'https://localhost:7083'
+      : 'http://www.saras.ind.in/API';
   }
   playAudio(type: string): void {
     const audio = new Audio(this.getAudioUrl(type));
@@ -188,22 +201,32 @@ export class GlobalService {
     return model;
   }
 
-  private isundefinedProperty<T extends SafeModel>(model: T, property: string): boolean {
-    return model[property] instanceof Date ||
-           (
-            Reflect.getMetadata('design:type', model, property) === undefined);
+  private isundefinedProperty<T extends SafeModel>(
+    model: T,
+    property: string
+  ): boolean {
+    return (
+      model[property] instanceof Date ||
+      Reflect.getMetadata('design:type', model, property) === undefined
+    );
   }
-  formatDate(date: Date): string {
+  formatDate(date: string | Date): string {
     if (!date) {
       return ''; // Or handle `undefined` differently, perhaps with a default value or by throwing an error.
     }
-    const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const seconds = date.getSeconds().toString().padStart(2, '0');
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
 
-  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    if (isNaN(dateObj.getTime())) {
+      throw new Error('Invalid date'); // Handle invalid date case
+    }
+
+    const year = dateObj.getFullYear();
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObj.getDate().toString().padStart(2, '0');
+    const hours = dateObj.getHours().toString().padStart(2, '0');
+    const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+    const seconds = dateObj.getSeconds().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 }

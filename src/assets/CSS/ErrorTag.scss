@@ -3,6 +3,7 @@
   top: 150px;
   right: 0;
   transform: translateY(-50%);
+  z-index: 2;
 
   &-Notification-Card {
     position: fixed;
@@ -23,6 +24,7 @@
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  z-index: 3;
 }
 
 .cursor-pointer {
