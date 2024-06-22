@@ -1,5 +1,5 @@
 import { Injectable, ViewChild } from '@angular/core';
-import { BadgeService } from './MatHelper/errortag/BadgeService.service';
+import { BadgeService } from './framework/errortag/BadgeService.service';
 import { GlobalService } from '../Global/Service/global.service';
 @Injectable({
   providedIn: 'root',

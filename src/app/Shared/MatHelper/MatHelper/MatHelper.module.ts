@@ -28,7 +28,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { EmailComponent } from '../email/email.component';
-import { ErrortagComponent } from '../errortag/errortag.component';
+import { ErrortagComponent } from '../../framework/errortag/errortag.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ToastComponent } from '../Toast/Toast.component';
 import { ButtonComponent } from '../../framework/button/button.component';
