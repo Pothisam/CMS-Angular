@@ -11,7 +11,7 @@ import {
 import {
   CaseType,
   HelperService,
-} from 'src/app/Shared/MatHelper/helper-service.service';
+} from 'src/app/Shared/framework/helper-service.service';
 
 @Component({
   selector: 'app-email',

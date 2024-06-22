@@ -8,11 +8,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import {
-  CaseType,
-  HelperService,
-} from 'src/app/Shared/MatHelper/helper-service.service';
-
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',

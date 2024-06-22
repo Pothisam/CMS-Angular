@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { MatSelect } from '@angular/material/select';
-import { HelperService } from '../../MatHelper/helper-service.service';
+import { HelperService } from '../helper-service.service';
 
 @Component({
   selector: 'app-select',

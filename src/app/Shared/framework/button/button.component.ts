@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormValidationService } from '../../formValidation.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
-import { HelperService } from '../../MatHelper/helper-service.service';
+import { HelperService } from '../helper-service.service';
 
 @Component({
   selector: 'app-button',
