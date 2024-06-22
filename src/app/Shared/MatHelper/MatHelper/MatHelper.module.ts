@@ -5,7 +5,6 @@ import { MatInputModule } from '@angular/material/input';
 import { TextboxComponent } from '../textbox/textbox.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { PasswordComponent } from '../password/password.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -32,6 +31,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { ToastComponent } from '../Toast/Toast.component';
 import { ButtonComponent } from '../../framework/button/button.component';
 import { EmailComponent } from '../../framework/email/email.component';
+import { PasswordComponent } from '../../framework/password/password.component';
 @NgModule({
   imports: [
     CommonModule,
