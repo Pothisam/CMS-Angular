@@ -6,12 +6,12 @@ import { LoginComponent } from '../../User/Login/Login.component';
 import { CmsdashboardComponent } from '../../Dashboard/cmsdashboard/cmsdashboard.component';
 import { DepartmentComponent } from '../../Management/department/department.component';
 import { SectionComponent } from '../../Management/section/section.component';
-import { frameworkModule } from 'src/app/Shared/framework/framework.module';
+import { FrameworkModule } from 'src/app/Shared/framework/framework.module';
 
 @NgModule({
     declarations: [InstitutionComponent, LoginComponent, CmsdashboardComponent,DepartmentComponent,SectionComponent],
     imports: [
-        CommonModule, CMSRoutingModule,frameworkModule
+        CommonModule, CMSRoutingModule,FrameworkModule
     ]
 })
 export class CMSModule { }

@@ -94,4 +94,4 @@ import { ToastComponent } from './toast/toast.component';
     ToastComponent
   ],
 })
-export class frameworkModule {}
+export class FrameworkModule {}

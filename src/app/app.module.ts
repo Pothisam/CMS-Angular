@@ -28,7 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FrameworkService } from './Shared/framework/framework.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { frameworkModule } from './Shared/framework/framework.module';
+import { FrameworkModule } from './Shared/framework/framework.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +58,7 @@ import { frameworkModule } from './Shared/framework/framework.module';
     MatSnackBarModule,
     MatDialogModule,
     HttpClientModule,
-    frameworkModule,
+    FrameworkModule,
     FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
