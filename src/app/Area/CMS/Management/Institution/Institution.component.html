@@ -13,19 +13,19 @@
           <div *ngSwitchCase="0">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="institutionName" label="InstitutionName" [required]="true"
+                <app-textbox entity="institutionName" label="InstitutionName" [isrequired]="true"
                   [(modelValue)]="request.institutionName"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="address1" label="Address1" [required]="true"
+                <app-textbox entity="address1" label="Address1" [isrequired]="true"
                   [(modelValue)]="request.address1"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="address2" label="Address2" [required]="true"
+                <app-textbox entity="address2" label="Address2" [isrequired]="true"
                   [(modelValue)]="request.address2"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="pincode" label="Postal Code" [required]="true" [(modelValue)]="request.pincode"
+                <app-textbox entity="pincode" label="Postal Code" [isrequired]="true" [(modelValue)]="request.pincode" [isNumberOnly]="true"
                   maxlength="6" (keydown)="onValueChange()"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
@@ -35,27 +35,27 @@
                   [(triggerAPI)]="triggerApi"></app-select>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="districtname" label="District" [required]="true"
+                <app-textbox entity="districtname" label="District" [isrequired]="true"
                   [(modelValue)]="request.districtname"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="stateName" label="State" [required]="true"
+                <app-textbox entity="stateName" label="State" [isrequired]="true"
                   [(modelValue)]="request.stateName"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="emailid" label="Email Id" [required]="true"
-                  [(modelValue)]="request.emailid"></app-textbox>
+                <app-email entity="emailid" label="Email Id" [isrequired]="true"
+                  [(modelValue)]="request.emailid"></app-email>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="mobileNumer" label="Mobile No" maxlength="10" [required]="true"
+                <app-textbox entity="mobileNumer" label="Mobile No" maxlength="10" [isrequired]="true" [isNumberOnly]="true"
                   [(modelValue)]="request.mobileNumer"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="alternateMobileNumer" label="Alternate Mobileno" maxlength="10" [required]="true"
+                <app-textbox entity="alternateMobileNumer" label="Alternate Mobileno" maxlength="10" [isrequired]="true" [isNumberOnly]="true"
                   [(modelValue)]="request.alternateMobileNumer"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="landline" label="Landline" [required]="true"
+                <app-textbox entity="landline" label="Landline" [isrequired]="true" [isNumberOnly]="true"
                   [(modelValue)]="request.landline"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
@@ -63,7 +63,7 @@
                   [(modelValue)]="request.institutionType"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
-                <app-textbox entity="staffIdprefix" label="Staff-ID Prefix" [required]="true"
+                <app-textbox entity="staffIdprefix" label="Staff-ID Prefix" [isrequired]="true"
                   [(modelValue)]="request.staffIdprefix"></app-textbox>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">

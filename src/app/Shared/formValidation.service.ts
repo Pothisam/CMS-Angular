@@ -95,9 +95,7 @@ export class FormValidationService {
             minLength > inputValue.length &&
             inputValue.length > 0
           ) {
-            const msg = `Invalid ${inputElement.getAttribute(
-              'label'
-            )} Minimum ${minLength} characters required`;
+            const msg = `Invalid ${inputElement.getAttribute('label')} Minimum ${minLength} characters required`;
             errormessage.push({
               id: inputElement.getAttribute('id') as string,
               msg: msg,
@@ -240,9 +238,7 @@ export class FormValidationService {
             minLength > inputValue.length &&
             inputValue.length > 0
           ) {
-            const msg = `Invalid ${inputElement.getAttribute(
-              'label'
-            )} Minimum ${minLength} characters required`;
+            const msg = `Invalid ${inputElement.getAttribute('aria-label')} Minimum ${minLength} characters required`;
             errormessage.push({
               id: inputElement.getAttribute('id') as string,
               msg: msg,
@@ -265,7 +261,7 @@ export class FormValidationService {
 
           if (inputElement.getAttribute('type') === 'email' && inputValue) {
             if (!this.isEmail(inputValue)) {
-              const msg = `Invalid ${inputElement.getAttribute('label')}`;
+              const msg = `Invalid ${inputElement.getAttribute('aria-label')}`;
               errormessage.push({
                 id: inputElement.getAttribute('id') as string,
                 msg: msg,

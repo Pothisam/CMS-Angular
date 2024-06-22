@@ -3,9 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EmailComponent } from './email-component.component';
+import { EmailComponent } from './email.component';
 
-describe('EmailComponentComponent', () => {
+describe('EmailComponent', () => {
   let component: EmailComponent;
   let fixture: ComponentFixture<EmailComponent>;
 

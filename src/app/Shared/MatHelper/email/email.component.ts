@@ -12,12 +12,14 @@ import {
   CaseType,
   HelperService,
 } from 'src/app/Shared/Helper/helper-service.service';
+
 @Component({
-  selector: 'app-textbox',
-  templateUrl: './textbox.component.html',
-  styleUrls: ['./textbox.component.css'],
+  selector: 'app-email',
+  templateUrl: './email.component.html',
+  styleUrls: ['./email.component.css']
 })
-export class TextboxComponent implements OnInit {
+export class EmailComponent implements OnInit {
+
   @ViewChild('input', { static: false }) input: ElementRef | undefined;
 
   @Input() entity: string = '';
@@ -46,7 +48,6 @@ export class TextboxComponent implements OnInit {
   @Input() maxlength: number | string = 50;
   @Input() setModelvalue: string = '';
   @Input() Case: string = CaseType.N;
-  @Input() isNumberOnly: boolean = false;
 
   public _disabled: boolean = false;
   @Input()
@@ -90,11 +91,6 @@ export class TextboxComponent implements OnInit {
     if (this.Case == 'T') {
       this._modelValue = this.helperService.toTitleCase(event.target.value);
     }
-    if (this.isNumberOnly) {
-      // Remove non-numeric characters
-      this._modelValue = this._modelValue.replace(/[^0-9]/g, '');
-      event.target.value = this._modelValue;
-    }
     this.modelValueChange.emit(this._modelValue);
   }
   clearInputValue() {
@@ -111,4 +107,5 @@ export class TextboxComponent implements OnInit {
     this.id = this.input?.nativeElement.id;
     this.UpdateValidation();
   }
+
 }

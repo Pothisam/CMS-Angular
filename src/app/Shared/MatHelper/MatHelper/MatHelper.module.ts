@@ -28,6 +28,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { EmailComponent } from '../email/email.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -61,6 +62,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AutocompleteComponent,
     TableComponent,
     CardComponent,
+    EmailComponent
   ],
   exports: [
     MatListModule,
@@ -81,7 +83,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatMenuModule,
     MatSidenavModule,
     MatTabsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    EmailComponent
   ],
 })
 export class MatHelperModule {}
