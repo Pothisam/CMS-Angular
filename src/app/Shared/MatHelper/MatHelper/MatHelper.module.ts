@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatHelperComponent } from './MatHelper.component';
 import { MatInputModule } from '@angular/material/input';
-import { TextboxComponent } from '../textbox/textbox.component';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -32,6 +31,7 @@ import { EmailComponent } from '../../framework/email/email.component';
 import { PasswordComponent } from '../../framework/password/password.component';
 import { SelectComponent } from '../../framework/select/select.component';
 import { TableComponent } from '../../framework/table/table.component';
+import { TextboxComponent } from '../../framework/textbox/textbox.component';
 @NgModule({
   imports: [
     CommonModule,
