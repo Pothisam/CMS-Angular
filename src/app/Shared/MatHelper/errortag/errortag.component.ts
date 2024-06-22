@@ -6,7 +6,7 @@ import {
   RendererFactory2,
   AfterViewInit,
 } from '@angular/core';
-import { BadgeService } from '../../Helper/Error-Tag/BadgeService.service';
+import { BadgeService } from './BadgeService.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 
