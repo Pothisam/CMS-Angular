@@ -14,7 +14,7 @@ import { SelectComponent } from '../select/select.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
+import { AutocompleteComponent } from '../../framework/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TableComponent } from '../table/table.component';

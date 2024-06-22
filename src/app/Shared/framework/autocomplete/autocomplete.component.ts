@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { CaseType, HelperService } from '../helper-service.service';
+import { CaseType, HelperService } from '../../MatHelper/helper-service.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
