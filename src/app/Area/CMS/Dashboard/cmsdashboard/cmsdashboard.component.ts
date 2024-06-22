@@ -11,7 +11,7 @@ import {
 } from 'src/app/Modules/CMS/User/Request/login.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';
-import { ITableSettings } from 'src/app/Shared/MatHelper/table/table.model';
+import { ITableSettings } from 'src/app/Shared/framework/table/table.model';
 
 @Component({
   selector: 'app-cmsdashboard',

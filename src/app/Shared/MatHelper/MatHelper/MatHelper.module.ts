@@ -14,7 +14,6 @@ import { MatListModule } from '@angular/material/list';
 import { AutocompleteComponent } from '../../framework/autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { TableComponent } from '../table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatSortModule } from '@angular/material/sort';
@@ -32,6 +31,7 @@ import { ButtonComponent } from '../../framework/button/button.component';
 import { EmailComponent } from '../../framework/email/email.component';
 import { PasswordComponent } from '../../framework/password/password.component';
 import { SelectComponent } from '../../framework/select/select.component';
+import { TableComponent } from '../../framework/table/table.component';
 @NgModule({
   imports: [
     CommonModule,

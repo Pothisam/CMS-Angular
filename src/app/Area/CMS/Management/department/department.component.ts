@@ -4,7 +4,7 @@ import {
   IDepartmentResponse,
 } from 'src/app/Modules/CMS/department/department';
 import { ManagementService } from '../management.service';
-import { ITableSettings } from 'src/app/Shared/MatHelper/table/table.model';
+import { ITableSettings } from 'src/app/Shared/framework/table/table.model';
 
 @Component({
   selector: 'app-department',
