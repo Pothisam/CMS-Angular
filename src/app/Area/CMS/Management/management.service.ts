@@ -23,4 +23,14 @@ export class ManagementService {
       false
     );
   }
+  getdepartmentlist(): Observable<any> {
+    this.url = '/Department/GetActiveAndInActiveDepartmentListDistinct';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      '',
+      this.Area,
+      false
+    );
+  }
 }

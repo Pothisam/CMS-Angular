@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-header class="mat-card-header mat-primary rounded-top">
+    <mat-card-title class="text-center">Section</mat-card-title>
+  </mat-card-header>
+  <div class="scrolldiv">
+    <mat-card-content>
+
+      <form id="department">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-select entity="DepartmentCode" label="Department Name" [isrequired]="true"
+            (getSelectedOptions)="onModelValueChanges($event)" [apicache]="true"  apiUrl="/Department/GetActiveDepartmentListDistinct"
+            [(modelValue)]="departmentvalue"
+            valueAndname="departmentCode,departmentName" [triggerAPIOnload]="true"></app-select>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-select entity="courseName" label="Course Name" [isrequired]="true"
+            [(parameter)]="courserequest"  apiUrl="/Course/GetCourseListByDepartmentCode"
+            [(modelValue)]="departmentvalue"
+            valueAndname="courseCode,courseNameSD" [(triggerAPI)]="triggerApi"></app-select>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 pt-3">
+            <app-button label="Add Department"></app-button>
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+      </form>
+    </mat-card-content>
+  </div>
+</mat-card>

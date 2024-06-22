@@ -32,6 +32,7 @@ export class ApiCallService {
     S: string | undefined
   ) {
     if (S?.toString() === '200') {
+      this.playAudio('S');
       S = 'bg-success';
     } else if (S?.toString() === 'P') {
       S = 'bg-primary';

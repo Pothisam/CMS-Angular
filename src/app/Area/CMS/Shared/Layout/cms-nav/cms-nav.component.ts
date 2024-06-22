@@ -27,6 +27,14 @@ export class CmsNavComponent {
       text: 'Institution',
       value: 'CMS/Institution',
     },
+    {
+      text: 'Department',
+      value: 'CMS/Department',
+    },
+    {
+      text: 'Section',
+      value: 'CMS/Section',
+    },
   ];
   constructor(
     private router: Router,

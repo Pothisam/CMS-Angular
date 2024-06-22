@@ -27,7 +27,7 @@ export class CmsLeftMenuComponent {
         { name: "General Information", link: "CMS/Institution" },
         { name: "Department", link: "CMS/Department" },
         { name: "Course", link: "#course" },
-        { name: "Section", link: "#section" },
+        { name: "Section", link: "CMS/Section" },
         { name: "Batch", link: "#batch" },
         { name: "Holiday-Workingday", link: "#holiday-workingday" },
       ],
@@ -37,6 +37,13 @@ export class CmsLeftMenuComponent {
       subMenu: [
         { name: "Add Staff", link: "#addstaff" },
         { name: "View Staff", link: "#viewstaff" },
+      ],
+    },
+    {
+      name: "Student",
+      subMenu: [
+        { name: "Add Student", link: "#addStudent" },
+        { name: "View Student", link: "#viewStudent" },
       ],
     },
     // ... other menu items

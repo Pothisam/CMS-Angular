@@ -91,6 +91,7 @@ export class TableComponent implements OnInit {
       button?: boolean;
       buttons?: string[];
       buttondata?: string;
+      conditions?:string[];
     }[];
     footergroup?: {
       sumfunction?: boolean;
@@ -226,5 +227,33 @@ export class TableComponent implements OnInit {
   getTotalCost(propertyName: string) {
     return this.datalist.map((t: { [x: string]: any; }) => t[propertyName])
       .reduce((acc: any, value: any) => acc + (value || 0), 0); // Added || 0 to handle null/undefined
+  }
+  shouldShowButton(element: any, button: string, conditions: string[] | undefined): boolean {
+    if (!conditions || conditions.length === 0) {
+      return true; // If no conditions are provided, always show the button
+    }
+    let hasbutton = conditions.some(condition => condition.includes(button));
+    if(hasbutton){
+      let condition = conditions.find(cond => cond.startsWith(button));
+      if (condition) {
+        let parts = condition.split('|');
+        if (parts.length === 3) {
+          let column = parts[1];
+          let value = parts[2];
+
+          // Check if the element's specified column matches the value
+          if (element[column] === value) {
+            return true; // Show the button if the condition matches
+          }
+          else{
+            return false
+          }
+        }
+      }
+    }
+    else{
+      return true;
+    }
+    return true;
   }
 }

@@ -98,9 +98,11 @@ export class GlobalService {
     return null;
   }
   getAPIBaseUrl() {
-    return isDevMode()
-      ? 'https://localhost:7083'
-      : 'http://www.saras.ind.in/API';
+    // return isDevMode()
+    //   ? 'https://localhost:7083'
+    //   : 'http://www.saras.ind.in/API';
+    //return 'http://www.saras.ind.in/API';
+    return 'https://localhost:7083';
   }
   playAudio(type: string): void {
     const audio = new Audio(this.getAudioUrl(type));

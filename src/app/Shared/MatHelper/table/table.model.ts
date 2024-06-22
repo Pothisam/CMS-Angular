@@ -16,6 +16,7 @@ export class ITableSettings {
       button?: boolean;
       buttons?: string[];
       buttondata?: string;
+      conditions?:string[]
     }[];
     footergroup?: {
       sumfunction?: boolean;
@@ -44,6 +45,7 @@ export class ITableSettings {
             button: false,
             buttons: ['edit'],
             buttondata: 'string',
+            conditions:['delete|status|Active']
           },
         ],
         footergroup: [
