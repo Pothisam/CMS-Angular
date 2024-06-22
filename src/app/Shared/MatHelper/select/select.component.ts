@@ -7,6 +7,7 @@ import {
   Output,
   ViewChild,
   input,
+  AfterViewInit
 } from '@angular/core';
 import { HelperService } from '../../Helper/helper-service.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
@@ -210,6 +211,7 @@ export class SelectComponent implements OnInit {
     if (this._TriggerAPIOnload) {
       this.getAPIData();
     }
+    this.cdr.detectChanges();
   }
   async CheckSelectedValue(): Promise<void> {
     await this.waitForArrayDate();

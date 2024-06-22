@@ -1,7 +1,9 @@
 import {
+  ElementRef,
   Inject,
   Injectable,
   Renderer2,
+  RendererFactory2,
   inject,
   isDevMode,
 } from '@angular/core';
@@ -17,13 +19,17 @@ interface SafeModel {
   providedIn: 'root',
 })
 export class GlobalService {
+  private renderer: Renderer2;
   router: any;
   private drawerState = new BehaviorSubject<boolean>(false);
   constructor(
     private location: Location,
     private layout: LayoutService,
+    private rendererFactory: RendererFactory2,
     @Inject(DOCUMENT) private document: Document
-  ) {}
+  ) {
+    this.renderer = rendererFactory.createRenderer(null, null);
+  }
 
   menutoggle(): void {
     this.drawerState.next(!this.drawerState.value);
@@ -113,6 +119,19 @@ export class GlobalService {
       window.location.origin +
       `/assets/Audio/${type === 'D' ? 'Error-Notification' : 'Popup'}.mp3`
     );
+  }
+  showHideIcon(status: boolean) {
+    const errorBar = this.document.querySelector('.Error-Bar');
+    const message = this.document.querySelector('.Error-Notification-Card');
+    if (errorBar && message) {
+      if (status) {
+        this.renderer.removeClass(errorBar, 'd-none');
+        this.renderer.removeClass(message, 'd-none');
+      } else {
+        this.renderer.addClass(errorBar, 'd-none');
+        this.renderer.addClass(message, 'd-none');
+      }
+    }
   }
   disableButton(id: string): void {
     const buttonElement = document.getElementById(id) as HTMLButtonElement;

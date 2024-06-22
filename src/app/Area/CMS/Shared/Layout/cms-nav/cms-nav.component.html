@@ -3,16 +3,17 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span><img id="LayoutImageLogo" height="30" width="200" alt="Logo" [src]="src"></span>
-  <span class="example-spacer"></span>
-  <span><input type="search" class="form-control focus-ring focus-ring-primary" placeholder="Search..." #IDLayoutSerach
-      id="IDLayoutSerach" aria-label="Search" [(ngModel)]="searchText" (input)="onInputChange()"
-      [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectChange($event)">
-      <ng-container *ngIf="arrayDate.length > 0">
-        <mat-option *ngFor="let item of arrayDate" [value]="item.value">{{ item.text }}</mat-option>
-      </ng-container>
-    </mat-autocomplete>
-  </span>
+
+  <span class="ps-3"><input type="search" class="form-control focus-ring focus-ring-primary" placeholder="Search..." #IDLayoutSerach
+    id="IDLayoutSerach" aria-label="Search" [(ngModel)]="searchText" (input)="onInputChange()"
+    [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectChange($event)">
+    <ng-container *ngIf="arrayDate.length > 0">
+      <mat-option *ngFor="let item of arrayDate" [value]="item.value">{{ item.text }}</mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</span>
+<span class="example-spacer"></span>
   <button mat-icon-button aria-label="go to Dashboard" routerLink="/CMS/Dashboard">
     <mat-icon>home</mat-icon>
   </button>

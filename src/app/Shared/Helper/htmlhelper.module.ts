@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { TextboxComponent } from './textbox-component/textbox-component.component';
 import { TextboxPasswordComponent } from './textbox-password-component/textbox-password-component.component';
 import { ButtonComponentComponent } from './button-component/button-component.component';
-import { ErrorTagComponent } from './Error-Tag/Error-Tag.component';
 import { ToastComponent } from './Toast/Toast.component';
 import { SelectComponent } from './Select-component/Select-component.component';
 import { AutoCompleteComponent } from './AutoComplete/AutoComplete.component';
@@ -15,7 +14,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatAutocompleteModule,
     MatCheckboxModule
   ],
-  declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent],
-  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,ErrorTagComponent,ToastComponent,SelectComponent,AutoCompleteComponent,MatAutocompleteModule]
+  declarations: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,ToastComponent,SelectComponent,AutoCompleteComponent],
+  exports: [TextboxComponent,TextboxPasswordComponent,ButtonComponentComponent,ToastComponent,SelectComponent,AutoCompleteComponent,MatAutocompleteModule]
 })
 export class HtmlHelperModule { }

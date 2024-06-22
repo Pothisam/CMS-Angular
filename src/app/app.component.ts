@@ -54,6 +54,7 @@ export class AppComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.globalService.HandleArea(event.url.split('/')[1]);
+        this.globalService.showHideIcon(false);
       }
     });
   }

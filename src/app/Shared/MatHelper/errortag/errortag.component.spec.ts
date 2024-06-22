@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ErrorTagComponent } from './Error-Tag.component';
+import { ErrortagComponent } from './errortag.component';
 
-describe('ErrorTagComponent', () => {
-  let component: ErrorTagComponent;
-  let fixture: ComponentFixture<ErrorTagComponent>;
+describe('ErrortagComponent', () => {
+  let component: ErrortagComponent;
+  let fixture: ComponentFixture<ErrortagComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ErrorTagComponent ]
+      declarations: [ ErrortagComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ErrorTagComponent);
+    fixture = TestBed.createComponent(ErrortagComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

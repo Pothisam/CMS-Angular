@@ -29,6 +29,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { EmailComponent } from '../email/email.component';
+import { ErrortagComponent } from '../errortag/errortag.component';
+import { MatBadgeModule } from '@angular/material/badge';
 @NgModule({
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { EmailComponent } from '../email/email.component';
     MatMenuModule,
     MatSidenavModule,
     MatTabsModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatBadgeModule
   ],
   declarations: [
     MatHelperComponent,
@@ -62,7 +65,8 @@ import { EmailComponent } from '../email/email.component';
     AutocompleteComponent,
     TableComponent,
     CardComponent,
-    EmailComponent
+    EmailComponent,
+    ErrortagComponent
   ],
   exports: [
     MatListModule,
@@ -84,7 +88,9 @@ import { EmailComponent } from '../email/email.component';
     MatSidenavModule,
     MatTabsModule,
     MatProgressBarModule,
-    EmailComponent
+    EmailComponent,
+    ErrortagComponent,
+    MatBadgeModule
   ],
 })
 export class MatHelperModule {}

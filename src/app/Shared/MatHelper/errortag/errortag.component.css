@@ -1,0 +1,10 @@
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-title {
+  margin: 0; /* Remove any default margin */
+  text-align: left; /* Ensure text is left-aligned */
+}
