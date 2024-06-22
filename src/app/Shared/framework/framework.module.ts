@@ -31,6 +31,8 @@ import { CardComponent } from './card/card.component';
 import { EmailComponent } from './email/email.component';
 import { ErrortagComponent } from './errortag/errortag.component';
 import { ToastComponent } from './toast/toast.component';
+import { AccordionComponent } from './accordion/accordion.component';
+import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,
@@ -54,7 +56,8 @@ import { ToastComponent } from './toast/toast.component';
     MatSidenavModule,
     MatTabsModule,
     MatProgressBarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    RouterModule
   ],
   declarations: [
     TextboxComponent,
@@ -66,7 +69,8 @@ import { ToastComponent } from './toast/toast.component';
     CardComponent,
     EmailComponent,
     ErrortagComponent,
-    ToastComponent
+    ToastComponent,
+    AccordionComponent
   ],
   exports: [
     MatListModule,
@@ -91,7 +95,8 @@ import { ToastComponent } from './toast/toast.component';
     CardComponent,
     EmailComponent,
     ErrortagComponent,
-    ToastComponent
+    ToastComponent,
+    AccordionComponent
   ],
 })
 export class FrameworkModule {}

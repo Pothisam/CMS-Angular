@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { GlobalService } from 'src/app/Global/Service/global.service';
-import { IMenuItem } from 'src/app/Global/Interface/common-interface';
 import { Router } from '@angular/router';
+import { IMenuItem } from 'src/app/Shared/framework/accordion/accordion.model';
 @Component({
   selector: 'app-cms-left-menu',
   templateUrl: './cms-left-menu.component.html',

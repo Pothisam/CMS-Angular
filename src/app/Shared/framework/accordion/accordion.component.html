@@ -1,0 +1,25 @@
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let item of _MenuItem" [disabled]="!item.subMenu">
+
+    <mat-expansion-panel-header>
+      <div *ngIf="item.subMenu; then ifBlock else elseBlock"></div>
+      <ng-template #ifBlock>
+        <mat-panel-title>
+          {{ item.name }}
+        </mat-panel-title>
+      </ng-template>
+      <ng-template #elseBlock>
+        <mat-panel-title [routerLink]="item.link" tabindex="0" (keydown)="handleKeydown($event, item.link!)">
+          {{ item.name }}
+        </mat-panel-title>
+      </ng-template>
+
+    </mat-expansion-panel-header>
+    <mat-nav-list *ngIf="item.subMenu">
+      <a mat-list-item *ngFor="let subItem of item.subMenu" [routerLink]="subItem.link">
+        {{ subItem.name }}
+      </a>
+    </mat-nav-list>
+
+  </mat-expansion-panel>
+</mat-accordion>
