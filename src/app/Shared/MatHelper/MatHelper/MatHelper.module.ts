@@ -9,7 +9,6 @@ import { PasswordComponent } from '../password/password.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ButtonComponent } from '../button/button.component';
 import { SelectComponent } from '../select/select.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -32,6 +31,7 @@ import { EmailComponent } from '../email/email.component';
 import { ErrortagComponent } from '../errortag/errortag.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { ToastComponent } from '../Toast/Toast.component';
+import { ButtonComponent } from '../../framework/button/button.component';
 @NgModule({
   imports: [
     CommonModule,
