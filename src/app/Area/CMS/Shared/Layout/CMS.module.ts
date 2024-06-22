@@ -4,7 +4,7 @@ import { InstitutionComponent } from '../../Management/Institution/Institution.c
 import { CMSRoutingModule } from './CMS-routing.module';
 import { LoginComponent } from '../../User/Login/Login.component';
 import { CmsdashboardComponent } from '../../Dashboard/cmsdashboard/cmsdashboard.component';
-import { MatHelperModule } from "../../../../Shared/MatHelper/MatHelper/MatHelper.module";
+import { MatHelperModule } from "../../../../Shared/framework/MatHelper/MatHelper.module";
 import { DepartmentComponent } from '../../Management/department/department.component';
 import { SectionComponent } from '../../Management/section/section.component';
 

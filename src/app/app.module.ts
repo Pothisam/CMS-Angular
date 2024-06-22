@@ -27,7 +27,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HelperService } from './Shared/framework/helper-service.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatHelperModule } from './Shared/MatHelper/MatHelper/MatHelper.module';
+import { MatHelperModule } from './Shared/framework/MatHelper/MatHelper.module';
 import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [

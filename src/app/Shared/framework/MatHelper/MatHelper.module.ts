@@ -10,28 +10,28 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
-import { AutocompleteComponent } from '../../framework/autocomplete/autocomplete.component';
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { CardComponent } from '../../framework/card/card.component';
+import { CardComponent } from '../card/card.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { ErrortagComponent } from '../../framework/errortag/errortag.component';
+import { ErrortagComponent } from '../errortag/errortag.component';
 import { MatBadgeModule } from '@angular/material/badge';
-import { ButtonComponent } from '../../framework/button/button.component';
-import { EmailComponent } from '../../framework/email/email.component';
-import { PasswordComponent } from '../../framework/password/password.component';
-import { SelectComponent } from '../../framework/select/select.component';
-import { TableComponent } from '../../framework/table/table.component';
-import { TextboxComponent } from '../../framework/textbox/textbox.component';
-import { ToastComponent } from '../../framework/toast/toast.component';
+import { ButtonComponent } from '../button/button.component';
+import { EmailComponent } from '../email/email.component';
+import { PasswordComponent } from '../password/password.component';
+import { SelectComponent } from '../select/select.component';
+import { TableComponent } from '../table/table.component';
+import { TextboxComponent } from '../textbox/textbox.component';
+import { ToastComponent } from '../toast/toast.component';
 @NgModule({
   imports: [
     CommonModule,
