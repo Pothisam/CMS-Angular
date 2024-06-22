@@ -25,7 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HelperService } from './Shared/framework/helper-service.service';
+import { FrameworkService } from './Shared/framework/framework.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { frameworkModule } from './Shared/framework/framework.module';
@@ -62,11 +62,11 @@ import { frameworkModule } from './Shared/framework/framework.module';
     FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [HelperService],
+  providers: [FrameworkService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private eventHandlerService: HelperService) {
+  constructor(private eventHandlerService: FrameworkService) {
     this.eventHandlerService.initializeEventHandling();
   }
  }

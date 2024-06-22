@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import {
   CaseType,
-  HelperService,
-} from 'src/app/Shared/framework/helper-service.service';
+  FrameworkService,
+} from 'src/app/Shared/framework/framework.service';
 @Component({
   selector: 'app-textbox',
   templateUrl: './textbox.component.html',
@@ -77,7 +77,7 @@ export class TextboxComponent implements OnInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private helperService: HelperService
+    private frameworkService: FrameworkService
   ) {}
   onInputChange(event: any) {
     this._modelValue = event.target.value;
@@ -88,7 +88,7 @@ export class TextboxComponent implements OnInit {
       this._modelValue = event.target.value.toLowerCase();
     }
     if (this.Case == 'T') {
-      this._modelValue = this.helperService.toTitleCase(event.target.value);
+      this._modelValue = this.frameworkService.toTitleCase(event.target.value);
     }
     if (this.isNumberOnly) {
       // Remove non-numeric characters

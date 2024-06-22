@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class HelperService {
+export class FrameworkService {
   private renderer: Renderer2;
   baseurl:string = '';
   constructor(private rendererFactory: RendererFactory2,private globalService:GlobalService,private http: HttpClient) {

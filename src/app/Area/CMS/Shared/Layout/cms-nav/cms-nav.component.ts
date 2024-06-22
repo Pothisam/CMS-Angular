@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/Global/Service/global.service';
-import { HelperService } from 'src/app/Shared/framework/helper-service.service';
+import { FrameworkService } from 'src/app/Shared/framework/framework.service';
 import { DOCUMENT } from '@angular/common';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';
@@ -39,7 +39,7 @@ export class CmsNavComponent {
   constructor(
     private router: Router,
     private globalService: GlobalService,
-    private helperService: HelperService,
+    private frameworkService: FrameworkService,
     @Inject(DOCUMENT) private document: Document
   ) {
     if (this.globalService.GLSG('CMSToken') != null) {
@@ -82,7 +82,7 @@ export class CmsNavComponent {
   loadLogo() {
     let token = localStorage.getItem('CMSToken');
 
-    this.helperService.callAPI('/Common/GetLogo', '', 'CMS',false).subscribe({
+    this.frameworkService.callAPI('/Common/GetLogo', '', 'CMS',false).subscribe({
       next: (Response) => {
         if (Response.data != null) {
           if (token) {

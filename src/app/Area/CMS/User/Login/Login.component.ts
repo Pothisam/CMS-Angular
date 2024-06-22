@@ -6,7 +6,7 @@ import { GlobalService } from 'src/app/Global/Service/global.service';
 import { FormValidationService } from 'src/app/Shared/formValidation.service';
 import { ILoginRequest } from 'src/app/Modules/CMS/User/Request/login.model';
 import { UserService } from 'src/app//Area/CMS/User/User.service';
-import { CaseType } from 'src/app/Shared/framework/helper-service.service';
+import { CaseType } from 'src/app/Shared/framework/framework.service';
 @Component({
   selector: 'app-Login',
   templateUrl: './Login.component.html',

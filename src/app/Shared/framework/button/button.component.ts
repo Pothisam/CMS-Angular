@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormValidationService } from '../../formValidation.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
-import { HelperService } from '../helper-service.service';
+import { FrameworkService } from '../framework.service';
 
 @Component({
   selector: 'app-button',
@@ -36,7 +36,7 @@ export class ButtonComponent implements OnInit {
   @Input() apicache: boolean = false;
   constructor(
     private ValidationService: FormValidationService,
-    private helperService: HelperService,
+    private frameworkService: FrameworkService,
     private globalService: GlobalService
   ) {}
   area: string = this.globalService.getArea();
@@ -62,7 +62,7 @@ export class ButtonComponent implements OnInit {
   }
   callAPI() {
     if (this.apiUrl != '' && this.auth == true) {
-      this.helperService
+      this.frameworkService
         .callSelectAPI(this.apiUrl, this.parameter, this.area,this.apicache)
         .subscribe({
           next: (Response) => {
@@ -78,7 +78,7 @@ export class ButtonComponent implements OnInit {
         });
     }
     else if(this.apiUrl != '' && this.auth == false){
-      this.helperService
+      this.frameworkService
         .callwithNoAuth(this.apiUrl, this.parameter, this.area)
         .subscribe({
           next: (Response) => {

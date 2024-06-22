@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { MatSelect } from '@angular/material/select';
-import { HelperService } from '../helper-service.service';
+import { FrameworkService } from '../framework.service';
 
 @Component({
   selector: 'app-select',
@@ -159,7 +159,7 @@ export class SelectComponent implements OnInit {
   }>();
   @Input() apicache: boolean = false;
   constructor(
-    private helperService: HelperService,
+    private frameworkService: FrameworkService,
     private globalService: GlobalService,
     private cdr: ChangeDetectorRef
   ) {}
@@ -228,7 +228,7 @@ export class SelectComponent implements OnInit {
   }
   getAPIData() {
     if (this.apiUrl != '' && this.valueAndname != '') {
-      this.helperService
+      this.frameworkService
         .callSelectAPI(this.apiUrl, this._parameter, this.area,this.apicache)
         .subscribe({
           next: (Response) => {

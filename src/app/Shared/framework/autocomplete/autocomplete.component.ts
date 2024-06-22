@@ -8,7 +8,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { CaseType, HelperService } from '../helper-service.service';
+import { CaseType, FrameworkService } from '../framework.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
@@ -135,7 +135,7 @@ export class AutocompleteComponent implements OnInit {
   // #endregion
   @Input() apicache: boolean = false;
   constructor(
-    private helperService: HelperService,
+    private frameworkService: FrameworkService,
     private globalService: GlobalService
   ) {}
   area: string = this.globalService.getArea();
@@ -157,7 +157,7 @@ export class AutocompleteComponent implements OnInit {
       this._modelValue = event.target.value.toLowerCase();
     }
     if (this.Case == 'T') {
-      this._modelValue = this.helperService.toTitleCase(event.target.value);
+      this._modelValue = this.frameworkService.toTitleCase(event.target.value);
     }
     this.modelValueChange.emit(this._modelValue);
     this._parameter = { ...this._parameter, searchParam: this._modelValue };
@@ -185,7 +185,7 @@ export class AutocompleteComponent implements OnInit {
 
   getAPIData() {
     if (this.apiUrl != '' && this.valueAndname != '') {
-      this.helperService
+      this.frameworkService
         .callSelectAPI(this.apiUrl, this._parameter, this.area,this.apicache)
         .subscribe({
           next: (Response) => {
