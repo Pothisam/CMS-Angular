@@ -25,8 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HtmlHelperModule } from './Shared/Helper/htmlhelper.module';
-import { HelperService } from './Shared/Helper/helper-service.service';
+import { HelperService } from './Shared/MatHelper/helper-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatHelperModule } from './Shared/MatHelper/MatHelper/MatHelper.module';
 import { FormsModule } from '@angular/forms';
@@ -58,7 +57,6 @@ import { FormsModule } from '@angular/forms';
     MatSortModule,
     MatSnackBarModule,
     MatDialogModule,
-    HtmlHelperModule,
     HttpClientModule,
     MatHelperModule,
     FormsModule

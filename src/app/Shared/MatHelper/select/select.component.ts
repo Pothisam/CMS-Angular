@@ -9,7 +9,7 @@ import {
   input,
   AfterViewInit
 } from '@angular/core';
-import { HelperService } from '../../Helper/helper-service.service';
+import { HelperService } from '../helper-service.service';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { MatSelect } from '@angular/material/select';
 

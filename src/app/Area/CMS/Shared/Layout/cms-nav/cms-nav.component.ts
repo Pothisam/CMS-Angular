@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/Global/Service/global.service';
-import { HelperService } from 'src/app/Shared/Helper/helper-service.service';
+import { HelperService } from 'src/app/Shared/MatHelper/helper-service.service';
 import { DOCUMENT } from '@angular/common';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { SelectInterface } from 'src/app/Global/Interface/common-interface';

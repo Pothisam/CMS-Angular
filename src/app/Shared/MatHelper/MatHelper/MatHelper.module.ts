@@ -31,6 +31,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { EmailComponent } from '../email/email.component';
 import { ErrortagComponent } from '../errortag/errortag.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { ToastComponent } from '../Toast/Toast.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -66,10 +67,12 @@ import { MatBadgeModule } from '@angular/material/badge';
     TableComponent,
     CardComponent,
     EmailComponent,
-    ErrortagComponent
+    ErrortagComponent,
+    ToastComponent
   ],
   exports: [
     MatListModule,
+    MatAutocompleteModule,
     MatProgressSpinnerModule,
     MatGridListModule,
     MatCardModule,
@@ -90,7 +93,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatProgressBarModule,
     EmailComponent,
     ErrortagComponent,
-    MatBadgeModule
+    MatBadgeModule,
+    ToastComponent
   ],
 })
 export class MatHelperModule {}
