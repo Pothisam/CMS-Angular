@@ -48,13 +48,7 @@ export class CmsLeftMenuComponent {
     },
     // ... other menu items
   ];
-  handleKeydown(event: KeyboardEvent, link?: string): void {
-    // Check if the 'Enter' key was pressed
-    if (event.key === 'Enter') {
-      // Use the Router to navigate to the link
-      this.router.navigate([link]);
-    }
-  }
+
   private setMenuLogo() {
     if (this.globalService.GLSG('CMSToken') != null) {
       let userJSON = localStorage.getItem('CMSToken');
