@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, shareReplay, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -114,7 +114,11 @@ export class ApiCallService {
         if (cached) {
           this.cache[url] = response;
         }
-        if (response.message != '' && response.message != null && response.status != '') {
+        if (
+          response.message != '' &&
+          response.message != null &&
+          response.status != ''
+        ) {
           this.ToastTrigger(response.message, response.status);
         }
       }),
@@ -143,6 +147,57 @@ export class ApiCallService {
     if (area == 'CMS') {
       localStorage.removeItem('CMSToken');
     }
+  }
+  public static downloadFile(
+    http: HttpClient,
+    url: string,
+    parameter: any,
+    area: string
+  ): Observable<HttpResponse<Blob>> {
+    let body = parameter;
+    let token = this.GetToken(area);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+
+    return http
+      .post(url, body, { headers, observe: 'response', responseType: 'blob' })
+      .pipe(
+        tap((response: HttpResponse<Blob>) => {
+          // Extract file name from the response headers
+          let filename = response.headers.get('fileName') || 'downloadedFile';
+
+          if (response.body) {
+            // Create a blob URL and download the file
+            const blobUrl = URL.createObjectURL(response.body);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = filename; // Use the extracted file name
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(blobUrl);
+
+            // Trigger your toast message (if needed)
+            // this.ToastTrigger('File downloaded successfully', 'success');
+          } else {
+            this.ToastTrigger('Download error: response body is null', '300');
+            console.error();
+          }
+
+          // Trigger your toast message (if needed)
+          // this.ToastTrigger('File downloaded successfully', 'success');
+        }),
+        catchError((error: any) => {
+          if (error.status === 401) {
+            this.RemoveToken(area);
+            // Handle unauthorized error, for example, redirect to login page
+            // You can also show a toast message or perform any other action
+          }
+          return throwError(() => error); // Rethrow the error to propagate it
+        })
+      );
   }
 }
 export class Response {

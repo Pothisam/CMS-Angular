@@ -1,6 +1,9 @@
 <mat-card>
   <mat-card-header class="mat-card-header mat-primary rounded-top">
-    <mat-card-title class="text-center">Department</mat-card-title>
+    <mat-card-title class="d-flex justify-content-between w-100">
+      Department
+      <app-download class="float-end" desc="Export department list" apiUrl="/File/ExportDepartmentDetails" icon="excel"></app-download>
+    </mat-card-title>
   </mat-card-header>
   <div class="scrolldiv">
     <mat-card-content>

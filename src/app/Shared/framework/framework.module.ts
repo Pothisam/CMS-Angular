@@ -12,6 +12,7 @@ import { EmailComponent } from './email/email.component';
 import { ErrortagComponent } from './errortag/errortag.component';
 import { ToastComponent } from './toast/toast.component';
 import { AccordionComponent } from './accordion/accordion.component';
+import { DownloadComponent } from './download/download.component';
 @NgModule({
   imports: [
     MaterialModule
@@ -27,7 +28,8 @@ import { AccordionComponent } from './accordion/accordion.component';
     EmailComponent,
     ErrortagComponent,
     ToastComponent,
-    AccordionComponent
+    AccordionComponent,
+    DownloadComponent
   ],
   exports: [
     MaterialModule,
@@ -41,7 +43,8 @@ import { AccordionComponent } from './accordion/accordion.component';
     EmailComponent,
     ErrortagComponent,
     ToastComponent,
-    AccordionComponent
+    AccordionComponent,
+    DownloadComponent
   ],
 })
 export class FrameworkModule {}

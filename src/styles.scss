@@ -26,6 +26,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   padding: 6px 6px 0 !important;
 }
+.mat-mdc-card-header-text{
+  width: 100%;
+}
 html {
 	--mat-card-title-text-font: Roboto, sans-serif !important;
 	--mat-card-title-text-line-height: 32px !important;

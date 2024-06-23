@@ -141,6 +141,9 @@ export class FrameworkService {
   callwithNoAuth(url:string,parameter:any,area:string){
     return ApiCallService.Post(this.http, this.baseurl+url,parameter);
   }
+  calldownloadAPI(url:string,parameter:any,area:string){
+    return ApiCallService.downloadFile(this.http, this.baseurl+url,parameter,area);
+  }
   toTitleCase(str: string): string {
     return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   }
