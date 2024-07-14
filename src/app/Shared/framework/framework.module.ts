@@ -13,6 +13,7 @@ import { ErrortagComponent } from './errortag/errortag.component';
 import { ToastComponent } from './toast/toast.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { DownloadComponent } from './download/download.component';
+import { HistoryInfoComponent } from './icon/history-info/history-info.component';
 @NgModule({
   imports: [
     MaterialModule
@@ -29,7 +30,8 @@ import { DownloadComponent } from './download/download.component';
     ErrortagComponent,
     ToastComponent,
     AccordionComponent,
-    DownloadComponent
+    DownloadComponent,
+    HistoryInfoComponent
   ],
   exports: [
     MaterialModule,
@@ -44,7 +46,8 @@ import { DownloadComponent } from './download/download.component';
     ErrortagComponent,
     ToastComponent,
     AccordionComponent,
-    DownloadComponent
+    DownloadComponent,
+    HistoryInfoComponent
   ],
 })
 export class FrameworkModule {}

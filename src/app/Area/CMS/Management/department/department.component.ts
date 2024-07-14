@@ -19,7 +19,7 @@ export class DepartmentComponent implements OnInit {
   departmentList: IDepartmentResponse[] = [];
   public tableSettings: ITableSettings = {
     showFotter: false,
-    showPagination: false,
+    showPagination: true,
     jsonData: undefined,
     shorting: true,
     slno: true,

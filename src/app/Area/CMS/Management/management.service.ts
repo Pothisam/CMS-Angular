@@ -24,7 +24,7 @@ export class ManagementService {
     );
   }
   getdepartmentlist(): Observable<any> {
-    this.url = '/Department/GetActiveAndInActiveDepartmentListDistinct';
+    this.url = '/Department/GetDepartmentList';
     return ApiCallService.PostwithAuth(
       this.http,
       this.baseurl + this.url,

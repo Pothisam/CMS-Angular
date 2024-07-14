@@ -105,7 +105,7 @@ export class GlobalService {
   }
   getAPIBaseUrl() {
     return isDevMode()
-      ? 'http://localhost:8081'
+      ? 'https://localhost:7083'
       : 'http://www.saras.ind.in/API';
     //return 'http://www.saras.ind.in/API';
     //return 'https://localhost:7083';

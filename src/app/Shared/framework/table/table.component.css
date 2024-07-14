@@ -1,6 +1,9 @@
 table {
   width: 100%;
 }
+.RecordInfo .mdc-tooltip__surface.mdc-tooltip__surface-animation {
+  max-width: 240px;
+}
 mat-icon {
   cursor: pointer;
 }

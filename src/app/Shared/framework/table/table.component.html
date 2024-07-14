@@ -41,10 +41,10 @@
 
                 <ng-container
                   *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('info') && shouldShowButton(element, 'info', column.buttongroup?.[0]?.conditions)">
-                  <mat-icon mat-button matTooltip="info" class="text-info" tabindex="0" matTooltipPosition="above"
+                  <mat-icon mat-button [matTooltip]="getTooltipContent(element)" matTooltipClass="RecordInfo" class="text-info" tabindex="0" matTooltipPosition="left"
                     [attr.aria-info]="element[column.buttongroup[0].buttondata ? column.buttongroup[0].buttondata : '']"
                     (keydown.enter)="onMatIconEdit(element)" (click)="onMatIconEdit(element)"
-                    aria-label="info">info</mat-icon>
+                    [attr.aria-label]="getTooltipContent(element)">info</mat-icon>
                 </ng-container>
 
                 <ng-container
@@ -89,12 +89,12 @@
           <ng-container *ngIf="column.render === undefined; else elserender">
             <td mat-cell *matCellDef="let element"
               [class]="(column.width !== undefined ? 'Mat-th-width-' + column.width : '') + ' ' + (column.class !== undefined ? column.class : '')">
-              {{element[column.data]}}
+              {{element[column.data]}} <!-- Display default data -->
             </td>
           </ng-container>
           <ng-template #elserender>
             <td mat-cell *matCellDef="let element">
-              {{ column.render(element[column.data]) }}
+              {{ column.render(element) }} <!-- Render with custom render function -->
             </td>
           </ng-template>
           <!--END Column data-->

@@ -14,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IDepartmentResponse } from 'src/app/Modules/CMS/User/Request/login.model';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ITableSettings } from './table.model';
+import { GlobalService } from 'src/app/Global/Service/global.service';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -101,7 +102,7 @@ export class TableComponent implements OnInit {
   public displayedColumns: string[] = [];
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {}
+  constructor(private _liveAnnouncer: LiveAnnouncer,private globalService: GlobalService,) {}
 
   ngOnInit() {}
   ngAfterViewInit() {
@@ -255,5 +256,14 @@ export class TableComponent implements OnInit {
       return true;
     }
     return true;
+  }
+  getTooltipContent(element: any): string {
+
+    const entryBy = element.entryby ? `Entry By: ${element.entredBy}` : 'Entry By: N/A';
+    const entryDate = element.entrydate ? `Entry Date: ${this.globalService.formatDate(element.entrydate)}` : 'Entry Date: N/A';
+
+    const modifiedBy = element.modifiedBy ? `Modified By: ${element.modifiedBy}` : 'Modified By: N/A';
+    const modifiedDate = element.modifiedDate ? `Modified Date: ${this.globalService.formatDate(element.modifiedDate)}` : 'Modified Date: N/A';
+    return `${entryBy}\n${entryDate}\n${modifiedBy}\n${modifiedDate}`;
   }
 }

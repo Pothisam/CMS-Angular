@@ -52,7 +52,7 @@ export class CmsdashboardComponent {
         title: 'Status',
         data: 'status',
         width: 20,
-        render: (value: any) => this.ConvertToDate(value),
+        render: (row: any) => this.TestFunction(row),
       },
       {
         title: 'Action',
@@ -72,6 +72,10 @@ export class CmsdashboardComponent {
     headerSticky: true,
     filter: false,
   };
+  TestFunction(row: any): string {
+    // Example implementation, replace with your actual logic
+    return `<i class="fa-solid  fa-info-circle cursor-pointer fa-1x  text-primary  pe-2"></i>`; // Example accessing status and departmentCode
+}
   public tableStaffType: ITableSettings = {
     showFotter: true,
     showPagination: false,

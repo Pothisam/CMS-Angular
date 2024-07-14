@@ -29,6 +29,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-card-header-text{
   width: 100%;
 }
+.mdc-tooltip  {
+  white-space: pre-line;
+}
+.RecordInfo .mdc-tooltip__surface.mdc-tooltip__surface-animation {
+  max-width: 240px;
+}
 html {
 	--mat-card-title-text-font: Roboto, sans-serif !important;
 	--mat-card-title-text-line-height: 32px !important;
