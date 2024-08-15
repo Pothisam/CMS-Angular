@@ -19,7 +19,7 @@
               [isDisabled]="true"></app-textbox>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 pt-3">
-            <app-button label="Add Department"></app-button>
+            <app-button label="Add Department" apiUrl="/Department/AddDepartment" [parameter]="request" (apiResponseSuccess)="ClearFormAndReload()"></app-button>
           </div>
         </div>
         <div class="row">

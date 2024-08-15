@@ -12,6 +12,7 @@ import { LayoutService } from './layout.service';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import 'reflect-metadata';
+import { IModalSettings } from 'src/app/Shared/framework/model/model';
 interface SafeModel {
   [key: string]: any;
 }
@@ -22,6 +23,13 @@ export class GlobalService {
   private renderer: Renderer2;
   router: any;
   private drawerState = new BehaviorSubject<boolean>(false);
+  // #region Model Popup
+  private modelDeleteConfirmation = new BehaviorSubject<IModalSettings>(new IModalSettings());
+  modelDeleteConfirmation$ = this.modelDeleteConfirmation.asObservable();
+  updateModelDeleteConfirmation(settings: IModalSettings) {
+    this.modelDeleteConfirmation.next(settings);
+  }
+  // #endregion Model Popup
   constructor(
     private location: Location,
     private layout: LayoutService,

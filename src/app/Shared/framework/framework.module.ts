@@ -14,6 +14,7 @@ import { ToastComponent } from './toast/toast.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { DownloadComponent } from './download/download.component';
 import { HistoryInfoComponent } from './icon/history-info/history-info.component';
+import { ModelComponent } from './model/model.component';
 @NgModule({
   imports: [
     MaterialModule
@@ -31,7 +32,8 @@ import { HistoryInfoComponent } from './icon/history-info/history-info.component
     ToastComponent,
     AccordionComponent,
     DownloadComponent,
-    HistoryInfoComponent
+    HistoryInfoComponent,
+    ModelComponent
   ],
   exports: [
     MaterialModule,
@@ -47,7 +49,8 @@ import { HistoryInfoComponent } from './icon/history-info/history-info.component
     ToastComponent,
     AccordionComponent,
     DownloadComponent,
-    HistoryInfoComponent
+    HistoryInfoComponent,
+    ModelComponent
   ],
 })
 export class FrameworkModule {}

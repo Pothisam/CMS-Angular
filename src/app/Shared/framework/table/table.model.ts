@@ -16,7 +16,8 @@ export class ITableSettings {
       button?: boolean;
       buttons?: string[];
       buttondata?: string;
-      conditions?:string[]
+      conditions?:string[];
+      click?:string[];
     }[];
     footergroup?: {
       sumfunction?: boolean;
@@ -45,7 +46,8 @@ export class ITableSettings {
             button: false,
             buttons: ['edit'],
             buttondata: 'string',
-            conditions:['delete|status|Active']
+            conditions:['delete|status|Active'],
+            click:['delete|sysid|departmentName']
           },
         ],
         footergroup: [
@@ -59,5 +61,21 @@ export class ITableSettings {
     (this.columnSticky = [0, 1, 2]),
       (this.headerSticky = false),
       (this.filter = false);
+  }
+}
+export class ITableDelete{
+  API:string;
+  PK:string;
+  ColumnName:string;
+  ParameterName:any;
+  Message:string;
+  Note:string;
+  constructor() {
+    this.API ='';
+    this.PK = '';
+    this.ColumnName = '';
+    this.ParameterName ='';
+    this.Message = '';
+    this.Note = '';
   }
 }

@@ -11,21 +11,22 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IDepartmentResponse } from 'src/app/Modules/CMS/User/Request/login.model';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ITableSettings } from './table.model';
+import { ITableDelete, ITableSettings } from './table.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
+import { IModalSettings } from '../model/model';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
-  depa: IDepartmentResponse[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<any[]>();
   datalist: any;
+  public _recordDeleteDetails: ITableDelete = new ITableDelete();
+  public _modalSettings: IModalSettings = new IModalSettings();
   public _tableSettings: ITableSettings | undefined;
 
   @Input()
@@ -59,6 +60,7 @@ export class TableComponent implements OnInit {
   @Output() matEditClickChange = new EventEmitter<any>();
 
   public _gridDelete: string = '';
+  public _gridDeleteColumn: string = '';
   @Input()
   set matDeleteClick(value: any) {
     if (this._gridDelete === value) {
@@ -92,7 +94,7 @@ export class TableComponent implements OnInit {
       button?: boolean;
       buttons?: string[];
       buttondata?: string;
-      conditions?:string[];
+      conditions?: string[];
     }[];
     footergroup?: {
       sumfunction?: boolean;
@@ -102,7 +104,10 @@ export class TableComponent implements OnInit {
   public displayedColumns: string[] = [];
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private _liveAnnouncer: LiveAnnouncer,private globalService: GlobalService,) {}
+  constructor(
+    private _liveAnnouncer: LiveAnnouncer,
+    private globalService: GlobalService
+  ) {}
 
   ngOnInit() {}
   ngAfterViewInit() {
@@ -120,6 +125,7 @@ export class TableComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.datalist);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
     if (this._tableSettings?.slno == true) {
       this.generateSlno(this.datalist);
 
@@ -127,11 +133,19 @@ export class TableComponent implements OnInit {
         (column) => column.data === 'autoSlno'
       );
       if (!isExists) {
-        if(this._tableSettings.shorting == true){
-        this.tableColums.unshift({ title: 'Slno', data: 'autoSlno', width: 5, short: true });
-        }
-        else{
-          this.tableColums.unshift({ title: 'Slno', data: 'autoSlno', width: 5 });
+        if (this._tableSettings.shorting == true) {
+          this.tableColums.unshift({
+            title: 'Slno',
+            data: 'autoSlno',
+            width: 5,
+            short: true,
+          });
+        } else {
+          this.tableColums.unshift({
+            title: 'Slno',
+            data: 'autoSlno',
+            width: 5,
+          });
         }
       }
     }
@@ -185,9 +199,55 @@ export class TableComponent implements OnInit {
     this._gridEdit = element['departmentCode'];
     this.matEditClickChange.emit(this._gridEdit);
   }
-  onMatIconDelete(element: any) {
-    this._gridDelete = element['departmentCode'];
+  public deleteFK: any = {};
+  onMatIconDelete(element: any, event: Event) {
+    const targetElement = event.target as HTMLElement;
+    const actionColumn = this._tableSettings?.columns.find(
+      (column) => column.data === 'Mat-Action'
+    );
+    if (
+      actionColumn &&
+      actionColumn.buttongroup &&
+      actionColumn.buttongroup[0] &&
+      actionColumn.buttongroup[0].click &&
+      actionColumn.buttongroup[0].click.some((x) => x.startsWith('delete|'))
+    ) {
+      const deleteAction = actionColumn.buttongroup[0].click.find((x) =>
+        x.startsWith('delete|')
+      );
+      if (deleteAction) {
+        const parts = deleteAction.split('|');
+        this._recordDeleteDetails.PK = parts[1] ?? '';
+        this._recordDeleteDetails.ColumnName = parts[2] ?? '';
+        this._recordDeleteDetails.API = parts[3] ?? '';
+        this._recordDeleteDetails.ParameterName = parts[4] ?? '';
+        this._recordDeleteDetails.Message = parts[5] ?? '';
+        this._recordDeleteDetails.Note = parts[6] ?? '';
+      }
+    }
+    if (
+      this._recordDeleteDetails.PK != '' &&
+      this._recordDeleteDetails.ColumnName != ''
+    ) {
+      this._gridDelete = element[this._recordDeleteDetails.PK];
+      this._gridDeleteColumn = element[this._recordDeleteDetails.ColumnName];
+      this._recordDeleteDetails.Message =
+        this._recordDeleteDetails.Message.replace(
+          '{{0}}',
+          this._gridDeleteColumn
+        );
+    }
+    this.deleteFK[this._recordDeleteDetails.ParameterName] = this._gridDelete;
     this.matDeleteClickChange.emit(this._gridDelete);
+
+    this._modalSettings.isModalVisible = true;
+    this._modalSettings.headerMessage = 'Delete Confirmation';
+    this._modalSettings.bodyMessage = this._recordDeleteDetails.Message;
+    this._modalSettings.note = this._recordDeleteDetails.Note;
+    this._modalSettings.parameter = this.deleteFK;
+    this._modalSettings.api = this._recordDeleteDetails.API;
+    this._modalSettings.html = targetElement;
+    this.globalService.updateModelDeleteConfirmation(this._modalSettings);
   }
   //End Grid Button Click
   // Filter
@@ -226,16 +286,21 @@ export class TableComponent implements OnInit {
   }
 
   getTotalCost(propertyName: string) {
-    return this.datalist.map((t: { [x: string]: any; }) => t[propertyName])
+    return this.datalist
+      .map((t: { [x: string]: any }) => t[propertyName])
       .reduce((acc: any, value: any) => acc + (value || 0), 0); // Added || 0 to handle null/undefined
   }
-  shouldShowButton(element: any, button: string, conditions: string[] | undefined): boolean {
+  shouldShowButton(
+    element: any,
+    button: string,
+    conditions: string[] | undefined
+  ): boolean {
     if (!conditions || conditions.length === 0) {
       return true; // If no conditions are provided, always show the button
     }
-    let hasbutton = conditions.some(condition => condition.includes(button));
-    if(hasbutton){
-      let condition = conditions.find(cond => cond.startsWith(button));
+    let hasbutton = conditions.some((condition) => condition.includes(button));
+    if (hasbutton) {
+      let condition = conditions.find((cond) => cond.startsWith(button));
       if (condition) {
         let parts = condition.split('|');
         if (parts.length === 3) {
@@ -245,25 +310,30 @@ export class TableComponent implements OnInit {
           // Check if the element's specified column matches the value
           if (element[column] === value) {
             return true; // Show the button if the condition matches
-          }
-          else{
-            return false
+          } else {
+            return false;
           }
         }
       }
-    }
-    else{
+    } else {
       return true;
     }
     return true;
   }
   getTooltipContent(element: any): string {
+    const entryBy = element.entryby
+      ? `Entry By: ${element.entredBy}`
+      : 'Entry By: N/A';
+    const entryDate = element.entrydate
+      ? `Entry Date: ${this.globalService.formatDate(element.entrydate)}`
+      : 'Entry Date: N/A';
 
-    const entryBy = element.entryby ? `Entry By: ${element.entredBy}` : 'Entry By: N/A';
-    const entryDate = element.entrydate ? `Entry Date: ${this.globalService.formatDate(element.entrydate)}` : 'Entry Date: N/A';
-
-    const modifiedBy = element.modifiedBy ? `Modified By: ${element.modifiedBy}` : 'Modified By: N/A';
-    const modifiedDate = element.modifiedDate ? `Modified Date: ${this.globalService.formatDate(element.modifiedDate)}` : 'Modified Date: N/A';
+    const modifiedBy = element.modifiedBy
+      ? `Modified By: ${element.modifiedBy}`
+      : 'Modified By: N/A';
+    const modifiedDate = element.modifiedDate
+      ? `Modified Date: ${this.globalService.formatDate(element.modifiedDate)}`
+      : 'Modified Date: N/A';
     return `${entryBy}\n${entryDate}\n${modifiedBy}\n${modifiedDate}`;
   }
 }

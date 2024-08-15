@@ -1,3 +1,4 @@
+$CardaBackgroundColor: var(--mdc-elevated-card-container-color);
 .MatInput {
   width: 100%;
   background-color: transparent;
@@ -47,3 +48,9 @@ button {
 // .mat-input-element {
 //   height: 40px; // Set your desired height here
 // }
+.modal-body .mat-mdc-card-content{
+  background-color: $CardaBackgroundColor !important;
+}
+.modal-footer{
+  background-color: $CardaBackgroundColor !important;
+}

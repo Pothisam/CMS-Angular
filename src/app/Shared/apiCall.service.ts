@@ -162,15 +162,27 @@ export class ApiCallService {
     });
 
     return http
-      .post(url, body, { headers, observe: 'response', responseType: 'blob' })
+      .post(url, body, { headers, observe: 'response', responseType: 'json' })
       .pipe(
-        tap((response: HttpResponse<Blob>) => {
+        tap((response: any) => {
           // Extract file name from the response headers
           let filename = response.headers.get('fileName') || 'downloadedFile';
 
-          if (response.body) {
+          if (response.body && response.body.data) {
+            // Extract the binary data from the `data` property
+            const binaryString = atob(response.body.data);
+            const binaryData = new Uint8Array(binaryString.length);
+
+            for (let i = 0; i < binaryString.length; i++) {
+              binaryData[i] = binaryString.charCodeAt(i);
+            }
+            const blob = new Blob([binaryData], { type: 'application/octet-stream' });
+
+          // Extract file name from the response headers or default to 'downloadedFile'
+          let filename = response.headers.get('fileName') || 'downloadedFile';
             // Create a blob URL and download the file
-            const blobUrl = URL.createObjectURL(response.body);
+            const blobUrl = URL.createObjectURL(blob);
+
             const a = document.createElement('a');
             a.href = blobUrl;
             a.download = filename; // Use the extracted file name

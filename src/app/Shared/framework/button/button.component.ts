@@ -33,6 +33,8 @@ export class ButtonComponent implements OnInit {
   }
   @Output()
   apiResponseChange = new EventEmitter<any>();
+  @Output()
+  apiResponseSuccess = new EventEmitter<any>();
   @Input() apicache: boolean = false;
   constructor(
     private ValidationService: FormValidationService,
@@ -69,11 +71,12 @@ export class ButtonComponent implements OnInit {
             if (Response.data != null) {
               this._apiResponse = Response.data;
               this.apiResponseChange.emit(this._apiResponse);
-              setTimeout(() => {
-                this._loading = !this._loading;
-                this.updateLabel();
-              }, 500);
             }
+            this.apiResponseSuccess.emit();
+            setTimeout(() => {
+              this._loading = !this._loading;
+              this.updateLabel();
+            }, 500);
           },
         });
     }

@@ -40,8 +40,9 @@ export class DepartmentComponent implements OnInit {
           {
             button: true,
             buttondata: 'departmentCode',
-            buttons: ['edit', 'delete','info'],
-            conditions:['delete|status|Active','edit|status|Active']
+            buttons: ['delete','info'],
+            conditions:['delete|status|Active'],
+            click:['delete|sysid|departmentName|/Department/InActivateDepartment|departmentSysid|Are you Sure you want to delete department: <span class="text-danger">{{0}}</span>|Note: Deleting Department Affect Course Section, Student And Staff Details']
           },
         ],
         buttonlabel: 'departmentCode',
@@ -82,5 +83,10 @@ export class DepartmentComponent implements OnInit {
         this.departmentcode = Response.data;
       },
     });
+  }
+  ClearFormAndReload(){
+    this.request.departmentname ='';
+    this.departmentcode = '';
+    this.getdepartmentList();
   }
 }

@@ -49,7 +49,7 @@
 
                 <ng-container
                   *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('edit') && shouldShowButton(element, 'edit', column.buttongroup?.[0]?.conditions)">
-                  <mat-icon mat-button matTooltip="Edit" class="text-success" tabindex="0" matTooltipPosition="above"
+                  <mat-icon role="img" mat-button matTooltip="Edit" class="text-success" tabindex="0" matTooltipPosition="above"
                     [attr.aria-edit]="element[column.buttongroup[0].buttondata ? column.buttongroup[0].buttondata : '']"
                     (keydown.enter)="onMatIconEdit(element)" (click)="onMatIconEdit(element)"
                     aria-label="Edit">edit</mat-icon>
@@ -57,9 +57,9 @@
 
                   <ng-container
                     *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('delete') && shouldShowButton(element, 'delete', column.buttongroup?.[0]?.conditions)">
-                    <mat-icon mat-button class="text-danger" tabindex="0" matTooltip="Delete" matTooltipPosition="above"
+                    <mat-icon #icondelete role="img" mat-button class="text-danger" tabindex="0" matTooltip="Delete" matTooltipPosition="above"
                       [attr.aria-delete]="element[column.buttongroup[0].buttondata ? column.buttongroup[0].buttondata : '']"
-                      (keydown.enter)="onMatIconDelete(element)" (click)="onMatIconDelete(element)"
+                      (keydown.enter)="onMatIconDelete(element, $event)" (click)="onMatIconDelete(element, $event)"
                       aria-label="Delete">delete_forever</mat-icon>
                   </ng-container>
 
@@ -93,8 +93,8 @@
             </td>
           </ng-container>
           <ng-template #elserender>
-            <td mat-cell *matCellDef="let element">
-              {{ column.render(element) }} <!-- Render with custom render function -->
+            <td mat-cell *matCellDef="let element" [innerHTML]="column.render(element)">
+              <!-- Render with custom render function -->
             </td>
           </ng-template>
           <!--END Column data-->
@@ -126,7 +126,7 @@
       </ng-container>
     </table>
 
-    <mat-paginator *ngIf="_tableSettings?.showPagination" [pageSizeOptions]="[5, 10, 25, 100]"
+    <mat-paginator *ngIf="_tableSettings?.showPagination" [pageSizeOptions]="[10, 25, 50, 100]"
       aria-label="Select page of users"></mat-paginator>
   </div>
 </div>
