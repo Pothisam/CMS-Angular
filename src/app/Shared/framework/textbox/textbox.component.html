@@ -1,7 +1,7 @@
 <mat-form-field class="MatInput">
   <mat-label>{{ label }} <span class="text-danger" *ngIf="_required">*</span></mat-label>
   <input type="text" matInput #input (input)="onInputChange($event)" [disabled]="_disabled" [attr.maxLength]="maxlength"
-    [value]="_modelValue" [attr.aria-label]="label" [attr.ErrorMessage]="message" [attr.name]="entity"
+    [value]="_modelValue" [attr.aria-label]="label" [placeholder]="placeholder.toString()" [attr.ErrorMessage]="message" [attr.name]="entity"
     [attr.min]="min" [attr.aria-required]="_required">
   @if (_modelValue && _showClearAll) {
   <button matSuffix mat-icon-button aria-label="Clear" (click)="clearInputValue()" tabindex="-1">

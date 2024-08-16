@@ -33,4 +33,14 @@ export class ManagementService {
       false
     );
   }
+  getcourselist(): Observable<any> {
+    this.url = '/Course/GetCourseList';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      '',
+      this.Area,
+      false
+    );
+  }
 }

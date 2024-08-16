@@ -7,9 +7,10 @@ import { CmsdashboardComponent } from '../../Dashboard/cmsdashboard/cmsdashboard
 import { DepartmentComponent } from '../../Management/department/department.component';
 import { SectionComponent } from '../../Management/section/section.component';
 import { FrameworkModule } from 'src/app/Shared/framework/framework.module';
+import { CourseComponent } from '../../Management/course/course.component';
 
 @NgModule({
-    declarations: [InstitutionComponent, LoginComponent, CmsdashboardComponent,DepartmentComponent,SectionComponent],
+    declarations: [InstitutionComponent, LoginComponent, CmsdashboardComponent,DepartmentComponent,CourseComponent,SectionComponent],
     imports: [
         CommonModule, CMSRoutingModule,FrameworkModule
     ]

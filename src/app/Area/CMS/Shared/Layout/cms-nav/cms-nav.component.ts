@@ -32,6 +32,10 @@ export class CmsNavComponent {
       value: 'CMS/Department',
     },
     {
+      text: 'Course',
+      value: 'CMS/Course',
+    },
+    {
       text: 'Section',
       value: 'CMS/Section',
     },

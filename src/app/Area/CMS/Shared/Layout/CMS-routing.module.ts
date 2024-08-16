@@ -6,6 +6,7 @@ import { InstitutionComponent } from '../../Management/Institution/Institution.c
 import { CMSIsLogin } from '../../User/Login/gaurds';
 import { DepartmentComponent } from '../../Management/department/department.component';
 import { SectionComponent } from '../../Management/section/section.component';
+import { CourseComponent } from '../../Management/course/course.component';
 
 
 
@@ -29,6 +30,11 @@ const CMSroutes: Routes = [
   {
     path:"Department",
     component:DepartmentComponent,
+    canActivate:[CMSIsLogin]
+  },
+  {
+    path:"Course",
+    component:CourseComponent,
     canActivate:[CMSIsLogin]
   },
   {

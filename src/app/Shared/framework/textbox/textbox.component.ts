@@ -44,6 +44,7 @@ export class TextboxComponent implements OnInit {
 
   @Input() min: number | string = 0;
   @Input() maxlength: number | string = 50;
+  @Input() placeholder: string = '';
   @Input() setModelvalue: string = '';
   @Input() Case: string = CaseType.N;
   @Input() isNumberOnly: boolean = false;

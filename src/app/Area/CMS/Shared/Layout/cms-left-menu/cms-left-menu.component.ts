@@ -26,7 +26,7 @@ export class CmsLeftMenuComponent {
       subMenu: [
         { name: "General Information", link: "CMS/Institution" },
         { name: "Department", link: "CMS/Department" },
-        { name: "Course", link: "#course" },
+        { name: "Course", link: "CMS/Course" },
         { name: "Section", link: "CMS/Section" },
         { name: "Batch", link: "#batch" },
         { name: "Holiday-Workingday", link: "#holiday-workingday" },
