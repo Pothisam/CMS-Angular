@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GlobalService } from 'src/app/Global/Service/global.service';
+import { ISectionRequestList } from 'src/app/Modules/CMS/section/Section';
 import { ApiCallService } from 'src/app/Shared/apiCall.service';
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,16 @@ export class ManagementService {
       this.http,
       this.baseurl + this.url,
       '',
+      this.Area,
+      false
+    );
+  }
+  getsectionlist(parameter: ISectionRequestList): Observable<any> {
+    this.url = '/Section/GetSectionListByCourseCode';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      parameter,
       this.Area,
       false
     );

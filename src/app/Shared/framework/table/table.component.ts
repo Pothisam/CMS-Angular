@@ -249,6 +249,9 @@ export class TableComponent implements OnInit {
     this._modalSettings.html = targetElement;
     this.globalService.updateModelDeleteConfirmation(this._modalSettings);
   }
+  onClicktoggle(element: any, event: Event) {
+    const targetElement = event.target as HTMLElement;
+  }
   //End Grid Button Click
   // Filter
   applyFilter(event: Event) {
@@ -319,6 +322,18 @@ export class TableComponent implements OnInit {
       return true;
     }
     return true;
+  }
+  toggleCondition(element: any, button: string,conditions: string[]| undefined): boolean {
+    if (!conditions || conditions.length === 0) {
+      return true; // If no conditions are provided, always show the button
+    }
+    return conditions.some(condition => {
+      const [type, columnName, expectedValue] = condition.split('|');
+      if (type === button) {
+        return element[columnName] === expectedValue;
+      }
+      return false;
+    });
   }
   getTooltipContent(element: any): string {
     const entryBy = element.entryby

@@ -15,6 +15,8 @@ export class ButtonComponent implements OnInit {
 
   _label: string = '';
   @Input() label: string = '';
+  _buttonclass:string ='';
+  @Input() buttontype: string = 'P';
   _loading: boolean = false;
   @Input() auth: boolean = true;
   @Input() parameter: any;
@@ -45,7 +47,17 @@ export class ButtonComponent implements OnInit {
   ngOnInit() {
     this.id = 'Btn' + this.label;
     this.updateLabel();
+    this.setButtonClass();
   }
+  private setButtonClass(): void {
+    const buttonClasses: { [key: string]: string } = {
+      'P': 'btn-primary',
+      'D': 'btn-danger',
+      'S': 'btn-success'
+  };
+
+  this._buttonclass = buttonClasses[this.buttontype] || '';
+}
   onClick() {
     this._loading = !this._loading;
     this.updateLabel();

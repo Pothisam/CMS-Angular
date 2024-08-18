@@ -18,6 +18,7 @@ export class ITableSettings {
       buttondata?: string;
       conditions?:string[];
       click?:string[];
+      toggle?:string[];
     }[];
     footergroup?: {
       sumfunction?: boolean;
@@ -47,7 +48,8 @@ export class ITableSettings {
             buttons: ['edit'],
             buttondata: 'string',
             conditions:['delete|status|Active'],
-            click:['delete|sysid|departmentName']
+            click:['delete|sysid|departmentName'],
+            toggle:['sysid|API|parameter|column,true,false']
           },
         ],
         footergroup: [

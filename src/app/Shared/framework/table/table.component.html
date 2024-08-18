@@ -65,6 +65,11 @@
                     aria-label="Delete">delete_forever</mat-icon>
                 </ng-container>
 
+                <ng-container
+                  *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('toggle')">
+                  <i class="fa-solid fa-2x cursor-pointer ps-1" [ngClass]="toggleCondition(element, 'toggle', column.buttongroup[0].conditions)? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'" matTooltipPosition="above"  tabindex="0" matTooltip="Active / InActive"
+                    (click)="onClicktoggle(element, $event)"></i>
+                </ng-container>
               </div>
             </td>
           </ng-container>

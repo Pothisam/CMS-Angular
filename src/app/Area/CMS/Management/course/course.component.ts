@@ -93,7 +93,6 @@ export class CourseComponent implements OnInit {
       next: (Response) => {
         if (Response.data != null) {
           this.courseList = Response.data;
-          console.log(Response.data);
         }
       },
     });

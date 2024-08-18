@@ -59,6 +59,13 @@ export class CmsNavComponent {
         }
       }
     }
+
+    const theme = this.globalService.GLSG('Darktheme');
+    this.darkmode =
+      theme !== null && (theme.toLowerCase() === 'true' || theme === '1');
+
+    const themeToApply = this.darkmode ? 'cyan-orange' : 'indigo-pink';
+    this.globalService.switchTheme(themeToApply);
   }
   setFavicon(url: string): void {
     const link: HTMLLinkElement =
@@ -79,6 +86,7 @@ export class CmsNavComponent {
     } else {
       this.globalService.switchTheme('indigo-pink');
     }
+    this.globalService.GLSS('Darktheme', String(this.darkmode));
   }
   toggleDrawer(): void {
     this.globalService.menutoggle();
@@ -86,22 +94,24 @@ export class CmsNavComponent {
   loadLogo() {
     let token = localStorage.getItem('CMSToken');
 
-    this.frameworkService.callAPI('/Common/GetLogo', '', 'CMS',false).subscribe({
-      next: (Response) => {
-        if (Response.data != null) {
-          if (token) {
-            let object = JSON.parse(token);
-            object.logoWithText = Response.data.logoWithText;
-            object.logo = Response.data.logo;
-            object.favIcon = Response.data.favIcon;
-            let updatedobject = JSON.stringify(object);
-            localStorage.setItem('CMSToken', updatedobject);
-            this.src = Response.data.logoWithText;
-            this.setFavicon(Response.data.favIcon);
+    this.frameworkService
+      .callAPI('/Common/GetLogo', '', 'CMS', false)
+      .subscribe({
+        next: (Response) => {
+          if (Response.data != null) {
+            if (token) {
+              let object = JSON.parse(token);
+              object.logoWithText = Response.data.logoWithText;
+              object.logo = Response.data.logo;
+              object.favIcon = Response.data.favIcon;
+              let updatedobject = JSON.stringify(object);
+              localStorage.setItem('CMSToken', updatedobject);
+              this.src = Response.data.logoWithText;
+              this.setFavicon(Response.data.favIcon);
+            }
           }
-        }
-      },
-    });
+        },
+      });
   }
   public Logout() {
     ApiCallService.clearCache();
