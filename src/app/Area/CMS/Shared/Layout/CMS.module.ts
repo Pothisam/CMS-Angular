@@ -8,11 +8,18 @@ import { DepartmentComponent } from '../../Management/department/department.comp
 import { SectionComponent } from '../../Management/section/section.component';
 import { FrameworkModule } from 'src/app/Shared/framework/framework.module';
 import { CourseComponent } from '../../Management/course/course.component';
+import { BatchComponent } from '../../Management/batch/batch.component';
 
 @NgModule({
-    declarations: [InstitutionComponent, LoginComponent, CmsdashboardComponent,DepartmentComponent,CourseComponent,SectionComponent],
-    imports: [
-        CommonModule, CMSRoutingModule,FrameworkModule
-    ]
+  declarations: [
+    InstitutionComponent,
+    LoginComponent,
+    CmsdashboardComponent,
+    DepartmentComponent,
+    CourseComponent,
+    SectionComponent,
+    BatchComponent,
+  ],
+  imports: [CommonModule, CMSRoutingModule, FrameworkModule],
 })
-export class CMSModule { }
+export class CMSModule {}

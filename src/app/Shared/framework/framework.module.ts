@@ -15,6 +15,7 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { DownloadComponent } from './download/download.component';
 import { HistoryInfoComponent } from './icon/history-info/history-info.component';
 import { ModelComponent } from './model/model.component';
+import { DateComponent } from './date/date.component';
 @NgModule({
   imports: [
     MaterialModule
@@ -33,7 +34,8 @@ import { ModelComponent } from './model/model.component';
     AccordionComponent,
     DownloadComponent,
     HistoryInfoComponent,
-    ModelComponent
+    ModelComponent,
+    DateComponent
   ],
   exports: [
     MaterialModule,
@@ -50,7 +52,8 @@ import { ModelComponent } from './model/model.component';
     AccordionComponent,
     DownloadComponent,
     HistoryInfoComponent,
-    ModelComponent
+    ModelComponent,
+    DateComponent
   ],
 })
 export class FrameworkModule {}

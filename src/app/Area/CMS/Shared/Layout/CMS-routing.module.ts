@@ -7,6 +7,7 @@ import { CMSIsLogin } from '../../User/Login/gaurds';
 import { DepartmentComponent } from '../../Management/department/department.component';
 import { SectionComponent } from '../../Management/section/section.component';
 import { CourseComponent } from '../../Management/course/course.component';
+import { BatchComponent } from '../../Management/batch/batch.component';
 
 
 
@@ -40,6 +41,11 @@ const CMSroutes: Routes = [
   {
     path:"Section",
     component:SectionComponent,
+    canActivate:[CMSIsLogin]
+  },
+  {
+    path:"Batch",
+    component:BatchComponent,
     canActivate:[CMSIsLogin]
   }
 ];

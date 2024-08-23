@@ -39,6 +39,10 @@ export class CmsNavComponent {
       text: 'Section',
       value: 'CMS/Section',
     },
+    {
+      text: 'Batch',
+      value: 'CMS/Batch',
+    },
   ];
   constructor(
     private router: Router,
