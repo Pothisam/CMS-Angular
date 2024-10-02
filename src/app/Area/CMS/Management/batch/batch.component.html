@@ -6,8 +6,9 @@
   <mat-card-content>
 
       <form id="batch">
-<app-date [isrequired]="true"></app-date>
+<app-date [isrequired]="true" label="Date Range" [inputdisabled]="true" type="date" [(modelValue)]="LoginRequest.password"  min="-2" max="1" ></app-date>
 
+{{LoginRequest.password}}
       </form>
   </mat-card-content>
 </div>

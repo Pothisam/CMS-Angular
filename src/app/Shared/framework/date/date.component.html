@@ -1,7 +1,8 @@
 <mat-form-field>
   <mat-label>{{ label }} <span class="text-danger" *ngIf="_required">*</span></mat-label>
-  <input matInput [matDatepicker]="datepicker" [disabled]="inputdisabled">
-  <mat-hint>MM/DD/YYYY</mat-hint>
+  <input matInput [matDatepicker]="datepicker" [disabled]="inputdisabled" [min]="_min" [max]="_max" [value]="_modelValue" (dateChange)="onDateSelect($event)">
+  <mat-hint *ngIf="type === 'date'">MM/DD/YYYY</mat-hint>
+  <mat-hint *ngIf="type === 'month'">MM/YYYY</mat-hint>
   <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-  <mat-datepicker #datepicker [disabled]="pickerdisabled"></mat-datepicker>
+  <mat-datepicker #datepicker [panelClass]="type === 'month' ? 'month-picker' : ''" [disabled]="pickerdisabled" [startView]="type === 'month' ? 'multi-year' : 'month'" (monthSelected)="setMonthAndYear($event, datepicker)"  [disabled]="pickerdisabled"></mat-datepicker>
 </mat-form-field>

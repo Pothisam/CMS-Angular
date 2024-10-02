@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ILoginRequest } from 'src/app/Modules/CMS/User/Request/login.model';
 
 @Component({
   selector: 'app-batch',
@@ -8,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class BatchComponent implements OnInit {
 
   constructor() { }
-
+  public LoginRequest: ILoginRequest = {
+    userName: '',
+    password: '',
+  };
   ngOnInit() {
   }
 
