@@ -117,12 +117,10 @@ export class SelectComponent implements OnInit {
     return this._modelValue;
   }
   set modelValue(value: any) {
-    console.log('Original modelValue:', value);
     if (this._modelValue === value) {
       return;
     }
     this._modelValue = typeof value === 'string' ? value.trim() : value;
-    console.log('Trimmed modelValue:', this._modelValue);
     if (!this._Multiple) {
       this.modelValueChange.emit(this._modelValue);
     } else {

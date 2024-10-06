@@ -54,4 +54,44 @@ export class ManagementService {
       false
     );
   }
+  getbatchlist(): Observable<any> {
+    this.url = '/Batch/GetBatchList';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      '',
+      this.Area,
+      false
+    );
+  }
+  getSemesterlist(): Observable<any> {
+    this.url = '/Common/GetSemesterList';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      '',
+      this.Area,
+      true
+    );
+  }
+  updateSemester(parameter:any): Observable<any> {
+    this.url = '/Batch/UpdateBatchSemester';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      parameter,
+      this.Area,
+      false
+    );
+  }
+  updateBatchStatus(parameter:any): Observable<any> {
+    this.url = '/Batch/UpdateBatchCompletionStatus';
+    return ApiCallService.PostwithAuth(
+      this.http,
+      this.baseurl + this.url,
+      parameter,
+      this.Area,
+      false
+    );
+  }
 }

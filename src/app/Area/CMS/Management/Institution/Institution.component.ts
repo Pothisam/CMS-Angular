@@ -77,7 +77,7 @@ export class InstitutionComponent implements OnInit {
           this.triggerApi = true;
 
           if (this.request.modifiedDate) {
-            const formattedDate = this.globalService.formatDate(this.request.modifiedDate);
+            const formattedDate = this.globalService.formatDateTime(this.request.modifiedDate);
             // Assuming you want to keep modifiedDate as a string. If not, you'll need a different approach.
             this.request.modifiedDate = formattedDate;
           }

@@ -239,7 +239,7 @@ export class GlobalService {
       Reflect.getMetadata('design:type', model, property) === undefined
     );
   }
-  formatDate(date: string | Date): string {
+  formatDateTime(date: string | Date): string {
     if (!date) {
       return ''; // Or handle `undefined` differently, perhaps with a default value or by throwing an error.
     }
@@ -257,5 +257,21 @@ export class GlobalService {
     const seconds = dateObj.getSeconds().toString().padStart(2, '0');
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+  formatDate(date: string | Date): string {
+    if (!date) {
+      return ''; // Or handle `undefined` differently, perhaps with a default value or by throwing an error.
+    }
+    const dateObj = typeof date === 'string' ? new Date(date) : date;
+
+    if (isNaN(dateObj.getTime())) {
+      throw new Error('Invalid date'); // Handle invalid date case
+    }
+
+    const year = dateObj.getFullYear();
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+    const day = dateObj.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 }

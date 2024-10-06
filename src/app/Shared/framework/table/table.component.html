@@ -10,7 +10,7 @@
 
   </div>
   <div class="table-container">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort [class]="_tableSettings?.class">
       <!-- (matSortChange)="Shorting($event)" -->
 
       <ng-container *ngFor="let column of tableColums let i = index">
@@ -67,8 +67,11 @@
 
                 <ng-container
                   *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('toggle')">
-                  <i class="fa-solid fa-2x cursor-pointer ps-1" [ngClass]="toggleCondition(element, 'toggle', column.buttongroup[0].conditions)? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'" matTooltipPosition="above"  tabindex="0" matTooltip="Active / InActive"
+                  <i class="fa-solid fa-2x cursor-pointer ps-1"
+                    [ngClass]="toggleCondition(element, 'toggle', column.buttongroup[0].conditions)? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'"
+                    matTooltipPosition="above" tabindex="0" [matTooltip]="toggleTooltip()"
                     (click)="onClicktoggle(element, $event)"></i>
+
                 </ng-container>
               </div>
             </td>
@@ -100,7 +103,7 @@
             </td>
           </ng-container>
           <ng-template #elserender>
-            <td mat-cell *matCellDef="let element" [innerHTML]="column.render(element)">
+            <td mat-cell *matCellDef="let element" [innerHTML]="sanitizeHTML(column.render(element))">
               <!-- Render with custom render function -->
             </td>
           </ng-template>

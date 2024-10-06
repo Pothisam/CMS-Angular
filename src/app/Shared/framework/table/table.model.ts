@@ -5,6 +5,7 @@ export class ITableSettings {
   shorting: boolean;
   slno: boolean;
   checkbox: boolean;
+  class?:string;
   columns: {
     title: string;
     data: string;
@@ -34,6 +35,7 @@ export class ITableSettings {
     this.shorting = true;
     this.slno = false;
     this.checkbox = false;
+    this.class =''
     this.columns = [
       {
         title: 'string',
@@ -47,9 +49,9 @@ export class ITableSettings {
             button: false,
             buttons: ['edit'],
             buttondata: 'string',
-            conditions:['delete|status|Active'],
+            conditions:['delete|status|Active','toggle|status|Active'],
             click:['delete|sysid|departmentName'],
-            toggle:['sysid|API|parameter|column,true,false']
+            toggle:['sysid|API|parameter']
           },
         ],
         footergroup: [
@@ -79,5 +81,15 @@ export class ITableDelete{
     this.ParameterName ='';
     this.Message = '';
     this.Note = '';
+  }
+}
+export class ITabletoggle{
+  API:string;
+  PK:string;
+  ParameterName:any;
+  constructor() {
+    this.API ='';
+    this.PK = '';
+    this.ParameterName ='';
   }
 }

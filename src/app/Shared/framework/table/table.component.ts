@@ -12,9 +12,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ITableDelete, ITableSettings } from './table.model';
+import { ITableDelete, ITableSettings, ITabletoggle } from './table.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { IModalSettings } from '../model/model';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { FrameworkService } from '../framework.service';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -26,6 +28,7 @@ export class TableComponent implements OnInit {
   dataSource = new MatTableDataSource<any[]>();
   datalist: any;
   public _recordDeleteDetails: ITableDelete = new ITableDelete();
+  public _recordtoggleDetails: ITabletoggle = new ITabletoggle();
   public _modalSettings: IModalSettings = new IModalSettings();
   public _tableSettings: ITableSettings | undefined;
 
@@ -103,12 +106,16 @@ export class TableComponent implements OnInit {
   }[] = [];
   public displayedColumns: string[] = [];
   selection = new SelectionModel<any>(true, []);
-
+  area: string = this.globalService.getArea();
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private sanitizer: DomSanitizer,
+    private frameworkService: FrameworkService
   ) {}
-
+  sanitizeHTML(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
   ngOnInit() {}
   ngAfterViewInit() {
     this.prepareTable();
@@ -200,6 +207,7 @@ export class TableComponent implements OnInit {
     this.matEditClickChange.emit(this._gridEdit);
   }
   public deleteFK: any = {};
+  public toggleFK: any = {};
   onMatIconDelete(element: any, event: Event) {
     const targetElement = event.target as HTMLElement;
     const actionColumn = this._tableSettings?.columns.find(
@@ -251,6 +259,32 @@ export class TableComponent implements OnInit {
   }
   onClicktoggle(element: any, event: Event) {
     const targetElement = event.target as HTMLElement;
+
+    const actionColumn = this._tableSettings?.columns.find(
+      (column) => column.data === 'Mat-Action'
+    );
+    if (
+      actionColumn &&
+      actionColumn.buttongroup &&
+      actionColumn.buttongroup[0] &&
+      actionColumn.buttongroup[0].toggle
+    ) {
+      if (targetElement.classList.contains('fa-toggle-off')) {
+        // If it's off, toggle it to on
+        targetElement.classList.remove('fa-toggle-off', 'text-danger');
+        targetElement.classList.add('fa-toggle-on', 'text-success');
+      } else if (targetElement.classList.contains('fa-toggle-on')) {
+        // If it's on, toggle it to off
+        targetElement.classList.remove('fa-toggle-on', 'text-success');
+        targetElement.classList.add('fa-toggle-off', 'text-danger');
+      }
+      const parts = actionColumn.buttongroup[0].toggle[0].split('|');
+      this._recordtoggleDetails.PK = parts[0] ?? '';
+      this._recordtoggleDetails.API = parts[1] ?? '';
+      this._recordtoggleDetails.ParameterName = parts[2] ?? '';
+      this.toggleFK[this._recordtoggleDetails.ParameterName] =element[this._recordtoggleDetails.PK];
+      this.CalltoggleAPI();
+    }
   }
   //End Grid Button Click
   // Filter
@@ -335,20 +369,44 @@ export class TableComponent implements OnInit {
       return false;
     });
   }
+  toggleTooltip(){
+    const actionColumn = this._tableSettings?.columns.find(
+      (column) => column.data === 'Mat-Action'
+    );
+    if (
+      actionColumn &&
+      actionColumn.buttongroup &&
+      actionColumn.buttongroup[0] &&
+      actionColumn.buttongroup[0].toggle
+    ) {
+      const parts = actionColumn.buttongroup[0].toggle[0].split('|');
+      return parts[3] ?? 'Active / InActive'
+    }
+    return 'Active / InActive'
+  }
   getTooltipContent(element: any): string {
-    const entryBy = element.entryby
+    const entryBy = element.entredBy
       ? `Entry By: ${element.entredBy}`
       : 'Entry By: N/A';
     const entryDate = element.entrydate
-      ? `Entry Date: ${this.globalService.formatDate(element.entrydate)}`
+      ? `Entry Date: ${this.globalService.formatDateTime(element.entrydate)}`
       : 'Entry Date: N/A';
 
     const modifiedBy = element.modifiedBy
       ? `Modified By: ${element.modifiedBy}`
       : 'Modified By: N/A';
     const modifiedDate = element.modifiedDate
-      ? `Modified Date: ${this.globalService.formatDate(element.modifiedDate)}`
+      ? `Modified Date: ${this.globalService.formatDateTime(element.modifiedDate)}`
       : 'Modified Date: N/A';
     return `${entryBy}\n${entryDate}\n${modifiedBy}\n${modifiedDate}`;
+  }
+  CalltoggleAPI() {
+    this.frameworkService
+    .callSelectAPI(this._recordtoggleDetails.API, this.toggleFK, this.area,false)
+    .subscribe({
+      next: (Response) => {
+
+      },
+    });
   }
 }

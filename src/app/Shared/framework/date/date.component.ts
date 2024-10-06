@@ -8,7 +8,7 @@ import {
   ViewChild,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import {
   MAT_DATE_FORMATS,
@@ -62,14 +62,23 @@ export const Type_Month = {
 })
 export class DateComponent implements OnInit {
   @ViewChild('input', { static: false }) input: ElementRef | undefined;
-
+  readonly campaignOne = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
   @Input() entity: string = '';
   @Input() label: string = 'date';
   @Input() pickerdisabled: boolean = false;
   @Input() inputdisabled: boolean = true;
+  @Input() showhint: boolean = false;
   @Input() type: string = 'date';
   public _required: boolean = false;
+  public _isrange: boolean = false;
   formControl: any;
+  @Input()
+  set isrange(value: boolean) {
+    this._isrange = value;
+  }
   @Input()
   set isrequired(value: boolean) {
     this._required = value;
@@ -173,6 +182,36 @@ export class DateComponent implements OnInit {
   @Output()
   modelValueChange = new EventEmitter<any>();
 
+  public _start: string = '';
+  @Input()
+  get startValue() {
+    return this._start;
+  }
+  set startValue(value: any) {
+    if (this._start === value) {
+      return;
+    }
+    this._start = value;
+    this.startValueChange.emit(this._start);
+  }
+  @Output()
+  startValueChange = new EventEmitter<any>();
+
+  public _end: string = '';
+  @Input()
+  get endValue() {
+    return this._end;
+  }
+  set endValue(value: any) {
+    if (this._end === value) {
+      return;
+    }
+    this._end = value;
+    this.endValueChange.emit(this._end);
+  }
+  @Output()
+  endValueChange = new EventEmitter<any>();
+
   public _disabled: boolean = false;
   @Input()
   set isDisabled(value: boolean) {
@@ -194,7 +233,9 @@ export class DateComponent implements OnInit {
     this._modelValue = event.target.value;
     this.modelValueChange.emit(this._modelValue);
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.message = 'Please Enter ' + this.label;
+  }
   clearInputValue() {
     this._modelValue = '';
     this.modelValueChange.emit('');
@@ -225,7 +266,8 @@ export class DateComponent implements OnInit {
     }
   }
   onDateSelect(event: any): void {
-    const selectedDate: Date = event.value instanceof Date ? event.value : new Date(event.value);
+    const selectedDate: Date =
+      event.value instanceof Date ? event.value : new Date(event.value);
 
     if (!isNaN(selectedDate.getTime())) {
       const formattedDate = this.formatDate(selectedDate);
@@ -234,6 +276,36 @@ export class DateComponent implements OnInit {
     } else {
       console.error('Invalid date selected');
     }
+  }
+  onStartDateSelect(event: any): void {
+    const selectedDate: Date =
+      event.value instanceof Date ? event.value : new Date(event.value);
+
+    if (!isNaN(selectedDate.getTime())) {
+      const formattedDate = this.formatDate(selectedDate);
+      this._start = formattedDate;
+      this.startValueChange.emit(this._start);
+    } else {
+      console.error('Invalid date selected');
+    }
+  }
+  onEndDateSelect(event: any): void {
+    const selectedDate: Date =
+      event.value instanceof Date ? event.value : new Date(event.value);
+
+    if (!isNaN(selectedDate.getTime())) {
+      const formattedDate = this.formatDate(selectedDate);
+      this._end = formattedDate;
+      this.endValueChange.emit(this._end);
+    } else {
+      console.error('Invalid date selected');
+    }
+  }
+  onMonthSelected(event: Moment): void {
+    const selectedMonth = event.format('MM/YYYY');
+    console.log(`Month selected: ${selectedMonth}`);
+    this._modelValue = selectedMonth;
+    this.modelValueChange.emit(this._modelValue);
   }
   private formatDate(date: Date): string {
     const year = date.getFullYear();

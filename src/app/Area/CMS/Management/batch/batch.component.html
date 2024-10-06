@@ -3,13 +3,33 @@
     <mat-card-title>Batch</mat-card-title>
   </mat-card-header>
   <div class="scrolldiv">
-  <mat-card-content>
+    <mat-card-content>
 
       <form id="batch">
-<app-date [isrequired]="true" label="Date Range" [inputdisabled]="true" type="date" [(modelValue)]="LoginRequest.password"  min="-2" max="1" ></app-date>
-
-{{LoginRequest.password}}
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-date [isrequired]="true" label="Batch Start and End" [isrange]="true"
+            [(startValue)]="AddBatchRequest.fromDate" [(endValue)]="AddBatchRequest.toDate"
+          [inputdisabled]="true" type="date"  (endValueChange)="onRespons()"></app-date>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-2">
+            <app-textbox   label="Batch" [(modelValue)]="batch"
+              [isDisabled]="true"></app-textbox>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+            <app-select entity="courseType" label="Course Type" [isrequired]="true"
+              commaSeparatedString="UG|UG,PG|PG" (getSelectedOptions)="onCourseTypeChanges($event)" [(modelValue)]="AddBatchRequest.courseType"></app-select>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 pt-3">
+            <app-button label="Add Batch" apiUrl="/Batch/AddBatch" [parameter]="AddBatchRequest"  (apiResponseSuccess)="ReloadForm()"></app-button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <app-table [tableSettings]="tableSettings" [jsonData]="this.batchList"></app-table>
+          </div>
+        </div>
       </form>
-  </mat-card-content>
-</div>
+    </mat-card-content>
+  </div>
 </mat-card>

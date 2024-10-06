@@ -1,8 +1,29 @@
-<mat-form-field>
+<mat-form-field *ngIf="!_isrange">
   <mat-label>{{ label }} <span class="text-danger" *ngIf="_required">*</span></mat-label>
-  <input matInput [matDatepicker]="datepicker" [disabled]="inputdisabled" [min]="_min" [max]="_max" [value]="_modelValue" (dateChange)="onDateSelect($event)">
-  <mat-hint *ngIf="type === 'date'">MM/DD/YYYY</mat-hint>
-  <mat-hint *ngIf="type === 'month'">MM/YYYY</mat-hint>
+  <input matInput #input [matDatepicker]="datepicker" [disabled]="inputdisabled" [min]="_min" [max]="_max"
+    [value]="_modelValue" (dateChange)="onDateSelect($event)" [attr.name]="entity" [attr.aria-label]="label" [attr.ErrorMessage]="message"
+    [attr.aria-required]="_required">
+  <mat-hint *ngIf="type === 'date' && showhint">DD/MM/YYYY</mat-hint>
+  <mat-hint *ngIf="type === 'month' && showhint">MM/YYYY</mat-hint>
   <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
-  <mat-datepicker #datepicker [panelClass]="type === 'month' ? 'month-picker' : ''" [disabled]="pickerdisabled" [startView]="type === 'month' ? 'multi-year' : 'month'" (monthSelected)="setMonthAndYear($event, datepicker)"  [disabled]="pickerdisabled"></mat-datepicker>
+  <mat-datepicker #datepicker [panelClass]="type === 'month' ? 'month-picker' : ''" [disabled]="pickerdisabled"
+    [startView]="type === 'month' ? 'multi-year' : 'month'"
+    (monthSelected)="setMonthAndYear($event, datepicker)"></mat-datepicker>
+</mat-form-field>
+<mat-form-field *ngIf="_isrange">
+  <mat-label>{{ label }} <span class="text-danger" *ngIf="_required">*</span></mat-label>
+  <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="picker" [min]="_min" [max]="_max"
+    [disabled]="inputdisabled">
+    <input matStartDate #input id="start" placeholder="Start date" [value]="_start" [attr.name]="entity" [attr.aria-label]="label"
+      [attr.ErrorMessage]="message" [attr.aria-required]="_required" (dateChange)="onStartDateSelect($event)">
+    <input matEndDate #input id="end" placeholder="End date" [value]="_end" [attr.name]="entity" [attr.aria-label]="label" [attr.ErrorMessage]="message"
+      [attr.aria-required]="_required" (dateChange)="onEndDateSelect($event)">
+  </mat-date-range-input>
+  <mat-hint *ngIf="type === 'date' && showhint">DD/MM/YYYY - DD/MM/YYYY</mat-hint>
+  <mat-hint *ngIf="type === 'month' && showhint">MM/YYYY - MM/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker [panelClass]="type === 'month' ? 'month-picker' : ''" [disabled]="pickerdisabled"
+    [startView]="type === 'month' ? 'multi-year' : 'month'">
+    <mat-calendar *ngIf="type === 'month'" (monthSelected)="onMonthSelected($event)"></mat-calendar>
+  </mat-date-range-picker>
 </mat-form-field>
