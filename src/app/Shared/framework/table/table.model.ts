@@ -5,7 +5,7 @@ export class ITableSettings {
   shorting: boolean;
   slno: boolean;
   checkbox: boolean;
-  class?:string;
+  class?: string;
   columns: {
     title: string;
     data: string;
@@ -17,9 +17,9 @@ export class ITableSettings {
       button?: boolean;
       buttons?: string[];
       buttondata?: string;
-      conditions?:string[];
-      click?:string[];
-      toggle?:string[];
+      conditions?: string[];
+      click?: string[];
+      toggle?: string[];
     }[];
     footergroup?: {
       sumfunction?: boolean;
@@ -35,7 +35,7 @@ export class ITableSettings {
     this.shorting = true;
     this.slno = false;
     this.checkbox = false;
-    this.class =''
+    this.class = '';
     this.columns = [
       {
         title: 'string',
@@ -47,11 +47,15 @@ export class ITableSettings {
         buttongroup: [
           {
             button: false,
-            buttons: ['edit'],
-            buttondata: 'string',
-            conditions:['delete|status|Active','toggle|status|Active'],
-            click:['delete|sysid|departmentName'],
-            toggle:['sysid|API|parameter']
+            buttons: ['edit', 'history'],
+            buttondata: 'history',
+            conditions: [
+              'delete|status|Active',
+              'toggle|status|Active',
+              'history|tablename|pk|application',
+            ],
+            click: ['delete|sysid|departmentName'],
+            toggle: ['sysid|API|parameter'],
           },
         ],
         footergroup: [
@@ -67,29 +71,41 @@ export class ITableSettings {
       (this.filter = false);
   }
 }
-export class ITableDelete{
-  API:string;
-  PK:string;
-  ColumnName:string;
-  ParameterName:any;
-  Message:string;
-  Note:string;
+export class ITableDelete {
+  API: string;
+  PK: string;
+  ColumnName: string;
+  ParameterName: any;
+  Message: string;
+  Note: string;
   constructor() {
-    this.API ='';
+    this.API = '';
     this.PK = '';
     this.ColumnName = '';
-    this.ParameterName ='';
+    this.ParameterName = '';
     this.Message = '';
     this.Note = '';
   }
 }
-export class ITabletoggle{
-  API:string;
-  PK:string;
-  ParameterName:any;
+export class ITabletoggle {
+  API: string;
+  PK: string;
+  ParameterName: any;
   constructor() {
-    this.API ='';
+    this.API = '';
     this.PK = '';
-    this.ParameterName ='';
+    this.ParameterName = '';
+  }
+}
+export class ITableHistory {
+  fID: number;
+  tableName: string;
+  application: string;
+  loadAllRecord: boolean;
+  constructor() {
+    this.fID = 0;
+    this.tableName = '';
+    this.application = '';
+    this.loadAllRecord = false;
   }
 }

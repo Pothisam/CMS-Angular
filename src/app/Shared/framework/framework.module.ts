@@ -16,6 +16,7 @@ import { DownloadComponent } from './download/download.component';
 import { HistoryInfoComponent } from './icon/history-info/history-info.component';
 import { ModelComponent } from './model/model.component';
 import { DateComponent } from './date/date.component';
+import { HistoryrecordComponent } from './historyrecord/historyrecord/historyrecord.component';
 @NgModule({
   imports: [
     MaterialModule
@@ -35,7 +36,8 @@ import { DateComponent } from './date/date.component';
     DownloadComponent,
     HistoryInfoComponent,
     ModelComponent,
-    DateComponent
+    DateComponent,
+    HistoryrecordComponent
   ],
   exports: [
     MaterialModule,
@@ -53,7 +55,8 @@ import { DateComponent } from './date/date.component';
     DownloadComponent,
     HistoryInfoComponent,
     ModelComponent,
-    DateComponent
+    DateComponent,
+    HistoryrecordComponent
   ],
 })
 export class FrameworkModule {}

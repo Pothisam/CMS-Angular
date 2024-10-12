@@ -105,7 +105,8 @@ export class BatchComponent implements OnInit {
           {
             button: true,
             buttondata: 'sysid',
-            buttons: ['info','toggle'],
+            buttons: ['info','toggle','history'],
+            click:['history|CourseBatchlist|sysid|'],
             conditions: ['toggle|status|Active'],
             toggle:['sysid|/Batch/UpdateBatchStatus|sysid|Change Status Note: This function is designed solely to display the batch name on the "Add Student" screen.']
           },

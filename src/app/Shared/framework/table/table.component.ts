@@ -12,11 +12,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ITableDelete, ITableSettings, ITabletoggle } from './table.model';
+import { ITableDelete, ITableHistory, ITableSettings, ITabletoggle } from './table.model';
 import { GlobalService } from 'src/app/Global/Service/global.service';
 import { IModalSettings } from '../model/model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { FrameworkService } from '../framework.service';
+import { IHistoryRecordSettings } from '../historyrecord/historyrecord';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -28,9 +29,11 @@ export class TableComponent implements OnInit {
   dataSource = new MatTableDataSource<any[]>();
   datalist: any;
   public _recordDeleteDetails: ITableDelete = new ITableDelete();
+  public _recordHistoryDetails: ITableHistory = new ITableHistory();
   public _recordtoggleDetails: ITabletoggle = new ITabletoggle();
   public _modalSettings: IModalSettings = new IModalSettings();
   public _tableSettings: ITableSettings | undefined;
+  public _historyrecordSettings: IHistoryRecordSettings = new IHistoryRecordSettings();
 
   @Input()
   set tableSettings(value: ITableSettings | undefined) {
@@ -408,5 +411,43 @@ export class TableComponent implements OnInit {
 
       },
     });
+  }
+  onMatIconHistory(element: any, event: Event) {
+    const targetElement = event.target as HTMLElement;
+    const actionColumn = this._tableSettings?.columns.find(
+      (column) => column.data === 'Mat-Action'
+    );
+    if (
+      actionColumn &&
+      actionColumn.buttongroup &&
+      actionColumn.buttongroup[0] &&
+      actionColumn.buttongroup[0].click &&
+      actionColumn.buttongroup[0].click.some((x) => x.startsWith('history|'))
+    ) {
+      const historyAction = actionColumn.buttongroup[0].click.find((x) =>
+        x.startsWith('history|')
+      );
+      if (historyAction) {
+        const parts = historyAction.split('|');
+         // Assign parts of the history action to recordHistoryDetails
+         this._recordHistoryDetails.tableName = parts[1] ?? '';
+         const PKname = parts[2] ?? '';
+
+         // Check if the PKname exists in the element and assign it to fID
+         if (PKname) {
+           this._recordHistoryDetails.fID = element[PKname];
+         }
+
+         this._recordHistoryDetails.application = parts[3] ?? '';
+
+         // Disable the loading of all records (default behavior)
+         this._recordHistoryDetails.loadAllRecord = false;
+      }
+    this._historyrecordSettings.fID = this._recordHistoryDetails.fID;
+    this._historyrecordSettings.tableName = this._recordHistoryDetails.tableName;
+    this._historyrecordSettings.application = this._recordHistoryDetails.application;
+    this._historyrecordSettings.html = targetElement;
+    this.globalService.updateModelHistoryPopup(this._historyrecordSettings);
+    }
   }
 }

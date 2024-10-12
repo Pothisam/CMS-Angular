@@ -66,6 +66,13 @@
                 </ng-container>
 
                 <ng-container
+                  *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('history')">
+                  <mat-icon #icondelete role="img" mat-button class="text-warning " matTooltipPosition="above"
+                    tabindex="0" matTooltip="View Record History" aria-label="View Record History"
+                    (keydown.enter)="onMatIconHistory(element, $event)" (click)="onMatIconHistory(element, $event)">history</mat-icon>
+                </ng-container>
+
+                <ng-container
                   *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('toggle')">
                   <i class="fa-solid fa-2x cursor-pointer ps-1"
                     [ngClass]="toggleCondition(element, 'toggle', column.buttongroup[0].conditions)? 'fa-toggle-on text-success' : 'fa-toggle-off text-danger'"

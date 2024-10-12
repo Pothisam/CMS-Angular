@@ -13,6 +13,7 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 import 'reflect-metadata';
 import { IModalSettings } from 'src/app/Shared/framework/model/model';
+import { IHistoryRecordSettings } from 'src/app/Shared/framework/historyrecord/historyrecord';
 interface SafeModel {
   [key: string]: any;
 }
@@ -30,6 +31,13 @@ export class GlobalService {
     this.modelDeleteConfirmation.next(settings);
   }
   // #endregion Model Popup
+   // #region Model history record Popup
+   private modelhistoryPopup = new BehaviorSubject<IHistoryRecordSettings>(new IHistoryRecordSettings());
+   modelhistoryPopup$ = this.modelhistoryPopup.asObservable();
+   updateModelHistoryPopup(settings: IHistoryRecordSettings) {
+     this.modelhistoryPopup.next(settings);
+   }
+   // #endregion Model history record Popup
   constructor(
     private location: Location,
     private layout: LayoutService,
