@@ -68,6 +68,21 @@ export class GlobalService {
   GLSG(name: string) {
     return localStorage.getItem(name);
   }
+  // Get Local Storage Key value
+  GLSKV(storagename:string,key: string = 'token'): string | null {
+    const area = this.getArea();
+    if (area === 'CMS') {
+      const Storage = localStorage.getItem(storagename);
+      if (Storage !== null) {
+        // Parse the JSON string to an object
+        const parsedStorage = JSON.parse(Storage);
+
+        // Return the dynamic key's value if it exists
+        return parsedStorage[key] ?? null;
+      }
+    }
+    return null;
+  }
   HandleArea(area: string) {
     this.layout.IsCMSNavVisible = false;
     this.layout.IsStaffNavVisible = false;

@@ -1,10 +1,15 @@
 <mat-card>
   <mat-card-header class="mat-card-header mat-primary rounded-top">
-   <mat-card-title class="left-align">
-    <mat-tab-group #tabGroup (selectedTabChange)="onTabChange($event)" headerPosition="below">
+   <mat-card-title class="left-align w-100">
+    <div class="d-flex justify-content-between align-items-center w-100">
+    <mat-tab-group #tabGroup class="w-25" (selectedTabChange)="onTabChange($event)" headerPosition="below">
       <mat-tab label="Institution"></mat-tab> <!-- Empty content here -->
       <mat-tab label="Change Logo"></mat-tab>
-    </mat-tab-group></mat-card-title>
+    </mat-tab-group>
+    <app-history-info [Parameter]="_historyrecordParameter"></app-history-info>
+  </div>
+  </mat-card-title>
+
   </mat-card-header>
   <div class="scrolldiv">
     <mat-card-content>

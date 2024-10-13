@@ -39,6 +39,7 @@ export class HistoryrecordComponent implements OnInit {
     this.globalService.modelhistoryPopup$.subscribe(
       (value: IHistoryRecordSettings) => {
         this._historySettings = value;
+        if(this._historySettings.tableName != ""){
         this.CallAPI();
         setTimeout(() => {
           if (this.modalElement) {
@@ -46,8 +47,10 @@ export class HistoryrecordComponent implements OnInit {
           }
         }, 0);
       }
+      }
     );
   }
+
   openModal() {
     this._historySettings.isModalVisible = true;
     if (this.modalElement) {

@@ -67,7 +67,7 @@
 
                 <ng-container
                   *ngIf="column.buttongroup && column.buttongroup[0].buttons && column.buttongroup[0].buttons.includes('history')">
-                  <mat-icon #icondelete role="img" mat-button class="text-warning " matTooltipPosition="above"
+                  <mat-icon #iconhistory role="img" mat-button class="text-warning " matTooltipPosition="above"
                     tabindex="0" matTooltip="View Record History" aria-label="View Record History"
                     (keydown.enter)="onMatIconHistory(element, $event)" (click)="onMatIconHistory(element, $event)">history</mat-icon>
                 </ng-container>

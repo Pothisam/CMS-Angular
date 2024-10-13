@@ -7,6 +7,7 @@ import {
   IPostoffice,
 } from 'src/app/Modules/CMS/Institution/Institution';
 import { InstitutionService } from './Institution.service';
+import { IHistoryRecordParameter } from 'src/app/Shared/framework/historyrecord/historyrecord';
 @Component({
   selector: 'app-Institution',
   templateUrl: './Institution.component.html',
@@ -17,6 +18,8 @@ export class InstitutionComponent implements OnInit {
   logo: string = '';
   favIcon: string = '';
   private isComponentLoaded = false;
+  public _historyrecordParameter: IHistoryRecordParameter =
+    new IHistoryRecordParameter();
   constructor(
     private globalService: GlobalService,
     private institutionService: InstitutionService
@@ -58,26 +61,34 @@ export class InstitutionComponent implements OnInit {
         this.favIcon = JSON.parse(userJSON).favIcon;
       }
     }
+    this._historyrecordParameter.tableName = 'InstitutionDetails';
+    const institutionCode = this.globalService.GLSKV(
+      'CMSToken',
+      'institutionCode'
+    );
+    this._historyrecordParameter.fID =
+      institutionCode !== null ? Number(institutionCode) : 0; // or any fallback number
   }
   ngAfterViewInit() {
     this.isComponentLoaded = true;
   }
-  GetInstitutionDetails(cached:boolean) {
+  GetInstitutionDetails(cached: boolean) {
     this.institutionService.getInstitutionDetails(cached).subscribe({
       next: (Response) => {
-        console.log(Response.data)
+        console.log(Response.data);
         if (Response.data != null) {
           this.request = this.globalService.bindDataToModel(
             this.request,
             Response.data
           );
-          console.log(this.request)
           this.postalrequest.Pincode = this.request.pincode;
-          this.request.postofficeName  = this.request.postofficeName;
+          this.request.postofficeName = this.request.postofficeName;
           this.triggerApi = true;
 
           if (this.request.modifiedDate) {
-            const formattedDate = this.globalService.formatDateTime(this.request.modifiedDate);
+            const formattedDate = this.globalService.formatDateTime(
+              this.request.modifiedDate
+            );
             // Assuming you want to keep modifiedDate as a string. If not, you'll need a different approach.
             this.request.modifiedDate = formattedDate;
           }
@@ -90,16 +101,15 @@ export class InstitutionComponent implements OnInit {
       return; // Prevent execution if the component has not fully loaded
     }
     if (this.request.pincode.length == 6) {
-      this.postalrequest.Pincode =this.request.pincode;
+      this.postalrequest.Pincode = this.request.pincode;
       this.triggerApi = true;
     }
-
   }
   onModelValueChanges(options: { value: string; text: string }) {
     // Handle the change event here
-    this.request.postofficeName  = options.value;
+    this.request.postofficeName = options.value;
   }
-  onRespons(Response:any){
+  onRespons(Response: any) {
     if (Response != null) {
       this.GetInstitutionDetails(false);
     }
